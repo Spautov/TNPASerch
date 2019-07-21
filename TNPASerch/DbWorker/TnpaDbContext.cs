@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DAL;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -14,5 +15,8 @@ namespace DbWorker
         {
 
         }
+
+        public DbSet<Tnpa> Tnpas { get; set; }
+        public DbSet<TnpaType> TnpaTypes { get; set; }
     }
 }
