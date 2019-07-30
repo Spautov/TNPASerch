@@ -1,16 +1,33 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DAL
 {
+    /// <summary>
+    /// Класс описывающий изменение в ТНПА
+    /// </summary>
     public class Change
     {
+        /// <summary>
+        /// Id изменения
+        /// </summary>
         public int Id { get; set; }
+        /// <summary>
+        /// Номер изменения
+        /// </summary>
         public int Number { get; set; }
+        /// <summary>
+        /// Дата введения в действие
+        /// </summary>
         public DateTime PutIntoOperation { get; set; }
+        /// <summary>
+        /// Дата регистрации в журнале
+        /// </summary>
+        public DateTime Registered { get; set; }
 
         public int TnpaId { get; set; }
+        /// <summary>
+        /// ТНПА которому принадлежит изменение
+        /// </summary>
         public Tnpa Tnpa { get; set; }
     }
 }
