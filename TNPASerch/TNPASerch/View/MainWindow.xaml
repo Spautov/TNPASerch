@@ -7,21 +7,26 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="900">
     <StackPanel Orientation="Vertical">
-        <Menu>
-            <MenuItem Header="Файл">
-                <MenuItem Header="Поиск"></MenuItem>
-                <MenuItem Header="Настройка"></MenuItem>
-                <Separator/>
-                <MenuItem Header="Закрыть"></MenuItem>
-            </MenuItem>
-            <MenuItem Header="Настрйка">
-                <MenuItem Header="Добавить тип ТНПА"></MenuItem>
-                <MenuItem Header="База данных"></MenuItem>
-            </MenuItem>
-            <MenuItem Header="Поиск"></MenuItem>
-            <ComboBox MinWidth="150"></ComboBox>
-            <TextBox MinWidth="150"></TextBox>
-        </Menu>
+        <StackPanel Orientation="Horizontal">
+            <Menu VerticalAlignment="Center" Padding="5">
+                <MenuItem Header="Файл">
+                    <MenuItem Header="Поиск"></MenuItem>
+                    <MenuItem Header="Настройка"></MenuItem>
+                    <Separator/>
+                    <MenuItem Header="Закрыть"></MenuItem>
+                </MenuItem>
+                <MenuItem Header="Настрйка">
+                    <MenuItem Header="Добавить тип ТНПА"></MenuItem>
+                    <MenuItem Header="База данных"></MenuItem>
+                </MenuItem>
+            </Menu>
+            <ComboBox MinWidth="150" Margin="5"></ComboBox>
+            <TextBox MinWidth="150" Margin="5"></TextBox>
+            <Button Margin="5" Padding="5 0">
+                <Image Height="25" Source="/TNPASerch;component/Images/search_book_open_search_locate_6178.png"></Image>
+            </Button>
+        </StackPanel>
+
         <ListView Height="auto"></ListView>
     </StackPanel>
 </Window>
