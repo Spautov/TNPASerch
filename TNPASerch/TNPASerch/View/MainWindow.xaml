@@ -5,8 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TNPASerch"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="MainWindow" Height="450" Width="900">
+    <StackPanel Orientation="Vertical">
+        <Menu>
+            <MenuItem Header="Файл">
+                <MenuItem Header="Поиск"></MenuItem>
+                <MenuItem Header="Настройка"></MenuItem>
+                <Separator/>
+                <MenuItem Header="Закрыть"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Настрйка">
+                <MenuItem Header="Добавить тип ТНПА"></MenuItem>
+                <MenuItem Header="База данных"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Поиск"></MenuItem>
+            <ComboBox MinWidth="150"></ComboBox>
+            <TextBox MinWidth="150"></TextBox>
+        </Menu>
+        <ListView Height="auto"></ListView>
+    </StackPanel>
 </Window>
