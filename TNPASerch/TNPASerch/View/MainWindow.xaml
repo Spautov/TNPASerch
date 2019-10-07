@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:TNPASerch"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="900">
-    <StackPanel Orientation="Vertical">
-        <StackPanel Orientation="Horizontal">
+    <DockPanel LastChildFill="True">
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
             <Menu VerticalAlignment="Center" Padding="5">
                 <MenuItem Header="Файл">
                     <MenuItem Header="Поиск"></MenuItem>
@@ -25,8 +25,17 @@
             <Button Margin="5" Padding="5 0">
                 <Image Height="25" Source="/TNPASerch;component/Images/search_book_open_search_locate_6178.png"></Image>
             </Button>
+            <Button Margin="5" Padding="5 0">
+                <Image Height="25" Source="/TNPASerch;component/Images/aqua_smooth_folder_documents_14309.png"></Image>
+            </Button>
+            <Button Margin="5" Padding="5 0">
+                <Image Height="25" Source="/TNPASerch;component/Images/folder_settings_tools_22597.png"></Image>
+            </Button>
+            <Button Margin="5" Padding="5 0">
+                <Image Height="25" Source="/TNPASerch;component/Images/cancellationbutton_exitneartheaction_botondecancelacion_salida_6335.ico"></Image>
+            </Button>
         </StackPanel>
 
         <ListView Height="auto"></ListView>
-    </StackPanel>
+    </DockPanel>
 </Window>
