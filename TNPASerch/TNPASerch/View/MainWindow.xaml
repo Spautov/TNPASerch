@@ -16,7 +16,7 @@
                     <MenuItem Header="Закрыть"></MenuItem>
                 </MenuItem>
                 <MenuItem Header="Настрйка">
-                    <MenuItem Header="Добавить тип ТНПА"></MenuItem>
+                    <MenuItem Header="Добавить тип ТНПА" Command="{Binding NewWindows}"></MenuItem>
                     <MenuItem Header="База данных"></MenuItem>
                 </MenuItem>
             </Menu>
