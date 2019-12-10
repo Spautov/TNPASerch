@@ -1,0 +1,39 @@
+﻿<Window x:Class="TNPASerch.View.AddTNPAWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TNPASerch.View"
+        mc:Ignorable="d"
+        Title="AddTNPAWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="*"> </RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <ComboBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5"/>
+        <TextBox Grid.Row="2" Grid.Column="2" HorizontalAlignment="Stretch" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Margin="5"/>
+        <TextBox Grid.Row="2" Grid.Column="3" HorizontalAlignment="Stretch" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Margin="5"/>
+        <CheckBox Grid.Row="3" Grid.Column="1" Content="Действует" HorizontalAlignment="Stretch"  VerticalAlignment="Center" Margin="5"/>
+        <Label Grid.Row="1" Grid.Column="1" Content="Тип ТНПА" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="5"/>
+        <Label Grid.Row="1" Grid.Column="2" Content="Номер ТНПА"  HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="5"/>
+        <Label Grid.Row="1" Grid.Column="3" Content="год" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="5"/>
+        <DatePicker Grid.Row="4" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5"/>
+        <DockPanel Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" LastChildFill="True">
+            <Button Content="Сохранить" DockPanel.Dock="Left" VerticalAlignment="Center" Width="75" Margin="5"/>
+            <Button Content="Отмена" DockPanel.Dock="Right" VerticalAlignment="Center" Width="75" Margin="5"/>
+            <Button Content="Применить" VerticalAlignment="Center" Width="75" Margin="5"/>
+        </DockPanel>
+    </Grid>
+</Window>
