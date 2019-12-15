@@ -25,5 +25,9 @@ namespace DAL
         {
             Tnpas = new List<Tnpa>();
         }
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

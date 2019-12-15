@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TNPASerch.View;
+using TNPASerch.ViewModel;
 
 namespace TNPASerch
 {
@@ -26,5 +27,11 @@ namespace TNPASerch
             InitializeComponent();
         }
 
+        private void add_Tnpa(object sender, RoutedEventArgs e)
+        {
+            AddTNPAWindow addWindow = new AddTNPAWindow();
+            addWindow.DataContext = new AddTNPAViewModel(addWindow);
+            addWindow.Show();
+        }
     }
 }

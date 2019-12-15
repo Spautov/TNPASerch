@@ -22,18 +22,46 @@
             <RowDefinition Height="2*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <ComboBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5"/>
-        <TextBox Grid.Row="2" Grid.Column="2" HorizontalAlignment="Stretch" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Margin="5"/>
-        <TextBox Grid.Row="2" Grid.Column="3" HorizontalAlignment="Stretch" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Margin="5"/>
-        <CheckBox Grid.Row="3" Grid.Column="1" Content="Действует" HorizontalAlignment="Stretch"  VerticalAlignment="Center" Margin="5"/>
+        <ComboBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" 
+                  VerticalAlignment="Top" Margin="5" 
+                  
+                  ItemsSource="{Binding  TnpaTypes}"
+                  SelectedItem="{Binding Path=SelectedTnpaType}">
+        </ComboBox>
+        <TextBox Grid.Row="2" Grid.Column="2" 
+                 HorizontalAlignment="Stretch" Height="23" 
+                 TextWrapping="Wrap" 
+                 VerticalAlignment="Top" Margin="5"
+                 Text="{Binding NumberTnpa, Mode=TwoWay}"/>
+        <TextBox Grid.Row="2" Grid.Column="3" 
+                 HorizontalAlignment="Stretch" Height="23" 
+                 TextWrapping="Wrap" Text="{Binding YearTnpa, Mode=TwoWay}"
+                 VerticalAlignment="Top" Margin="5"/>
+        <CheckBox Grid.Row="3" Grid.Column="1" 
+                  Content="Действует" 
+                  HorizontalAlignment="Stretch"  
+                  VerticalAlignment="Center" Margin="5"
+                  IsChecked="{Binding IsValid, Mode=TwoWay}"/>
         <Label Grid.Row="1" Grid.Column="1" Content="Тип ТНПА" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="5"/>
         <Label Grid.Row="1" Grid.Column="2" Content="Номер ТНПА"  HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="5"/>
         <Label Grid.Row="1" Grid.Column="3" Content="год" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="5"/>
-        <DatePicker Grid.Row="4" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5"/>
+        <DatePicker Grid.Row="4" Grid.Column="1" 
+                    HorizontalAlignment="Stretch" 
+                    VerticalAlignment="Center" Margin="5"
+                    SelectedDate="{Binding PutIntoOperationTnpa}"/>
         <DockPanel Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" LastChildFill="True">
-            <Button Content="Сохранить" DockPanel.Dock="Left" VerticalAlignment="Center" Width="75" Margin="5"/>
-            <Button Content="Отмена" DockPanel.Dock="Right" VerticalAlignment="Center" Width="75" Margin="5"/>
-            <Button Content="Применить" VerticalAlignment="Center" Width="75" Margin="5"/>
+            <Button Content="Сохранить" DockPanel.Dock="Left" 
+                    VerticalAlignment="Center" 
+                    Width="75" Margin="5"
+                    Command="{Binding SaveCommand}"/>
+            <Button Content="Отмена" DockPanel.Dock="Right" 
+                    VerticalAlignment="Center" 
+                    Width="75" Margin="5"
+                    Command="{Binding CancelCommand}"/>
+            <Button Content="Применить" 
+                    VerticalAlignment="Center" 
+                    Width="75" Margin="5"
+                    Command="{Binding ApplyCommand}"/>
         </DockPanel>
     </Grid>
 </Window>
