@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using DbWorker;
+using Microsoft.EntityFrameworkCore;
 using System.Windows;
 
 namespace TNPASerch
@@ -13,5 +9,15 @@ namespace TNPASerch
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+
+            using (var db = new TnpaDbContext())
+            {
+                db.Database.Migrate();
+            }
+        }
+
     }
 }
