@@ -32,6 +32,10 @@ namespace DAL
         /// Дата регистрации в журнале
         /// </summary>
         public DateTime Registered { get; set; }
+        /// <summary>
+        /// Номер регистрации в журнале
+        /// </summary>
+        public int NumberRegistered { get; set; }
 
         public int TnpaTypeId { get; set; }
         /// <summary>
