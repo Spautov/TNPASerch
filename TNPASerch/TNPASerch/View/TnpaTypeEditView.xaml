@@ -1,0 +1,30 @@
+﻿<Window x:Class="TNPASerch.View.TnpaTypeEditView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TNPASerch.View"
+        mc:Ignorable="d"
+        Title="TnpaTypeEditView" Height="650" Width="550"
+        MaxHeight="650" MaxWidth="550" MinHeight="650" MinWidth="550">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <ListView Grid.Row="0"></ListView>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Margin="8" Grid.Column="0">Add</Button>
+            <Button Margin="8" Grid.Column="1">Del</Button>
+            <Button Margin="8" Grid.Column="2">Edit</Button>
+        </Grid>
+    </Grid>
+</Window>
