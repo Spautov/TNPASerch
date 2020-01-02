@@ -201,6 +201,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="View\AddTextView.xaml.cs">
+      <DependentUpon>AddTextView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TnpaTypeEditView.xaml.cs">
+      <DependentUpon>TnpaTypeEditView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="View\AddTextView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\AddTNPAWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -218,6 +228,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ViewModel\AddTNPAViewModel.cs" />
+    <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="View\AddTNPAWindow.xaml.cs">
       <DependentUpon>AddTNPAWindow.xaml</DependentUpon>
     </Compile>
@@ -228,6 +239,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\TnpaTypeEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

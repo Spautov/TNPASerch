@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using TNPASerch.View;
@@ -140,18 +141,28 @@ namespace TNPASerch.ViewModel
 
         public AddTNPAViewModel(AddTNPAWindow window)
         {
-            _window = window;
+            _window = window ?? throw new ArgumentNullException("window");
             _dbContext = new TnpaDbContext();
-            var colllectTnpaType = _dbContext.TnpaTypes.Select(x => x);
-            TnpaTypes = new ObservableCollection<TnpaType>(colllectTnpaType.ToList());
+            GetTnpaTypsAsync();
             SaveCommand = new RelayCommand(Save);
             ApplyCommand = new RelayCommand(Apply);
             CancelCommand = new RelayCommand(Cancel);
             YearTnpa = "";
             NumberTnpa = "";
-            TnpaName = " ";
+            TnpaName = "";
             PutIntoOperationTnpa = DateTime.Now;
             CancelledTnpa = DateTime.Now;
+        }
+
+        private void GetTnpaTyps()
+        {
+            var colllectTnpaType = _dbContext.TnpaTypes.Select(x => x);
+            TnpaTypes = new ObservableCollection<TnpaType>(colllectTnpaType.ToList());
+        }
+
+        private async void GetTnpaTypsAsync()
+        {
+            await Task.Run(() => GetTnpaTyps());
         }
 
         private void Save()

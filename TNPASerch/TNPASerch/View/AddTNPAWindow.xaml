@@ -40,15 +40,14 @@
                  HorizontalAlignment="Stretch" Height="23" 
                  TextWrapping="Wrap" Text="{Binding YearTnpa, Mode=TwoWay}"
                  VerticalAlignment="Top" Margin="5"/>
-        <StackPanel Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" >
+        <DockPanel Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" LastChildFill="True" >
             <Label Content="Наименование ТНПА" HorizontalContentAlignment="Center" 
-                   HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="5"/>
-            <TextBox HorizontalAlignment="Stretch" 
+                   HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="5" DockPanel.Dock="Top"/>
+            <TextBox HorizontalAlignment="Stretch"  
                  TextWrapping="Wrap" Text="{Binding TnpaName, Mode=TwoWay}"
                      MinLines="4"
-                     
-                 VerticalAlignment="Top" Margin="5"/>
-        </StackPanel>
+                 VerticalAlignment="Stretch" Margin="5"/>
+        </DockPanel>
         
         <CheckBox Grid.Row="5" Grid.Column="1" 
                   x:Name="ChBoxIsValid"

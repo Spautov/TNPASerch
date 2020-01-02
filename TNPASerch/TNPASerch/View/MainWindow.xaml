@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:TNPASerch"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="900">
+    
     <DockPanel LastChildFill="True">
         <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
             <Menu VerticalAlignment="Center" Padding="5">
@@ -13,30 +14,57 @@
                     <MenuItem Header="Поиск"></MenuItem>
                     <MenuItem Header="Настройка"></MenuItem>
                     <Separator/>
-                    <MenuItem Header="Закрыть"></MenuItem>
+                    <MenuItem Header="Закрыть" Command="{Binding CloseCommand}"></MenuItem>
                 </MenuItem>
                 <MenuItem Header="Настрйка">
                     <MenuItem Header="Добавить тип ТНПА"></MenuItem>
-                    <MenuItem Header="Добавить ТНПА" Click="add_Tnpa"></MenuItem>
+                    <MenuItem Header="Добавить ТНПА" Command="{Binding ShowAddTNPAWindowCommand}"/>
                     <MenuItem Header="База данных"></MenuItem>
                 </MenuItem>
             </Menu>
-            <ComboBox MinWidth="150" Margin="5"></ComboBox>
-            <TextBox MinWidth="150" Margin="5"></TextBox>
-            <Button Margin="5" Padding="5 0">
+            <ComboBox MinWidth="150" Margin="5"
+                      ItemsSource="{Binding  TnpaTypes}"
+                      SelectedItem="{Binding Path=SelectedTnpaType}"/>
+            <TextBox MinWidth="150" Margin="5" 
+                     Text="{Binding NumberTnpa, Mode=TwoWay}"/>
+            <Button Margin="5" Padding="5 0" 
+                    Command="{Binding SearchCommand}">
                 <Image Height="25" Source="/TNPASerch;component/Images/search_book_open_search_locate_6178.png"></Image>
             </Button>
-            <Button Margin="5" Padding="5 0">
+            <Button Margin="5" Padding="5 0" Command="{Binding ShowAddTNPAWindowCommand}">
                 <Image Height="25" Source="/TNPASerch;component/Images/aqua_smooth_folder_documents_14309.png"></Image>
             </Button>
             <Button Margin="5" Padding="5 0">
                 <Image Height="25" Source="/TNPASerch;component/Images/folder_settings_tools_22597.png"></Image>
             </Button>
-            <Button Margin="5" Padding="5 0">
+            <Button Margin="5" Padding="5 0" Command="{Binding CloseCommand}">
                 <Image Height="25" Source="/TNPASerch;component/Images/cancellationbutton_exitneartheaction_botondecancelacion_salida_6335.ico"></Image>
             </Button>
         </StackPanel>
 
-        <ListView Height="auto"></ListView>
+        <ListView ItemsSource="{Binding Tnpas}" HorizontalContentAlignment="Stretch">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border x:Name="myBorder" BorderThickness="3" CornerRadius="15" BorderBrush="BlueViolet">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                            <ColumnDefinition Width="6*"></ColumnDefinition>
+                            <ColumnDefinition Width="6*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="{Binding Type.Name}" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="0" Margin="5"/>
+                        <TextBlock Text="{Binding Namber}" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="0" Margin="5"/>
+                        <TextBlock Text="{Binding Name}" HorizontalAlignment="Left" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="0" Margin="5"/>
+                        <TextBlock Text="{Binding PutIntoOperation}" HorizontalAlignment="Left" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Margin="5"/>
+                    </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </DockPanel>
 </Window>

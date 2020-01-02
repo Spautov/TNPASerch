@@ -25,13 +25,7 @@ namespace TNPASerch
         public MainWindow()
         {
             InitializeComponent();
-        }
-
-        private void add_Tnpa(object sender, RoutedEventArgs e)
-        {
-            AddTNPAWindow addWindow = new AddTNPAWindow();
-            addWindow.DataContext = new AddTNPAViewModel(addWindow);
-            addWindow.Show();
+            this.DataContext = new MainWindowViewModel(this);
         }
     }
 }
