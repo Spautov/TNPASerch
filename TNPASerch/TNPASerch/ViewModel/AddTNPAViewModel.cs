@@ -179,7 +179,8 @@ namespace TNPASerch.ViewModel
                 PutIntoOperation = PutIntoOperationTnpa,
                 NumberRegistered = NumberRegisteredTnpa,
                 Cancelled = new DateTime(),
-                Registered = DateTime.Now
+                Registered = DateTime.Now,
+                IsReal = IsValid
             };
             _dbContext.Tnpas.Add(tnpa);
             _dbContext.SaveChanges();
@@ -201,7 +202,8 @@ namespace TNPASerch.ViewModel
                 PutIntoOperation = PutIntoOperationTnpa,
                 NumberRegistered = NumberRegisteredTnpa,
                 Cancelled = new DateTime(),
-                Registered = DateTime.Now
+                Registered = DateTime.Now,
+                IsReal = IsValid
             };
             _dbContext.Tnpas.Add(tnpa);
             _dbContext.SaveChanges();

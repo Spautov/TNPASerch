@@ -17,7 +17,7 @@
                     <MenuItem Header="Закрыть" Command="{Binding CloseCommand}"></MenuItem>
                 </MenuItem>
                 <MenuItem Header="Настрйка">
-                    <MenuItem Header="Добавить тип ТНПА"></MenuItem>
+                    <MenuItem Header="Редактор тип ТНПА" Command="{Binding ShowTNPATypeEditWindowCommand}"></MenuItem>
                     <MenuItem Header="Добавить ТНПА" Command="{Binding ShowAddTNPAWindowCommand}"/>
                     <MenuItem Header="База данных"></MenuItem>
                 </MenuItem>

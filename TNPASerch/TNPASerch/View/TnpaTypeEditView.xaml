@@ -5,26 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TNPASerch.View"
         mc:Ignorable="d"
-        Title="TnpaTypeEditView" Height="650" Width="550"
-        MaxHeight="650" MaxWidth="550" MinHeight="650" MinWidth="550">
+        Title="TnpaTypeEditView" Height="650" Width="550" ResizeMode="NoResize">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="8*"/>
+            <RowDefinition Height="12*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <ListView Grid.Row="0"></ListView>
+        <ListView Grid.Row="0" 
+                  ItemsSource="{Binding TnpaTypes}"
+                  SelectedItem="{Binding SelectedTnpaType}"></ListView>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Margin="8" Grid.Column="0">Add</Button>
-            <Button Margin="8" Grid.Column="1">Del</Button>
-            <Button Margin="8" Grid.Column="2">Edit</Button>
+            <Button Margin="8" Grid.Column="0" Command="{Binding AddTypeCommand}">Add</Button>
+            <Button Margin="8" Grid.Column="1" Command="{Binding RemoveTypeCommand}">Del</Button>
+            <Button Margin="8" Grid.Column="2" Command="{Binding EditTypeCommand}">Edit</Button>
         </Grid>
     </Grid>
 </Window>

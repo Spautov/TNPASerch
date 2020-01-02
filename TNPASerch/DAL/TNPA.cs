@@ -36,6 +36,10 @@ namespace DAL
         /// Номер регистрации в журнале
         /// </summary>
         public int NumberRegistered { get; set; }
+        /// <summary>
+        /// Действующий ТНПА
+        /// </summary>
+        public bool IsReal { get; set; }
 
         public int TnpaTypeId { get; set; }
         /// <summary>

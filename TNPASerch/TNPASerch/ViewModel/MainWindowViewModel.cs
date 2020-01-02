@@ -23,6 +23,7 @@ namespace TNPASerch.ViewModel
 
         private readonly TnpaDbContext _dbContext;
         public ICommand ShowAddTNPAWindowCommand { get; set; }
+        public ICommand ShowTNPATypeEditWindowCommand { get; set; }
         public ICommand SearchCommand { get; set; }
         public ICommand SettingsCommand { get; set; }
         public ICommand CloseCommand { get; set; }
@@ -37,8 +38,19 @@ namespace TNPASerch.ViewModel
             GetTnpaTypsAsync();
             GetTnpaAsync();
             ShowAddTNPAWindowCommand = new RelayCommand(ShowAddTNPAWindow);
+            ShowTNPATypeEditWindowCommand = new RelayCommand(ShowTNPATypeEditWindow);
             SearchCommand = new RelayCommand(SearchAsync);
             CloseCommand = new RelayCommand(Close);
+        }
+
+        private void ShowTNPATypeEditWindow()
+        {
+            TnpaTypeEditView tnpaTypeEditView = new TnpaTypeEditView
+            {
+                DataContext = new TnpaTypeEditViewModel()
+            };
+            tnpaTypeEditView.ShowDialog();
+            GetTnpaTypsAsync();
         }
 
         private async void SearchAsync()
@@ -64,7 +76,7 @@ namespace TNPASerch.ViewModel
             }
         }
 
-        public ObservableCollection<TnpaType> _tnpaTypes;
+        private ObservableCollection<TnpaType> _tnpaTypes;
         public ObservableCollection<TnpaType> TnpaTypes
         {
             get { return _tnpaTypes; }
@@ -89,7 +101,7 @@ namespace TNPASerch.ViewModel
             await Task.Run(() => GetTnpaTyps());
         }
 
-        public TnpaType _selectedTnpaType;
+        private TnpaType _selectedTnpaType;
         public TnpaType SelectedTnpaType
         {
             get { return _selectedTnpaType; }
@@ -100,7 +112,7 @@ namespace TNPASerch.ViewModel
             }
         }
 
-        public ObservableCollection<Tnpa> _tnpas;
+        private ObservableCollection<Tnpa> _tnpas;
         public ObservableCollection<Tnpa> Tnpas
         {
             get { return _tnpas; }
@@ -134,7 +146,7 @@ namespace TNPASerch.ViewModel
         {
             AddTNPAWindow addWindow = new AddTNPAWindow();
             addWindow.DataContext = new AddTNPAViewModel(addWindow);
-            addWindow.Show();
+            addWindow.ShowDialog();
         }
 
         public void OnPropertyChanged([CallerMemberName]string prop = "")
