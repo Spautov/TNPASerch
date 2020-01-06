@@ -5,9 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TNPASerch.View"
         mc:Ignorable="d"
-        Title="AddTNPAWindow" Height="450" Width="800"
-        MinHeight="450"
-        MinWidth="800">
+        Title="AddTNPAWindow" Height="550" Width="800" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.5*"></ColumnDefinition>
@@ -23,21 +21,27 @@
             <RowDefinition Height="3*"></RowDefinition>
             <RowDefinition Height="*"> </RowDefinition>
             <RowDefinition Height="*"> </RowDefinition>
-            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <ComboBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" 
+        <ComboBox Grid.Row="2" Grid.Column="1" Width="210" 
+                  HorizontalAlignment="Left"
                   VerticalAlignment="Top" Margin="5" 
                   ItemsSource="{Binding  TnpaTypes}"
                   SelectedItem="{Binding Path=SelectedTnpaType}">
         </ComboBox>
         <TextBox Grid.Row="2" Grid.Column="2" 
-                 HorizontalAlignment="Stretch" Height="23" 
+                 Width="210"
+                 Height="23" 
                  TextWrapping="Wrap" 
                  VerticalAlignment="Top" Margin="5"
                  Text="{Binding NumberTnpa, Mode=TwoWay}"/>
         <TextBox Grid.Row="2" Grid.Column="3" 
-                 HorizontalAlignment="Stretch" Height="23" 
+                 HorizontalAlignment="Right"
+                 Width="210" 
+                 Height="23" 
                  TextWrapping="Wrap" Text="{Binding YearTnpa, Mode=TwoWay}"
                  VerticalAlignment="Top" Margin="5"/>
         <DockPanel Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" LastChildFill="True" >
@@ -55,34 +59,60 @@
                   HorizontalAlignment="Stretch"  
                   VerticalAlignment="Center" Margin="5"
                   IsChecked="{Binding IsValid, Mode=TwoWay}"/>
-        <StackPanel Grid.Row="6" Grid.Column="1">
-            <Label Content="Номер регистрации в жернале" HorizontalContentAlignment="Center" 
-                   HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="5"/>
-            <TextBox Grid.Row="6" Grid.Column="1" 
-                 HorizontalAlignment="Stretch" Height="23" 
+        <DockPanel Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3" LastChildFill="True">
+            <Label Content="Номер регистрации в жернале" 
+                   DockPanel.Dock="Left"
+                   VerticalAlignment="Center" Margin="5 0 5 5"/>
+            <TextBox 
+                 Height="23" 
+                 DockPanel.Dock="Left"
                  TextWrapping="Wrap" 
                  VerticalAlignment="Center" Margin="5"
+                 Width="50"
                  Text="{Binding NumberRegisteredTnpa, Mode=TwoWay}"/>
-        </StackPanel>
-        <Label Grid.Row="1" Grid.Column="1" Content="Тип ТНПА" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="5"/>
+            
+            <DatePicker 
+                    DockPanel.Dock="Right"
+                    VerticalAlignment="Center" Margin="5"
+                    SelectedDate="{Binding Registered}"
+                    Width="210"/>
+            <Label Content="Дата регистрации в жернале"
+                    DockPanel.Dock="Right"
+                   HorizontalContentAlignment="Right"
+                   VerticalAlignment="Center" Margin="5 0"/>
+            
+        </DockPanel>
+        <Label Grid.Row="1" Grid.Column="1" 
+               Content="Тип ТНПА" 
+               HorizontalAlignment="Left" 
+               VerticalAlignment="Bottom" Margin="85 5 5 5"/>
         <Label Grid.Row="1" Grid.Column="2" Content="Номер ТНПА"  HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="5"/>
-        <Label Grid.Row="1" Grid.Column="3" Content="год" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="5"/>
+        <Label Grid.Row="1" Grid.Column="3" 
+               Content="год" 
+               HorizontalAlignment="Right" 
+               VerticalAlignment="Bottom" 
+               Margin="5 5 90 5"/>
         <Label Grid.Row="4" Grid.Column="3" Content="Отмены с:" 
-               HorizontalContentAlignment="Center" 
-               HorizontalAlignment="Stretch" 
+               HorizontalAlignment="Right" 
                VerticalAlignment="Bottom" Margin="5"
                Visibility="{Binding VvisibleCancelledTnpa}"/>
-        <Label Grid.Row="4" Grid.Column="2" Content="Введения в действе с:" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="5"/>
+        <Label Grid.Row="4" Grid.Column="2" 
+               Content="Введения в действе с:" 
+               HorizontalAlignment="Right" 
+               VerticalAlignment="Bottom" 
+               Margin="5"/>
         <DatePicker Grid.Row="5" Grid.Column="2" 
-                    HorizontalAlignment="Stretch" 
+                    HorizontalAlignment="Right"
+                    Width="210" 
                     VerticalAlignment="Center" Margin="5"
                     SelectedDate="{Binding PutIntoOperationTnpa}"/>
         <DatePicker Grid.Row="5" Grid.Column="3" 
-                    HorizontalAlignment="Stretch" 
+                    Width="210" 
+                    HorizontalAlignment="Right"
                     VerticalAlignment="Center" Margin="5"
                     SelectedDate="{Binding CancelledTnpa}"
                     Visibility="{Binding VvisibleCancelledTnpa}"/>
-        <DockPanel Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="2" LastChildFill="True">
+        <DockPanel Grid.Row="8" Grid.Column="2" Grid.ColumnSpan="2" LastChildFill="True">
             <Button Content="Сохранить" DockPanel.Dock="Left" 
                     VerticalAlignment="Center" 
                     Width="75" Margin="5"
@@ -95,6 +125,37 @@
                     VerticalAlignment="Center" 
                     Width="75" Margin="5"
                     Command="{Binding ApplyCommand}"/>
+        </DockPanel>
+        <DockPanel Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3">
+            <Label Content="Количество изменений:" 
+                   DockPanel.Dock="Left"
+                   VerticalAlignment="Center" Margin="5 5 0 5"/>
+            
+            <Label Content="2" 
+                   DockPanel.Dock="Left"
+                   VerticalAlignment="Center" Margin="0 5 5 5"
+                   />
+            <Button Content="Редактировать" 
+                    VerticalAlignment="Center" 
+                    Padding="5 0"
+                    Margin="5"
+                    Command="{Binding}"/>
+            
+            <Button Content="Добавить" DockPanel.Dock="Right" 
+                    VerticalAlignment="Center" 
+                    Width="75" Margin="5"
+                    Command="{Binding}"/>
+            
+            <Button Content="Извлечь" DockPanel.Dock="Right" 
+                    VerticalAlignment="Center" 
+                    Width="75" Margin="5"
+                    Command="{Binding}"/>
+            
+            <Label Content="Электронная версия"
+                   DockPanel.Dock="Right"
+                   HorizontalContentAlignment="Right"
+                   VerticalAlignment="Center" Margin="5 0"/>
+
         </DockPanel>
     </Grid>
 </Window>

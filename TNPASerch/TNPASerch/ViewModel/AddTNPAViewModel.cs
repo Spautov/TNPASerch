@@ -116,6 +116,17 @@ namespace TNPASerch.ViewModel
                 OnPropertyChanged();
             }
         }
+
+        public DateTime _registered;
+        public DateTime Registered
+        {
+            get { return _registered; }
+            set
+            {
+                _registered = value;
+                OnPropertyChanged();
+            }
+        }
         public ObservableCollection<TnpaType> _tnpaTypes;
         public ObservableCollection<TnpaType> TnpaTypes
         {

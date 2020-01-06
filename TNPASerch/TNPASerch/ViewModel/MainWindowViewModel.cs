@@ -163,7 +163,10 @@ namespace TNPASerch.ViewModel
 
         private void ShowAddTNPAWindow()
         {
-            AddTNPAWindow addWindow = new AddTNPAWindow();
+            AddTNPAWindow addWindow = new AddTNPAWindow
+            {
+                Owner = _window
+            };
             addWindow.DataContext = new AddTNPAViewModel(addWindow);
             addWindow.ShowDialog();
             GetTnpaAsync();
