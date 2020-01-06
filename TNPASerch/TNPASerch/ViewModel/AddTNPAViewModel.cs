@@ -174,7 +174,8 @@ namespace TNPASerch.ViewModel
             Tnpa tnpa = new Tnpa
             {
                 Type = SelectedTnpaType,
-                Namber = NumberTnpa + "-" + YearTnpa,
+                Number = NumberTnpa,
+                Year = int.Parse(YearTnpa),
                 Name = TnpaName,
                 PutIntoOperation = PutIntoOperationTnpa,
                 NumberRegistered = NumberRegisteredTnpa,
@@ -184,7 +185,7 @@ namespace TNPASerch.ViewModel
             };
             _dbContext.Tnpas.Add(tnpa);
             _dbContext.SaveChanges();
-            MessageBox.Show($"{tnpa.Type.Name} {tnpa.Namber} успешно добавлен");
+            MessageBox.Show(_window, $"{tnpa.Type.Name} {tnpa.Number} успешно добавлен");
             _window.Close();
         }
 
@@ -197,7 +198,7 @@ namespace TNPASerch.ViewModel
             Tnpa tnpa = new Tnpa
             {
                 Type = SelectedTnpaType,
-                Namber = NumberTnpa + "-" + YearTnpa,
+                Number = NumberTnpa + "-" + YearTnpa,
                 Name = TnpaName,
                 PutIntoOperation = PutIntoOperationTnpa,
                 NumberRegistered = NumberRegisteredTnpa,
@@ -207,7 +208,7 @@ namespace TNPASerch.ViewModel
             };
             _dbContext.Tnpas.Add(tnpa);
             _dbContext.SaveChanges();
-            MessageBox.Show($"{tnpa.Type.Name} {tnpa.Namber} успешно добавлен");
+            MessageBox.Show(_window, $"{tnpa.Type.Name} {tnpa.Number} успешно добавлен");
             SelectedTnpaType = null;
             NumberTnpa = " ";
             NumberRegisteredTnpa = 0;
@@ -300,7 +301,7 @@ namespace TNPASerch.ViewModel
                     throw new Exception("Неверный номер регистрации в журнале");
                 }
                 var Namber = NumberTnpa + "-" + YearTnpa;
-                var tnpas = _dbContext.Tnpas.Select(t=>t).Where(tw=> tw.Namber.Equals(Namber) && tw.TnpaTypeId == SelectedTnpaType.Id);
+                var tnpas = _dbContext.Tnpas.Select(t=>t).Where(tw=> tw.Number.Equals(Namber) && tw.TnpaTypeId == SelectedTnpaType.Id);
                 if (tnpas.Count() > 0)
                 {
                     throw new Exception($"ТНПА {SelectedTnpaType.Name} {Namber} уже зарегистрирован в журнале под № {tnpas.First().NumberRegistered}");
@@ -309,7 +310,7 @@ namespace TNPASerch.ViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(_window, ex.Message);
                 return false;
             }
         }

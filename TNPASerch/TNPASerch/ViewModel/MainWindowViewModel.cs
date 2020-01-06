@@ -1,6 +1,7 @@
 ﻿using DAL;
 using DbWorker;
 using GalaSoft.MvvmLight.Command;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using TNPASerch.Model;
 using TNPASerch.View;
 
 namespace TNPASerch.ViewModel
@@ -45,12 +47,12 @@ namespace TNPASerch.ViewModel
 
         private void ShowTNPATypeEditWindow()
         {
-            TnpaTypeEditView tnpaTypeEditView = new TnpaTypeEditView
-            {
-                DataContext = new TnpaTypeEditViewModel()
-            };
+            TnpaTypeEditView tnpaTypeEditView = new TnpaTypeEditView();
+            tnpaTypeEditView.DataContext = new TnpaTypeEditViewModel(tnpaTypeEditView);
             tnpaTypeEditView.ShowDialog();
+
             GetTnpaTypsAsync();
+            GetTnpaAsync();
         }
 
         private async void SearchAsync()
@@ -76,8 +78,8 @@ namespace TNPASerch.ViewModel
             }
         }
 
-        private ObservableCollection<TnpaType> _tnpaTypes;
-        public ObservableCollection<TnpaType> TnpaTypes
+        private ObservableCollection<TnpaTypeView> _tnpaTypes;
+        public ObservableCollection<TnpaTypeView> TnpaTypes
         {
             get { return _tnpaTypes; }
             set
@@ -91,8 +93,11 @@ namespace TNPASerch.ViewModel
         {
             lock (_lockDb)
             {
-                var colllectTnpaType = _dbContext.TnpaTypes.Select(x => x);
-                TnpaTypes = new ObservableCollection<TnpaType>(colllectTnpaType.ToList());
+                var colllectTnpaType = _dbContext.TnpaTypes.Select(x => new TnpaTypeView {Id = x.Id, Name = x.Name });
+                if (colllectTnpaType.Count() > 0)
+                {
+                    TnpaTypes = new ObservableCollection<TnpaTypeView>(colllectTnpaType.ToList());
+                }
             }
         }
 
@@ -101,8 +106,8 @@ namespace TNPASerch.ViewModel
             await Task.Run(() => GetTnpaTyps());
         }
 
-        private TnpaType _selectedTnpaType;
-        public TnpaType SelectedTnpaType
+        private TnpaTypeView _selectedTnpaType;
+        public TnpaTypeView SelectedTnpaType
         {
             get { return _selectedTnpaType; }
             set
@@ -112,8 +117,8 @@ namespace TNPASerch.ViewModel
             }
         }
 
-        private ObservableCollection<Tnpa> _tnpas;
-        public ObservableCollection<Tnpa> Tnpas
+        private ObservableCollection<TnpaView> _tnpas;
+        public ObservableCollection<TnpaView> Tnpas
         {
             get { return _tnpas; }
             set
@@ -127,8 +132,22 @@ namespace TNPASerch.ViewModel
         {
             lock (_lockDb)
             {
-                var colllectTnpa = _dbContext.Tnpas.Select(x => x);
-                Tnpas = new ObservableCollection<Tnpa>(colllectTnpa.ToList());
+                var colllectTnpa = _dbContext.Tnpas.Include(x => x.Type).Select(t =>
+                new TnpaView {Id = t.Id,
+                Number = $"{t.Number}-{t.Year}",
+                Name = t.Name,
+                PutIntoOperation = t.PutIntoOperation,
+                Cancelled = t.Cancelled,
+                Registered = t.Registered,
+                NumberRegistered = t.NumberRegistered,
+                IsReal = t.IsReal, 
+                Type = t.Type.Name
+                });
+
+                if (colllectTnpa.Count()>0)
+                {
+                    Tnpas = new ObservableCollection<TnpaView>(colllectTnpa.ToList());
+                }
             }
         }
 
@@ -147,6 +166,7 @@ namespace TNPASerch.ViewModel
             AddTNPAWindow addWindow = new AddTNPAWindow();
             addWindow.DataContext = new AddTNPAViewModel(addWindow);
             addWindow.ShowDialog();
+            GetTnpaAsync();
         }
 
         public void OnPropertyChanged([CallerMemberName]string prop = "")

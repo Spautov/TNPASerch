@@ -201,6 +201,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\TnpaTypeView.cs" />
+    <Compile Include="Model\TnpaView.cs" />
     <Compile Include="ViewModel\AddTextViewModel.cs" />
     <Compile Include="ViewModel\TnpaTypeEditViewModel.cs" />
     <Compile Include="View\AddTextView.xaml.cs">
