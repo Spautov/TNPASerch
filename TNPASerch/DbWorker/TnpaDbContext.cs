@@ -15,7 +15,8 @@ namespace DbWorker
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Filename=DataBase\\TNPA.db");
+            //optionsBuilder.UseSqlite(@"Filename=TNPA.db");
+            optionsBuilder.UseSqlite(@"Filename=DataBase\TNPA.db");
         }
     }
 }
