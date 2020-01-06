@@ -15,7 +15,11 @@ namespace DAL
         /// <summary>
         /// Номер документа
         /// </summary>
-        public string Namber { get; set; }
+        public string Number { get; set; }
+        /// <summary>
+        /// Год документа
+        /// </summary>
+        public int Year { get; set; }
         /// <summary>
         /// Наименование документа
         /// </summary>
