@@ -5,19 +5,18 @@ using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
 using TNPASerch.View;
 
 namespace TNPASerch.ViewModel
 {
-    public class TnpaTypeEditViewModel : NotifyPropertyChangedModel
+    public class TnpaTypeEditViewModel : BaseViewModel
     {
         public ICommand AddTypeCommand { get; set; }
         public ICommand RemoveTypeCommand { get; set; }
         public ICommand EditTypeCommand { get; set; }
+        public ICommand CancelTypeCommand { get; set; }
 
-        private readonly TnpaTypeEditView _window;
         private readonly TnpaDbContext _dbContext;
         private readonly object _lockDb;
 
@@ -32,15 +31,14 @@ namespace TNPASerch.ViewModel
             }
         }
 
-        public TnpaTypeEditViewModel(TnpaTypeEditView window)
+        public TnpaTypeEditViewModel(TnpaTypeEditView window): base(window)
         {
-            _window = window ?? throw new ArgumentNullException("window");
-
             _dbContext = new TnpaDbContext();
             _lockDb = new object();
             AddTypeCommand = new RelayCommand(AddType);
             RemoveTypeCommand = new RelayCommand(RemoveType);
             EditTypeCommand = new RelayCommand(EditType);
+            CancelTypeCommand = new RelayCommand(Close);
             GetTnpaTypsAsync();
         }
 
@@ -63,7 +61,7 @@ namespace TNPASerch.ViewModel
                         var collect = _dbContext.TnpaTypes.Select(a => a).Where(x => x.Name.ToUpper().Equals(textresoult.ToUpper()));
                         if (collect.ToList().Count() > 0)
                         {
-                            MessageBox.Show($"Тип {textresoult} уже существует");
+                            YesMessage($"Тип {textresoult} уже существует");
                             return;
                         }
                         else
@@ -73,7 +71,6 @@ namespace TNPASerch.ViewModel
                             _dbContext.Update(SelectedTnpaType);
                             _dbContext.SaveChanges();
                             GetTnpaTypsAsync();
-                            MessageBox.Show($"Тип {textresoult} успешно изменен");
                         }
                     }
                 }
@@ -85,24 +82,24 @@ namespace TNPASerch.ViewModel
             if (SelectedTnpaType != null)
             {
                 var nameType = SelectedTnpaType.Name;
-                var resoult = MessageBox.Show($"Вы действительно желаете удалить тип {nameType}?",
-                    "", MessageBoxButton.YesNoCancel);
+                
+                var resoult = YesCancelMessage($"Вы действительно желаете удалить тип {nameType}?");
 
-                if (resoult == MessageBoxResult.Yes || resoult == MessageBoxResult.OK)
+                if (resoult)
                 {
                     var resoulCollect = _dbContext.Tnpas.Select(x => x).Where(el => el.TnpaTypeId == SelectedTnpaType.Id);
-                    if (resoulCollect.Count()>0)
+                    if (resoulCollect.Count() > 0)
                     {
-                        MessageBox.Show(_window, $"Тип {nameType} невозможно удалить, " +
+                        YesMessage($"Тип {nameType} невозможно удалить, " +
                             $"так как существуют ТНПА связанные с ним. Сначала нужно удалить соответствующие ТНПА, " +
-                            $"а затем тип.");
+                            $"а затем тип.", "Ошибка");
                         return;
                     }
 
                     _dbContext.TnpaTypes.Remove(SelectedTnpaType);
                     _dbContext.SaveChanges();
                     GetTnpaTypsAsync();
-                    MessageBox.Show($"Тип {nameType} успешно удален");
+                    YesMessage($"Тип {nameType} успешно удален");
 
                 }
             }
@@ -133,7 +130,7 @@ namespace TNPASerch.ViewModel
                     var collect = _dbContext.TnpaTypes.Select(a => a).Where(x => x.Name.ToUpper().Equals(textresoult.ToUpper()));
                     if (collect.ToList().Count() > 0)
                     {
-                        MessageBox.Show($"Тип {textresoult} уже существует");
+                        YesMessage($"Тип {textresoult} уже существует");
                         return;
                     }
                     else
@@ -145,7 +142,7 @@ namespace TNPASerch.ViewModel
                         _dbContext.TnpaTypes.Add(tnpaType);
                         _dbContext.SaveChanges();
                         GetTnpaTypsAsync();
-                        MessageBox.Show($"Тип {textresoult} успешно добавлен");
+                        YesMessage($"Тип {textresoult} успешно добавлен");
                     }
                 }
             }

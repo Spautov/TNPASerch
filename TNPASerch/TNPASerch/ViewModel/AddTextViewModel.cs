@@ -5,15 +5,13 @@ using TNPASerch.View;
 
 namespace TNPASerch.ViewModel
 {
-    public class AddTextViewModel : NotifyPropertyChangedModel
+    public class AddTextViewModel : BaseViewModel
     {
-        private readonly AddTextView _window;
         public ICommand OkCommand { get; set; }
         public ICommand CancelCommand { get; set; }
 
-        public AddTextViewModel(AddTextView window)
+        public AddTextViewModel(AddTextView window): base(window)
         {
-            _window = window ?? throw new ArgumentNullException("window");
             OkCommand = new RelayCommand(Ok);
             CancelCommand = new RelayCommand(Cancel);
         }

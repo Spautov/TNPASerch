@@ -12,10 +12,8 @@ using TNPASerch.View;
 
 namespace TNPASerch.ViewModel
 {
-    public class MainWindowViewModel : NotifyPropertyChangedModel
+    public class MainWindowViewModel : BaseViewModel
     {
-        private readonly MainWindow _window;
-
         private readonly TnpaDbContext _dbContext;
         public ICommand ShowAddTNPAWindowCommand { get; set; }
         public ICommand ShowTNPATypeEditWindowCommand { get; set; }
@@ -25,9 +23,8 @@ namespace TNPASerch.ViewModel
 
         private readonly object _lockDb;
 
-        public MainWindowViewModel(MainWindow window)
+        public MainWindowViewModel(MainWindow window): base(window)
         {
-            _window = window ?? throw new ArgumentNullException("window");
             _dbContext = new TnpaDbContext();
             _lockDb = new object();
             GetTnpaTypsAsync();
@@ -40,7 +37,10 @@ namespace TNPASerch.ViewModel
 
         private void ShowTNPATypeEditWindow()
         {
-            TnpaTypeEditView tnpaTypeEditView = new TnpaTypeEditView();
+            TnpaTypeEditView tnpaTypeEditView = new TnpaTypeEditView
+            {
+                Owner = _window
+            };
             tnpaTypeEditView.DataContext = new TnpaTypeEditViewModel(tnpaTypeEditView);
             tnpaTypeEditView.ShowDialog();
 
@@ -147,11 +147,6 @@ namespace TNPASerch.ViewModel
         private async void GetTnpaAsync()
         {
             await Task.Run(() => GetTnpa());
-        }
-
-        private void Close()
-        {
-            _window.Close();
         }
 
         private void ShowAddTNPAWindow()

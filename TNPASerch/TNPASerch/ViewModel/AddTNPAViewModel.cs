@@ -13,10 +13,8 @@ using TNPASerch.View;
 
 namespace TNPASerch.ViewModel
 {
-    public class AddTNPAViewModel : NotifyPropertyChangedModel, IDisposable
+    public class AddTNPAViewModel : BaseViewModel, IDisposable
     {
-        private readonly AddTNPAWindow _window;
-
         private readonly TnpaDbContext _dbContext;
 
         private bool _isValid;
@@ -146,9 +144,8 @@ namespace TNPASerch.ViewModel
             }
         }
 
-        public AddTNPAViewModel(AddTNPAWindow window)
+        public AddTNPAViewModel(AddTNPAWindow window): base(window)
         {
-            _window = window ?? throw new ArgumentNullException("window");
             _dbContext = new TnpaDbContext();
             GetTnpaTypsAsync();
             SaveCommand = new RelayCommand(Save);
@@ -192,7 +189,7 @@ namespace TNPASerch.ViewModel
             };
             _dbContext.Tnpas.Add(tnpa);
             _dbContext.SaveChanges();
-            MessageBox.Show(_window, $"{tnpa.Type.Name} {tnpa.Number} успешно добавлен");
+            YesMessage($"{tnpa.Type.Name} {tnpa.Number} успешно добавлен");
             _window.Close();
         }
 
@@ -215,7 +212,7 @@ namespace TNPASerch.ViewModel
             };
             _dbContext.Tnpas.Add(tnpa);
             _dbContext.SaveChanges();
-            MessageBox.Show(_window, $"{tnpa.Type.Name} {tnpa.Number} успешно добавлен");
+            YesMessage($"{tnpa.Type.Name} {tnpa.Number} успешно добавлен");
             SelectedTnpaType = null;
             NumberTnpa = " ";
             NumberRegisteredTnpa = 0;
@@ -312,7 +309,7 @@ namespace TNPASerch.ViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show(_window, ex.Message);
+                YesMessage(ex.Message);
                 return false;
             }
         }

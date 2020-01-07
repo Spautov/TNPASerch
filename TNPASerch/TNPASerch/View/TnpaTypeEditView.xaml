@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TNPASerch.View"
         mc:Ignorable="d"
-        Title="TnpaTypeEditView" Height="650" Width="550" ResizeMode="NoResize">
+        Title="TnpaTypeEditView" Height="650" Width="550" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -22,10 +22,12 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Margin="8" Grid.Column="0" Command="{Binding AddTypeCommand}">Add</Button>
-            <Button Margin="8" Grid.Column="1" Command="{Binding RemoveTypeCommand}">Del</Button>
-            <Button Margin="8" Grid.Column="2" Command="{Binding EditTypeCommand}">Edit</Button>
+            <Button Margin="8" Grid.Column="0" Command="{Binding AddTypeCommand}">Добавить</Button>
+            <Button Margin="8" Grid.Column="1" Command="{Binding RemoveTypeCommand}">Удалить</Button>
+            <Button Margin="8" Grid.Column="2" Command="{Binding EditTypeCommand}">Редактировать</Button>
+            <Button Margin="8" Grid.Column="3" Command="{Binding CancelTypeCommand}">Отмена</Button>
         </Grid>
     </Grid>
 </Window>
