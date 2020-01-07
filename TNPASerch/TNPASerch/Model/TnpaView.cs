@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
+using TNPASerch.ViewModel;
 
 namespace TNPASerch.Model
 {
-    public class TnpaView : INotifyPropertyChanged
+    public class TnpaView : NotifyPropertyChangedModel
     {
         /// <summary>
         /// Id документа
@@ -149,12 +148,6 @@ namespace TNPASerch.Model
         public TnpaView()
         {
             Changes = new List<string>();
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName]string prop = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
     }
 }

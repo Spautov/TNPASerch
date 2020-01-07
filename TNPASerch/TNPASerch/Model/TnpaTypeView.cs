@@ -1,12 +1,11 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
+﻿using TNPASerch.ViewModel;
 
 namespace TNPASerch.Model
 {
     /// <summary>
     /// Класс для отображения тип ТНПА
     /// </summary>
-    public class TnpaTypeView : INotifyPropertyChanged
+    public class TnpaTypeView : NotifyPropertyChangedModel
     {
         private int _id;
         /// <summary>
@@ -34,12 +33,6 @@ namespace TNPASerch.Model
                 _name = value;
                 OnPropertyChanged();
             }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName]string prop = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
 
         public override string ToString()

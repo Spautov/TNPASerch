@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TNPASerch.ViewModel
 {
-    public class MessageViewModel
+    public class MessageViewModel: NotifyPropertyChangedModel
     {
     }
 }

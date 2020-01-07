@@ -1,14 +1,9 @@
-﻿using DAL;
-using DbWorker;
+﻿using DbWorker;
 using GalaSoft.MvvmLight.Command;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -17,10 +12,8 @@ using TNPASerch.View;
 
 namespace TNPASerch.ViewModel
 {
-    public class MainWindowViewModel : INotifyPropertyChanged
+    public class MainWindowViewModel : NotifyPropertyChangedModel
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
         private readonly MainWindow _window;
 
         private readonly TnpaDbContext _dbContext;
@@ -170,11 +163,6 @@ namespace TNPASerch.ViewModel
             addWindow.DataContext = new AddTNPAViewModel(addWindow);
             addWindow.ShowDialog();
             GetTnpaAsync();
-        }
-
-        public void OnPropertyChanged([CallerMemberName]string prop = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
     }
 }

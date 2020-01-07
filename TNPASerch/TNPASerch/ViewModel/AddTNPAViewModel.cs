@@ -3,9 +3,7 @@ using DbWorker;
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -15,13 +13,11 @@ using TNPASerch.View;
 
 namespace TNPASerch.ViewModel
 {
-    public class AddTNPAViewModel : IDisposable, INotifyPropertyChanged
+    public class AddTNPAViewModel : NotifyPropertyChangedModel, IDisposable
     {
         private readonly AddTNPAWindow _window;
 
         private readonly TnpaDbContext _dbContext;
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         private bool _isValid;
         public bool IsValid
@@ -242,11 +238,6 @@ namespace TNPASerch.ViewModel
         public ICommand SaveCommand { get; set; }
         public ICommand ApplyCommand { get; set; }
         public ICommand CancelCommand { get; set; }
-
-        public void OnPropertyChanged([CallerMemberName]string prop = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
-        }
 
         private bool СheckFild()
         {
