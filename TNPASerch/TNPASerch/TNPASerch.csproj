@@ -290,6 +290,10 @@
       <Project>{df1c8993-9373-4ca5-9af4-d7fa05801a72}</Project>
       <Name>DbWorker</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Repository\Repository.csproj">
+      <Project>{8a8d66bd-ac5b-429a-9045-6ef432932890}</Project>
+      <Name>Repository</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="aqua_smooth_folder_documents_14309.ico" />

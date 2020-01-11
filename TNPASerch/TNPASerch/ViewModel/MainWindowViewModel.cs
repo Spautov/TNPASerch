@@ -1,9 +1,6 @@
-﻿using DbWorker;
-using GalaSoft.MvvmLight.Command;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using GalaSoft.MvvmLight.Command;
+using Repository;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -14,7 +11,7 @@ namespace TNPASerch.ViewModel
 {
     public class MainWindowViewModel : BaseViewModel
     {
-        private readonly TnpaDbContext _dbContext;
+        private readonly IRepository _repository;
         public ICommand ShowAddTNPAWindowCommand { get; set; }
         public ICommand ShowTNPATypeEditWindowCommand { get; set; }
         public ICommand SearchCommand { get; set; }
@@ -23,9 +20,9 @@ namespace TNPASerch.ViewModel
 
         private readonly object _lockDb;
 
-        public MainWindowViewModel(MainWindow window): base(window)
+        public MainWindowViewModel(MainWindow window) : base(window)
         {
-            _dbContext = new TnpaDbContext();
+            _repository = SQLiteRepository.GetRepository();
             _lockDb = new object();
             GetTnpaTypsAsync();
             GetTnpaAsync();
@@ -50,7 +47,7 @@ namespace TNPASerch.ViewModel
 
         private async void SearchAsync()
         {
-            await Task.Run(()=> { Search(); });
+            await Task.Run(() => { Search(); });
         }
 
         private void Search()
@@ -82,21 +79,16 @@ namespace TNPASerch.ViewModel
             }
         }
 
-        private void GetTnpaTyps()
-        {
-            lock (_lockDb)
-            {
-                var colllectTnpaType = _dbContext.TnpaTypes.Select(x => new TnpaTypeView {Id = x.Id, Name = x.Name });
-                if (colllectTnpaType.Count() > 0)
-                {
-                    TnpaTypes = new ObservableCollection<TnpaTypeView>(colllectTnpaType.ToList());
-                }
-            }
-        }
-
         private async void GetTnpaTypsAsync()
         {
-            await Task.Run(() => GetTnpaTyps());
+            var colllectTnpaType = await _repository.GetTnpaTypeListAsunc();
+
+            TnpaTypes = new ObservableCollection<TnpaTypeView>();
+            foreach (var type in colllectTnpaType)
+            {
+                TnpaTypes.Add(new TnpaTypeView { Id = type.Id, Name = type.Name });
+            }
+
         }
 
         private TnpaTypeView _selectedTnpaType;
@@ -121,32 +113,27 @@ namespace TNPASerch.ViewModel
             }
         }
 
-        private void GetTnpa()
-        {
-            lock (_lockDb)
-            {
-                var colllectTnpa = _dbContext.Tnpas.Include(x => x.Type).Select(t =>
-                new TnpaView {Id = t.Id,
-                Number = $"{t.Number}-{t.Year}",
-                Name = t.Name,
-                PutIntoOperation = t.PutIntoOperation,
-                Cancelled = t.Cancelled,
-                Registered = t.Registered,
-                NumberRegistered = t.NumberRegistered,
-                IsReal = t.IsReal, 
-                Type = t.Type.Name
-                });
-
-                if (colllectTnpa.Count()>0)
-                {
-                    Tnpas = new ObservableCollection<TnpaView>(colllectTnpa.ToList());
-                }
-            }
-        }
-
         private async void GetTnpaAsync()
         {
-            await Task.Run(() => GetTnpa());
+            var colllectTnpa = await _repository.GetTnpaListAsunc();
+
+            Tnpas = new ObservableCollection<TnpaView>();
+            foreach (var tnpa in colllectTnpa)
+            {
+                Tnpas.Add(new TnpaView
+                {
+                    Id = tnpa.Id,
+                    Number = $"{tnpa.Number}-{tnpa.Year}",
+                    Name = tnpa.Name,
+                    PutIntoOperation = tnpa.PutIntoOperation,
+                    Cancelled = tnpa.Cancelled,
+                    Registered = tnpa.Registered,
+                    NumberRegistered = tnpa.NumberRegistered,
+                    IsReal = tnpa.IsReal,
+                    Type = tnpa.Type.Name
+                });
+            }
+
         }
 
         private void ShowAddTNPAWindow()
