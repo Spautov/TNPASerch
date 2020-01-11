@@ -46,7 +46,10 @@ namespace TNPASerch.ViewModel
         {
             if (SelectedTnpaType != null)
             {
-                AddTextView addTextView = new AddTextView();
+                AddTextView addTextView = new AddTextView
+                {
+                    Owner = _window
+                };
                 AddTextViewModel addTextViewModel = new AddTextViewModel(addTextView)
                 {
                     TextValue = SelectedTnpaType.Name
@@ -118,7 +121,10 @@ namespace TNPASerch.ViewModel
 
         private void AddType()
         {
-            AddTextView addTextView = new AddTextView();
+            AddTextView addTextView = new AddTextView
+            {
+                Owner = _window
+            };
             AddTextViewModel addTextViewModel = new AddTextViewModel(addTextView);
             addTextView.DataContext = addTextViewModel;
             addTextView.ShowDialog();
