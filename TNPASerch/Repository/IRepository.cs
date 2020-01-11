@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Repository
 {
-    interface IRepository : IDisposable
+    public interface IRepository : IDisposable
     {
         IEnumerable<Tnpa> GetTnpaList();
         ValueTask<IEnumerable<Tnpa>> GetTnpaListAsunc();
