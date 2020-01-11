@@ -14,6 +14,7 @@ namespace Repository
         private readonly TnpaDbContext _dbContext;
 
         private static SQLiteRepository _SQLiteRepository;
+        private readonly object _lockDb;
 
         public static SQLiteRepository GetRepository()
         {
@@ -24,64 +25,99 @@ namespace Repository
 
         private SQLiteRepository()
         {
+            _lockDb = new object();
             _dbContext = new TnpaDbContext();
         }
         public void Create(Tnpa item)
         {
-            _dbContext.Tnpas.Add(item);
-            Save();
+            lock (_lockDb)
+            {
+                _dbContext.Tnpas.Add(item);
+                Save();
+            }
         }
 
         public void Create(TnpaType item)
         {
-            _dbContext.TnpaTypes.Add(item);
-            Save();
+            lock (_lockDb)
+            {
+                _dbContext.TnpaTypes.Add(item);
+                Save();
+            }
         }
 
         public void DeleteTnpa(int id)
         {
-            Tnpa tnpa = _dbContext.Tnpas.Find(id);
-            if (tnpa != null)
-                _dbContext.Tnpas.Remove(tnpa);
+            lock (_lockDb)
+            {
+                Tnpa tnpa = _dbContext.Tnpas.Find(id);
+                if (tnpa != null)
+                    _dbContext.Tnpas.Remove(tnpa);
+            }
         }
 
         public void DeleteTnpaType(int id)
         {
-            TnpaType tnpaType = _dbContext.TnpaTypes.Find(id);
-            if (tnpaType != null)
-                _dbContext.TnpaTypes.Remove(tnpaType);
+            lock (_lockDb)
+            {
+                TnpaType tnpaType = _dbContext.TnpaTypes.Find(id);
+                if (tnpaType != null)
+                    _dbContext.TnpaTypes.Remove(tnpaType);
+            }
         }
 
         public Tnpa GetTnpa(int id)
         {
-            return _dbContext.Tnpas.Find(id);
+            lock (_lockDb)
+            {
+                return _dbContext.Tnpas.Find(id);
+            }
         }
 
         public IEnumerable<Tnpa> GetTnpaList()
         {
-            return _dbContext.Tnpas;
+            lock (_lockDb)
+            {
+                return _dbContext.Tnpas;
+            }
         }
 
         async public ValueTask<IEnumerable<Tnpa>> GetTnpaListAsunc()
         {
-            var resoult = await Task.Run(() => _dbContext.Tnpas);
+            var resoult = await Task.Run(() => {
+                lock (_lockDb)
+                { 
+                    return _dbContext.Tnpas; 
+                }
+            });
             return resoult;
         }
 
         public TnpaType GetTnpaType(int id)
         {
-            return _dbContext.TnpaTypes.Find(id);
+            lock (_lockDb)
+            {
+                return _dbContext.TnpaTypes.Find(id);
+            }
         }
 
         async public ValueTask<IEnumerable<TnpaType>> GetTnpaTypeListAsunc()
         {
-            var resoult = await Task.Run(() => _dbContext.TnpaTypes);
+            var resoult = await Task.Run(() => {
+                lock (_lockDb)
+                {
+                    return _dbContext.TnpaTypes;
+                }
+            });
             return resoult;
         }
 
         public IEnumerable<TnpaType> GetTnpaTypeList()
         {
-            return _dbContext.TnpaTypes;
+            lock (_lockDb)
+            {
+                return _dbContext.TnpaTypes;
+            }
         }
 
         public void Save()
@@ -91,14 +127,20 @@ namespace Repository
 
         public void Update(Tnpa item)
         {
-            _dbContext.Entry(item).State = EntityState.Modified;
-            Save();
+            lock (_lockDb)
+            {
+                _dbContext.Entry(item).State = EntityState.Modified;
+                Save();
+            }
         }
 
         public void Update(TnpaType item)
         {
-            _dbContext.Entry(item).State = EntityState.Modified;
-            Save();
+            lock (_lockDb)
+            {
+                _dbContext.Entry(item).State = EntityState.Modified;
+                Save();
+            }
         }
 
         private bool disposed = false;
