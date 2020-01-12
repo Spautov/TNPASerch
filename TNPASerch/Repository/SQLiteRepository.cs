@@ -41,6 +41,11 @@ namespace Repository
         {
             lock (_lockDb)
             {
+                var collect = _dbContext.TnpaTypes.Select(a => a).Where(x => x.Name.ToUpper().Equals(item.Name.ToUpper()));
+                if (collect.Count() > 0)
+                {
+                    throw new Exception($"Тип {item.Name} уже существует");
+                }
                 _dbContext.TnpaTypes.Add(item);
                 Save();
             }
@@ -52,7 +57,10 @@ namespace Repository
             {
                 Tnpa tnpa = _dbContext.Tnpas.Find(id);
                 if (tnpa != null)
+                {
                     _dbContext.Tnpas.Remove(tnpa);
+                    Save();
+                }
             }
         }
 
@@ -61,8 +69,19 @@ namespace Repository
             lock (_lockDb)
             {
                 TnpaType tnpaType = _dbContext.TnpaTypes.Find(id);
-                if (tnpaType != null)
+                if (tnpaType != null) 
+                {
+                    var resoulCollect = _dbContext.Tnpas.Select(x => x).Where(el => el.TnpaTypeId == tnpaType.Id);
+                    if (resoulCollect.Count() > 0)
+                    {
+                        var message = $"Тип {tnpaType.Name} невозможно удалить, " +
+                            $"так как существуют ТНПА связанные с ним. Сначала нужно удалить соответствующие ТНПА, " +
+                            $"а затем тип.";
+                        throw new Exception(message);
+                    }
                     _dbContext.TnpaTypes.Remove(tnpaType);
+                    Save();
+                }
             }
         }
 
@@ -160,6 +179,17 @@ namespace Repository
                 }
             }
             this.disposed = true;
+        }
+
+        public TnpaType FindTnpaTypeByName(string name)
+        {
+            var collect = _dbContext.TnpaTypes.Select(a => a).Where(x => x.Name.ToUpper().Equals(name.ToUpper()));
+            return collect.FirstOrDefault();
+        }
+
+        public TnpaType FindTnpaTypeById(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using DAL;
 using DbWorker;
 using GalaSoft.MvvmLight.Command;
+using Repository;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -17,8 +18,7 @@ namespace TNPASerch.ViewModel
         public ICommand EditTypeCommand { get; set; }
         public ICommand CancelTypeCommand { get; set; }
 
-        private readonly TnpaDbContext _dbContext;
-        private readonly object _lockDb;
+        private readonly IRepository _repository;
 
         private ObservableCollection<TnpaType> _tnpaTypes;
         public ObservableCollection<TnpaType> TnpaTypes
@@ -31,10 +31,9 @@ namespace TNPASerch.ViewModel
             }
         }
 
-        public TnpaTypeEditViewModel(TnpaTypeEditView window): base(window)
+        public TnpaTypeEditViewModel(TnpaTypeEditView window) : base(window)
         {
-            _dbContext = new TnpaDbContext();
-            _lockDb = new object();
+            _repository = SQLiteRepository.GetRepository();
             AddTypeCommand = new RelayCommand(AddType);
             RemoveTypeCommand = new RelayCommand(RemoveType);
             EditTypeCommand = new RelayCommand(EditType);
@@ -61,8 +60,7 @@ namespace TNPASerch.ViewModel
                     string textresoult = addTextViewModel.TextValue.Trim(' ');
                     if (!String.IsNullOrEmpty(textresoult) || String.IsNullOrWhiteSpace(textresoult))
                     {
-                        var collect = _dbContext.TnpaTypes.Select(a => a).Where(x => x.Name.ToUpper().Equals(textresoult.ToUpper()));
-                        if (collect.ToList().Count() > 0)
+                        if (_repository.FindTnpaTypeByName(textresoult) != null)
                         {
                             YesMessage($"Тип {textresoult} уже существует");
                             return;
@@ -70,9 +68,7 @@ namespace TNPASerch.ViewModel
                         else
                         {
                             SelectedTnpaType.Name = textresoult;
-
-                            _dbContext.Update(SelectedTnpaType);
-                            _dbContext.SaveChanges();
+                            _repository.Update(SelectedTnpaType);
                             GetTnpaTypsAsync();
                         }
                     }
@@ -84,26 +80,20 @@ namespace TNPASerch.ViewModel
         {
             if (SelectedTnpaType != null)
             {
-                var nameType = SelectedTnpaType.Name;
-                
-                var resoult = YesCancelMessage($"Вы действительно желаете удалить тип {nameType}?");
+                var resoult = YesCancelMessage($"Вы действительно желаете удалить тип {SelectedTnpaType.Name}?");
 
                 if (resoult)
                 {
-                    var resoulCollect = _dbContext.Tnpas.Select(x => x).Where(el => el.TnpaTypeId == SelectedTnpaType.Id);
-                    if (resoulCollect.Count() > 0)
+                    try
                     {
-                        YesMessage($"Тип {nameType} невозможно удалить, " +
-                            $"так как существуют ТНПА связанные с ним. Сначала нужно удалить соответствующие ТНПА, " +
-                            $"а затем тип.", "Ошибка");
-                        return;
+                        _repository.DeleteTnpaType(SelectedTnpaType.Id);
+                        YesMessage($"Тип {SelectedTnpaType.Name} успешно удален");
+                        GetTnpaTypsAsync();
                     }
-
-                    _dbContext.TnpaTypes.Remove(SelectedTnpaType);
-                    _dbContext.SaveChanges();
-                    GetTnpaTypsAsync();
-                    YesMessage($"Тип {nameType} успешно удален");
-
+                    catch (Exception ex)
+                    {
+                        YesMessage(ex.Message, "Ошибка");
+                    }
                 }
             }
         }
@@ -133,39 +123,30 @@ namespace TNPASerch.ViewModel
                 string textresoult = addTextViewModel.TextValue.Trim(' ');
                 if (!String.IsNullOrEmpty(textresoult) || String.IsNullOrWhiteSpace(textresoult))
                 {
-                    var collect = _dbContext.TnpaTypes.Select(a => a).Where(x => x.Name.ToUpper().Equals(textresoult.ToUpper()));
-                    if (collect.ToList().Count() > 0)
+                    TnpaType tnpaType = new TnpaType
                     {
-                        YesMessage($"Тип {textresoult} уже существует");
-                        return;
-                    }
-                    else
+                        Name = textresoult
+                    };
+
+                    try
                     {
-                        TnpaType tnpaType = new TnpaType
-                        {
-                            Name = textresoult
-                        };
-                        _dbContext.TnpaTypes.Add(tnpaType);
-                        _dbContext.SaveChanges();
+                        _repository.Create(tnpaType);
                         GetTnpaTypsAsync();
                         YesMessage($"Тип {textresoult} успешно добавлен");
                     }
+                    catch (Exception ex)
+                    {
+                        YesMessage(ex.Message, "Ошибка");
+                    }
+                   
                 }
             }
         }
 
         private async void GetTnpaTypsAsync()
         {
-            await Task.Run(() => GetTnpaTyps());
-        }
-
-        private void GetTnpaTyps()
-        {
-            lock (_lockDb)
-            {
-                var colllectTnpaType = _dbContext.TnpaTypes.Select(x => x);
-                TnpaTypes = new ObservableCollection<TnpaType>(colllectTnpaType.ToList());
-            }
+            var colllectTnpaType = await _repository.GetTnpaTypeListAsunc();
+            TnpaTypes = new ObservableCollection<TnpaType>(colllectTnpaType);
         }
     }
 }

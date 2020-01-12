@@ -18,12 +18,9 @@ namespace TNPASerch.ViewModel
         public ICommand SettingsCommand { get; set; }
         public ICommand CloseCommand { get; set; }
 
-        private readonly object _lockDb;
-
         public MainWindowViewModel(MainWindow window) : base(window)
         {
             _repository = SQLiteRepository.GetRepository();
-            _lockDb = new object();
             GetTnpaTypsAsync();
             GetTnpaAsync();
             ShowAddTNPAWindowCommand = new RelayCommand(ShowAddTNPAWindow);
@@ -88,7 +85,6 @@ namespace TNPASerch.ViewModel
             {
                 TnpaTypes.Add(new TnpaTypeView { Id = type.Id, Name = type.Name });
             }
-
         }
 
         private TnpaTypeView _selectedTnpaType;
