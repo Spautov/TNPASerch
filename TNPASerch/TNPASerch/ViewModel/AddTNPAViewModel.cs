@@ -1,6 +1,7 @@
 ﻿using DAL;
 using DbWorker;
 using GalaSoft.MvvmLight.Command;
+using Repository;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace TNPASerch.ViewModel
 {
     public class AddTNPAViewModel : BaseViewModel, IDisposable
     {
-        private readonly TnpaDbContext _dbContext;
+        private readonly IRepository _repository;
 
         private bool _isValid;
         public bool IsValid
@@ -146,11 +147,12 @@ namespace TNPASerch.ViewModel
 
         public AddTNPAViewModel(AddTNPAWindow window): base(window)
         {
-            _dbContext = new TnpaDbContext();
+            _repository = SQLiteRepository.GetRepository();
             GetTnpaTypsAsync();
             SaveCommand = new RelayCommand(Save);
             ApplyCommand = new RelayCommand(Apply);
             CancelCommand = new RelayCommand(Cancel);
+            EditChangesCommand = new RelayCommand(EditChanges);
             YearTnpa = "";
             NumberTnpa = "";
             TnpaName = "";
@@ -158,22 +160,43 @@ namespace TNPASerch.ViewModel
             CancelledTnpa = DateTime.Now;
         }
 
-        private void GetTnpaTyps()
+        private void EditChanges()
         {
-            var colllectTnpaType = _dbContext.TnpaTypes.Select(x => x);
-            TnpaTypes = new ObservableCollection<TnpaType>(colllectTnpaType.ToList());
+            throw new NotImplementedException();
         }
 
         private async void GetTnpaTypsAsync()
         {
-            await Task.Run(() => GetTnpaTyps());
+            var colllectTnpaType = await _repository.GetTnpaTypeListAsunc();
+            TnpaTypes = new ObservableCollection<TnpaType>(colllectTnpaType);
         }
 
         private void Save()
         {
+            CreatTnpa();
+
+            _window.Close();
+        }
+
+        private void Apply()
+        {
+            if (CreatTnpa())
+            {
+                SelectedTnpaType = null;
+                NumberTnpa = " ";
+                NumberRegisteredTnpa = 0;
+                YearTnpa = "";
+                TnpaName = "";
+                PutIntoOperationTnpa = DateTime.Now;
+                IsValid = false;
+            }
+        }
+
+        private bool CreatTnpa()
+        {
             if (!СheckFild())
             {
-                return;
+                return false;
             }
             Tnpa tnpa = new Tnpa
             {
@@ -187,44 +210,23 @@ namespace TNPASerch.ViewModel
                 Registered = DateTime.Now,
                 IsReal = IsValid
             };
-            _dbContext.Tnpas.Add(tnpa);
-            _dbContext.SaveChanges();
-            YesMessage($"{tnpa.Type.Name} {tnpa.Number} успешно добавлен");
-            _window.Close();
-        }
 
-        private void Apply()
-        {
-            if (!СheckFild())
+            try
             {
-                return;
+                _repository.Create(tnpa);
+                YesMessage($"ТНПА {tnpa.Type.Name} {tnpa.Number} успешно добавлен");
             }
-            Tnpa tnpa = new Tnpa
+            catch (Exception ex)
             {
-                Type = SelectedTnpaType,
-                Number = NumberTnpa + "-" + YearTnpa,
-                Name = TnpaName,
-                PutIntoOperation = PutIntoOperationTnpa,
-                NumberRegistered = NumberRegisteredTnpa,
-                Cancelled = new DateTime(),
-                Registered = DateTime.Now,
-                IsReal = IsValid
-            };
-            _dbContext.Tnpas.Add(tnpa);
-            _dbContext.SaveChanges();
-            YesMessage($"{tnpa.Type.Name} {tnpa.Number} успешно добавлен");
-            SelectedTnpaType = null;
-            NumberTnpa = " ";
-            NumberRegisteredTnpa = 0;
-            YearTnpa = "";
-            TnpaName = "";
-            PutIntoOperationTnpa = DateTime.Now;
-            IsValid = false;
+                YesMessage(ex.Message, "Ошибка");
+                return false;
+            }
+            return true;
         }
 
         public void Dispose()
         {
-            _dbContext?.Dispose();
+            _repository?.Dispose();
         }
 
         private void Cancel()
@@ -235,6 +237,7 @@ namespace TNPASerch.ViewModel
         public ICommand SaveCommand { get; set; }
         public ICommand ApplyCommand { get; set; }
         public ICommand CancelCommand { get; set; }
+        public ICommand EditChangesCommand { get; set; }
 
         private bool СheckFild()
         {
@@ -269,14 +272,14 @@ namespace TNPASerch.ViewModel
 
                     if (year <100)
                     {
-                        if (year < 80)
+                        if (year < 50)
                         {
                             throw new Exception();
                         }
                     }
                     else
                     {
-                        if (year<1980 || year > nowyear)
+                        if (year<2000 || year > nowyear)
                         {
                             throw new Exception();
                         }
@@ -300,10 +303,10 @@ namespace TNPASerch.ViewModel
                     throw new Exception("Неверный номер регистрации в журнале");
                 }
                 var Namber = NumberTnpa + "-" + YearTnpa;
-                var tnpas = _dbContext.Tnpas.Select(t=>t).Where(tw=> tw.Number.Equals(Namber) && tw.TnpaTypeId == SelectedTnpaType.Id);
-                if (tnpas.Count() > 0)
+                var tnpas = _repository.FindTnpaByNumber(Namber);
+                if (tnpas != null && tnpas.TnpaTypeId == SelectedTnpaType.Id)
                 {
-                    throw new Exception($"ТНПА {SelectedTnpaType.Name} {Namber} уже зарегистрирован в журнале под № {tnpas.First().NumberRegistered}");
+                    throw new Exception($"ТНПА {SelectedTnpaType.Name} {Namber} уже зарегистрирован в журнале под № {tnpas.NumberRegistered}");
                 }
                 return true;
             }

@@ -32,6 +32,12 @@ namespace Repository
         {
             lock (_lockDb)
             {
+                var collect = _dbContext.Tnpas.Where(x => x.Number.ToUpper().Equals(item.Number.ToUpper()) 
+                && x.TnpaTypeId == item.TnpaTypeId);
+                if (collect.Count() > 0)
+                {
+                    throw new Exception($"ТНПА {item.Type.Name} {item.Number} уже существует");
+                }
                 _dbContext.Tnpas.Add(item);
                 Save();
             }
@@ -41,7 +47,7 @@ namespace Repository
         {
             lock (_lockDb)
             {
-                var collect = _dbContext.TnpaTypes.Select(a => a).Where(x => x.Name.ToUpper().Equals(item.Name.ToUpper()));
+                var collect = _dbContext.TnpaTypes.Where(x => x.Name.ToUpper().Equals(item.Name.ToUpper()));
                 if (collect.Count() > 0)
                 {
                     throw new Exception($"Тип {item.Name} уже существует");
@@ -183,13 +189,30 @@ namespace Repository
 
         public TnpaType FindTnpaTypeByName(string name)
         {
-            var collect = _dbContext.TnpaTypes.Select(a => a).Where(x => x.Name.ToUpper().Equals(name.ToUpper()));
+            var collect = _dbContext.TnpaTypes.Where(x => x.Name.ToUpper().Equals(name.ToUpper()));
             return collect.FirstOrDefault();
         }
 
         public TnpaType FindTnpaTypeById(int id)
         {
-            throw new NotImplementedException();
+            return _dbContext.TnpaTypes.Find(id);
+        }
+
+        public Tnpa FindTnpaByName(string name)
+        {
+            var collect = _dbContext.Tnpas.Where(x => x.Name.ToUpper().Equals(name.ToUpper()));
+            return collect.FirstOrDefault();
+        }
+
+        public Tnpa FindTnpaById(int id)
+        {
+            return _dbContext.Tnpas.Find(id);
+        }
+
+        public Tnpa FindTnpaByNumber(string number)
+        {
+            var collect = _dbContext.Tnpas.Where(x => x.Number.ToUpper().Equals(number.ToUpper()));
+            return collect.FirstOrDefault();
         }
     }
 }

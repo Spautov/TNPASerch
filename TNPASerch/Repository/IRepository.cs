@@ -21,6 +21,9 @@ namespace Repository
         void DeleteTnpaType(int id);
         TnpaType FindTnpaTypeByName(string name);
         TnpaType FindTnpaTypeById(int id);
+        Tnpa FindTnpaByName(string name);
+        Tnpa FindTnpaByNumber(string name);
+        Tnpa FindTnpaById(int id);
         void Save();
     }
 }

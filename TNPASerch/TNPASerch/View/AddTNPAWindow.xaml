@@ -139,7 +139,7 @@
                     VerticalAlignment="Center" 
                     Padding="5 0"
                     Margin="5"
-                    Command="{Binding}"/>
+                    Command="{Binding EditChangesCommand}"/>
             
             <Button Content="Добавить" DockPanel.Dock="Right" 
                     VerticalAlignment="Center" 
