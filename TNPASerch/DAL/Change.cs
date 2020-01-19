@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace DAL
 {
@@ -29,5 +30,10 @@ namespace DAL
         /// ТНПА которому принадлежит изменение
         /// </summary>
         public Tnpa Tnpa { get; set; }
+
+        public override string ToString()
+        {
+            return $"№ {Number} зарегистроирован {Registered.ToString("d", CultureInfo.CreateSpecificCulture("ru-RU"))} ";
+        }
     }
 }

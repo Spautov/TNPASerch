@@ -207,12 +207,16 @@
     <Compile Include="ViewModel\AddTextViewModel.cs" />
     <Compile Include="ViewModel\MessageViewModel.cs" />
     <Compile Include="ViewModel\NotifyPropertyChangedModel.cs" />
+    <Compile Include="ViewModel\TnpaChengesEditViewModel.cs" />
     <Compile Include="ViewModel\TnpaTypeEditViewModel.cs" />
     <Compile Include="View\AddTextView.xaml.cs">
       <DependentUpon>AddTextView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MessageView.xaml.cs">
       <DependentUpon>MessageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TnpaChengesEditView.xaml.cs">
+      <DependentUpon>TnpaChengesEditView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\TnpaTypeEditView.xaml.cs">
       <DependentUpon>TnpaTypeEditView.xaml</DependentUpon>
@@ -243,6 +247,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\MessageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TnpaChengesEditView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
