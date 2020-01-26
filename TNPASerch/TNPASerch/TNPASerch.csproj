@@ -212,6 +212,9 @@
     <Compile Include="View\AddTextView.xaml.cs">
       <DependentUpon>AddTextView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ChangeView.xaml.cs">
+      <DependentUpon>ChangeView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MessageView.xaml.cs">
       <DependentUpon>MessageView.xaml</DependentUpon>
     </Compile>
@@ -226,6 +229,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AddTNPAWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ChangeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
