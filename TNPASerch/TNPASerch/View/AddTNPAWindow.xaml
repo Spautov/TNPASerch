@@ -130,8 +130,8 @@
             <Label Content="Количество изменений:" 
                    DockPanel.Dock="Left"
                    VerticalAlignment="Center" Margin="5 5 0 5"/>
-            
-            <Label Content="2" 
+
+            <Label Content="{Binding CountChanges}" 
                    DockPanel.Dock="Left"
                    VerticalAlignment="Center" Margin="0 5 5 5"
                    />

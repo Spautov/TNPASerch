@@ -17,15 +17,15 @@ namespace TNPASerch.ViewModel
     public class AddTNPAViewModel : BaseViewModel, IDisposable
     {
         private readonly IRepository _repository;
+        private Tnpa _currentTnpa;
 
-        private bool _isValid;
         public bool IsValid
         {
-            get { return _isValid; }
+            get { return _currentTnpa.IsReal; }
             set
             {
-                _isValid = value;
-                if (_isValid)
+                _currentTnpa.IsReal = value;
+                if (_currentTnpa.IsReal)
                 {
                     VvisibleCancelledTnpa = Visibility.Hidden;
                 }
@@ -35,6 +35,11 @@ namespace TNPASerch.ViewModel
                 }
                 OnPropertyChanged();
             }
+        }
+
+        public int CountChanges
+        {
+            get { return _currentTnpa.Changes.Count; }
         }
 
         private Visibility _visibleCancelledTnpa;
@@ -51,33 +56,32 @@ namespace TNPASerch.ViewModel
             }
         }
 
-        public TnpaType _selectedTnpaType;
         public TnpaType SelectedTnpaType
         {
-            get { return _selectedTnpaType; }
+            get { return _currentTnpa.Type; }
             set
             {
-                _selectedTnpaType = value;
+                _currentTnpa.Type = value;
                 OnPropertyChanged();
             }
         }
         public string _numberTnpa;
         public string NumberTnpa
         {
-            get { return _numberTnpa; }
+            get { return _currentTnpa.Number; }
             set
             {
-                _numberTnpa = value;
+                _currentTnpa.Number = value;
                 OnPropertyChanged();
             }
         }
-        public int _numberRegisteredTnpa;
+        
         public int NumberRegisteredTnpa
         {
-            get { return _numberRegisteredTnpa; }
+            get { return _currentTnpa.NumberRegistered; }
             set
             {
-                _numberRegisteredTnpa = value;
+                _currentTnpa.NumberRegistered = value;
                 OnPropertyChanged();
             }
         }
@@ -91,13 +95,13 @@ namespace TNPASerch.ViewModel
                 OnPropertyChanged();
             }
         }
-        public DateTime _putIntoOperationTnpa;
+        
         public DateTime PutIntoOperationTnpa
         {
-            get { return _putIntoOperationTnpa; }
+            get { return _currentTnpa.PutIntoOperation; }
             set
             {
-                _putIntoOperationTnpa = value;
+                _currentTnpa.PutIntoOperation = value;
                 OnPropertyChanged();
             }
         }
@@ -133,14 +137,12 @@ namespace TNPASerch.ViewModel
             }
         }
 
-        private string _tnpaName;
-
         public string TnpaName
         {
-            get { return _tnpaName; }
+            get { return _currentTnpa.Name; }
             set
             {
-                _tnpaName = value;
+                _currentTnpa.Name = value;
                 OnPropertyChanged();
             }
         }
@@ -153,16 +155,25 @@ namespace TNPASerch.ViewModel
             ApplyCommand = new RelayCommand(Apply);
             CancelCommand = new RelayCommand(Cancel);
             EditChangesCommand = new RelayCommand(EditChanges);
+            _currentTnpa = new Tnpa();
             YearTnpa = "";
             NumberTnpa = "";
             TnpaName = "";
+            
             PutIntoOperationTnpa = DateTime.Now;
             CancelledTnpa = DateTime.Now;
         }
 
         private void EditChanges()
         {
-            throw new NotImplementedException();
+            var view = new TnpaChengesEditView
+            {
+                Owner = _window
+            };
+
+            var ViewModel = new TnpaChengesEditViewModel(view, _currentTnpa.Changes );
+            view.DataContext = ViewModel;
+            view.Show();
         }
 
         private async void GetTnpaTypsAsync()
@@ -173,22 +184,22 @@ namespace TNPASerch.ViewModel
 
         private void Save()
         {
-            CreatTnpa();
-
-            _window.Close();
+            if (CreatTnpa())
+            {
+                _window.Close();
+            }
         }
 
         private void Apply()
         {
             if (CreatTnpa())
             {
-                SelectedTnpaType = null;
-                NumberTnpa = " ";
-                NumberRegisteredTnpa = 0;
+                _currentTnpa = new Tnpa();
                 YearTnpa = "";
+                NumberTnpa = "";
                 TnpaName = "";
-                PutIntoOperationTnpa = DateTime.Now;
-                IsValid = false;
+                NumberRegisteredTnpa = 0;
+                SelectedTnpaType = null;
             }
         }
 
@@ -198,23 +209,14 @@ namespace TNPASerch.ViewModel
             {
                 return false;
             }
-            Tnpa tnpa = new Tnpa
-            {
-                Type = SelectedTnpaType,
-                Number = NumberTnpa,
-                Year = int.Parse(YearTnpa),
-                Name = TnpaName,
-                PutIntoOperation = PutIntoOperationTnpa,
-                NumberRegistered = NumberRegisteredTnpa,
-                Cancelled = new DateTime(),
-                Registered = DateTime.Now,
-                IsReal = IsValid
-            };
+            _currentTnpa.Year = int.Parse(YearTnpa);
+            _currentTnpa.Cancelled = new DateTime();
+            _currentTnpa.Registered = DateTime.Now;
 
             try
             {
-                _repository.Create(tnpa);
-                YesMessage($"ТНПА {tnpa.Type.Name} {tnpa.Number} успешно добавлен");
+                _repository.Create(_currentTnpa);
+                YesMessage($"ТНПА {_currentTnpa.Type.Name} {_currentTnpa.Number} успешно добавлен");
             }
             catch (Exception ex)
             {
