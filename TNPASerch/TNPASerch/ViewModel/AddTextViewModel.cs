@@ -1,5 +1,4 @@
 ﻿using GalaSoft.MvvmLight.Command;
-using System;
 using System.Windows.Input;
 using TNPASerch.View;
 
