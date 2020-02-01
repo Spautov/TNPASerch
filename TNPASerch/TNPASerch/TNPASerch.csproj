@@ -205,9 +205,9 @@
     <Compile Include="Model\TnpaView.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\AddTextViewModel.cs" />
-    <Compile Include="ViewModel\ChangeBaseViewModel.cs" />
-    <Compile Include="ViewModel\ChangeEditViewModel.cs" />
-    <Compile Include="ViewModel\ChangeViewModel.cs" />
+    <Compile Include="ViewModel\Changes\ChangeBaseViewModel.cs" />
+    <Compile Include="ViewModel\Changes\ChangeEditViewModel.cs" />
+    <Compile Include="ViewModel\Changes\ChangeViewModel.cs" />
     <Compile Include="ViewModel\MessageViewModel.cs" />
     <Compile Include="ViewModel\NotifyPropertyChangedModel.cs" />
     <Compile Include="ViewModel\TnpaChengesEditViewModel.cs" />
