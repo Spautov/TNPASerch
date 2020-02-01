@@ -37,10 +37,24 @@ namespace TNPASerch.ViewModel
             }
         }
 
+        //public int CountChanges
+        //{
+        //    get { return _currentTnpa.Changes.Count; }
+        //}
+
+
+        private int _countChanges;
+
         public int CountChanges
         {
-            get { return _currentTnpa.Changes.Count; }
+            get { return _countChanges; }
+            set
+            {
+                _countChanges = value;
+                OnPropertyChanged();
+            }
         }
+
 
         private Visibility _visibleCancelledTnpa;
         public Visibility VvisibleCancelledTnpa
@@ -156,6 +170,7 @@ namespace TNPASerch.ViewModel
             CancelCommand = new RelayCommand(Cancel);
             EditChangesCommand = new RelayCommand(EditChanges);
             _currentTnpa = new Tnpa();
+            CountChanges = _currentTnpa.Changes.Count;
             YearTnpa = "";
             NumberTnpa = "";
             TnpaName = "";
@@ -171,9 +186,10 @@ namespace TNPASerch.ViewModel
                 Owner = _window
             };
 
-            var ViewModel = new TnpaChengesEditViewModel(view, _currentTnpa.Changes );
+            var ViewModel = new TnpaChengesEditViewModel(view, _currentTnpa);
             view.DataContext = ViewModel;
-            view.Show();
+            view.ShowDialog();
+            CountChanges = _currentTnpa.Changes.Count;
         }
 
         private async void GetTnpaTypsAsync()

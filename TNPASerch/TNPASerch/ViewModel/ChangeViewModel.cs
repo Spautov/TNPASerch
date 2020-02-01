@@ -10,77 +10,36 @@ using TNPASerch.View;
 
 namespace TNPASerch.ViewModel
 {
-    public class ChangeViewModel : BaseViewModel
+    public class ChangeViewModel : ChangeBaseViewModel
     {
-        public ICommand OkCommand { get; set; }
-        public ICommand CancelCommand { get; set; }
-        public Change Resoult { get; set; }
-
-        private readonly Tnpa _tnpa;
-
-        public ChangeViewModel(ChangeView window, Tnpa tnpa) : base(window)
+        public ChangeViewModel(ChangeView window, Tnpa tnpa) : base(window, tnpa)
         {
-            _tnpa = tnpa ?? throw new ArgumentNullException(nameof(tnpa));
-
-            OkCommand = new RelayCommand(Ok);
-            CancelCommand = new RelayCommand(Close);
-            Resoult = null;
             Registered = DateTime.Now;
             PutIntoOperation = DateTime.Now;
             NumberChange = 0;
+            Title = "Добавить изменение";
         }
 
-        public DateTime _putIntoOperation;
-        public DateTime PutIntoOperation
-        {
-            get { return _putIntoOperation; }
-            set
-            {
-                _putIntoOperation = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public DateTime _registered;
-        public DateTime Registered
-        {
-            get { return _registered; }
-            set
-            {
-                _registered = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private int _numberChange;
-        public int NumberChange
-        {
-            get { return _numberChange; }
-            set
-            {
-                _numberChange = value;
-                OnPropertyChanged();
-            }
-        }
-        private void Ok()
+        protected override void Ok()
         {
             if (NumberChange < 1)
             {
                 YesMessage("Некорректный номер изменения", "Ошибка");
                 return;
             }
-            if (Chek())
+            if (!Chek())
             {
                 YesMessage("Изменение с таким номером уже существует", "Ошибка");
                 return;
             }
-            Resoult = new Change
+            var change = new Change
             {
                 Number = this.NumberChange,
                 PutIntoOperation = this.PutIntoOperation,
                 Registered = this.Registered,
                 Tnpa = _tnpa,
             };
+            _tnpa.Changes.Add(change);
             Close();
         }
 
