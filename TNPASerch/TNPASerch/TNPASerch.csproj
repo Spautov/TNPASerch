@@ -205,12 +205,14 @@
     <Compile Include="Model\TnpaView.cs" />
     <Compile Include="ViewModel\BaseModelView\BaseViewModel.cs" />
     <Compile Include="ViewModel\AddTextViewModel.cs" />
+    <Compile Include="ViewModel\TNPAs\BaseTNPAViewModel.cs" />
     <Compile Include="ViewModel\Changes\ChangeBaseViewModel.cs" />
     <Compile Include="ViewModel\Changes\ChangeEditViewModel.cs" />
     <Compile Include="ViewModel\Changes\ChangeViewModel.cs" />
     <Compile Include="ViewModel\BaseModelView\MessageViewModel.cs" />
     <Compile Include="ViewModel\BaseModelView\NotifyPropertyChangedModel.cs" />
     <Compile Include="ViewModel\Changes\TnpaChengesEditViewModel.cs" />
+    <Compile Include="ViewModel\TNPAs\EditTNPAViewModel.cs" />
     <Compile Include="ViewModel\TnpaTypeEditViewModel.cs" />
     <Compile Include="View\AddTextView.xaml.cs">
       <DependentUpon>AddTextView.xaml</DependentUpon>
@@ -231,7 +233,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\AddTNPAWindow.xaml">
+    <Page Include="View\TNPAWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -247,10 +249,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ViewModel\AddTNPAViewModel.cs" />
+    <Compile Include="ViewModel\TNPAs\AddTNPAViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
-    <Compile Include="View\AddTNPAWindow.xaml.cs">
-      <DependentUpon>AddTNPAWindow.xaml</DependentUpon>
+    <Compile Include="View\TNPAWindow.xaml.cs">
+      <DependentUpon>TNPAWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

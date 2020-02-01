@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using Repository;
+using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
@@ -13,6 +14,7 @@ namespace TNPASerch.ViewModel
     {
         private readonly IRepository _repository;
         public ICommand ShowAddTNPAWindowCommand { get; set; }
+        public ICommand ShowEditTNPAWindowCommand { get; set; }
         public ICommand ShowTNPATypeEditWindowCommand { get; set; }
         public ICommand SearchCommand { get; set; }
         public ICommand SettingsCommand { get; set; }
@@ -24,9 +26,29 @@ namespace TNPASerch.ViewModel
             GetTnpaTypsAsync();
             GetTnpaAsync();
             ShowAddTNPAWindowCommand = new RelayCommand(ShowAddTNPAWindow);
+            ShowEditTNPAWindowCommand = new RelayCommand(ShowEditTNPAWindow);
             ShowTNPATypeEditWindowCommand = new RelayCommand(ShowTNPATypeEditWindow);
             SearchCommand = new RelayCommand(SearchAsync);
             CloseCommand = new RelayCommand(Close);
+        }
+
+        private void ShowEditTNPAWindow()
+        {
+            if (SelectedTnpa != null)
+            {
+                TNPAWindow addWindow = new TNPAWindow
+                {
+                    Owner = _window
+                };
+                var tnpa = _repository.GetTnpa(SelectedTnpa.Id);
+                if (tnpa == null)
+                {
+                    return;
+                }
+                addWindow.DataContext = new EditTNPAViewModel(addWindow, tnpa);
+                addWindow.ShowDialog();
+                GetTnpaAsync();
+            }
         }
 
         private void ShowTNPATypeEditWindow()
@@ -109,6 +131,18 @@ namespace TNPASerch.ViewModel
             }
         }
 
+        private TnpaView _selectedTnpa;
+        public TnpaView SelectedTnpa
+        {
+            get { return _selectedTnpa; }
+            set 
+            { 
+                _selectedTnpa = value;
+                OnPropertyChanged();
+            }
+        }
+
+
         private async void GetTnpaAsync()
         {
             var colllectTnpa = await _repository.GetTnpaListAsunc();
@@ -134,7 +168,7 @@ namespace TNPASerch.ViewModel
 
         private void ShowAddTNPAWindow()
         {
-            AddTNPAWindow addWindow = new AddTNPAWindow
+            TNPAWindow addWindow = new TNPAWindow
             {
                 Owner = _window
             };

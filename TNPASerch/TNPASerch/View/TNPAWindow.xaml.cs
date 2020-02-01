@@ -17,9 +17,9 @@ namespace TNPASerch.View
     /// <summary>
     /// Interaction logic for AddTNPAWindow.xaml
     /// </summary>
-    public partial class AddTNPAWindow : Window
+    public partial class TNPAWindow : Window
     {
-        public AddTNPAWindow()
+        public TNPAWindow()
         {
             InitializeComponent();
         }

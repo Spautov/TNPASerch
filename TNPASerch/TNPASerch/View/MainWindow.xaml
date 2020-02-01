@@ -34,7 +34,7 @@
             <Button Margin="5" Padding="5 0" Command="{Binding ShowAddTNPAWindowCommand}">
                 <Image Height="25" Source="/TNPASerch;component/Images/aqua_smooth_folder_documents_14309.png"></Image>
             </Button>
-            <Button Margin="5" Padding="5 0">
+            <Button Margin="5" Padding="5 0" Command="{Binding ShowEditTNPAWindowCommand}">
                 <Image Height="25" Source="/TNPASerch;component/Images/folder_settings_tools_22597.png"></Image>
             </Button>
             <Button Margin="5" Padding="5 0" Command="{Binding CloseCommand}">
@@ -42,7 +42,9 @@
             </Button>
         </StackPanel>
 
-        <ListView ItemsSource="{Binding Tnpas}" HorizontalContentAlignment="Stretch">
+        <ListView ItemsSource="{Binding Tnpas}" 
+                  SelectedItem="{Binding SelectedTnpa}"
+                  HorizontalContentAlignment="Stretch">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border x:Name="myBorder" BorderThickness="3" CornerRadius="15" BorderBrush="BlueViolet">
