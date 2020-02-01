@@ -209,10 +209,10 @@ namespace Repository
             return _dbContext.Tnpas.Find(id);
         }
 
-        public Tnpa FindTnpaByNumber(string number)
+        public IEnumerable<Tnpa> FindTnpaByNumber(string number)
         {
             var collect = _dbContext.Tnpas.Where(x => x.Number.ToUpper().Equals(number.ToUpper()));
-            return collect.FirstOrDefault();
+            return collect.ToList();
         }
     }
 }
