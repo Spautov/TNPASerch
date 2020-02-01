@@ -13,6 +13,15 @@ namespace TNPASerch.ViewModel
         public EditTNPAViewModel(TNPAWindow window, Tnpa tnpa) : base(window)
         {
             _currentTnpa = tnpa?? throw new ArgumentNullException(nameof(tnpa));
+
+            GetTnpaTypsAsync();
+
+            YearTnpa = _currentTnpa.Year.ToString();
+            CountChanges = _currentTnpa.Changes.Count;
+
+            PutIntoOperationTnpa = _currentTnpa.PutIntoOperation;
+            CancelledTnpa = _currentTnpa.Cancelled;
+            Registered = _currentTnpa.Registered;
         }
 
         protected override void Apply()

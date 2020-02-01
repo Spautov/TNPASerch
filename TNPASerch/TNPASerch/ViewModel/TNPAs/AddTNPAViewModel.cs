@@ -17,7 +17,8 @@ namespace TNPASerch.ViewModel
             TnpaName = "";
             
             PutIntoOperationTnpa = DateTime.Now;
-            CancelledTnpa = DateTime.Now;
+            CancelledTnpa = new DateTime();
+            Registered = DateTime.Now;
         }
          
         protected override void EditChanges()
@@ -53,6 +54,12 @@ namespace TNPASerch.ViewModel
                 TnpaName = "";
                 NumberRegisteredTnpa = 0;
                 SelectedTnpaType = null;
+                CountChanges = _currentTnpa.Changes.Count;
+                IsValid = false;
+
+                PutIntoOperationTnpa = DateTime.Now;
+                CancelledTnpa = new DateTime();
+                Registered = DateTime.Now;
             }
         }
 
@@ -63,8 +70,8 @@ namespace TNPASerch.ViewModel
                 return false;
             }
             _currentTnpa.Year = int.Parse(YearTnpa);
-            _currentTnpa.Cancelled = new DateTime();
-            _currentTnpa.Registered = DateTime.Now;
+            _currentTnpa.Cancelled = CancelledTnpa;
+            _currentTnpa.Registered = Registered;
 
             try
             {
