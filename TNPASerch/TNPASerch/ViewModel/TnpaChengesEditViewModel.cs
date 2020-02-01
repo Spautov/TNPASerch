@@ -18,7 +18,7 @@ namespace TNPASerch.ViewModel
         public ICommand EditChangeCommand { get; set; }
         public ICommand CancelChangeCommand { get; set; }
 
-        private readonly ICollection<Change> _tnpaChanges;
+        private readonly Tnpa _tnpa;
 
         private ObservableCollection<Change> _changes;
         public ObservableCollection<Change> Changes
@@ -42,9 +42,9 @@ namespace TNPASerch.ViewModel
             }
         }
 
-        public TnpaChengesEditViewModel(TnpaChengesEditView window, ICollection<Change> tnpaChanges) : base(window)
+        public TnpaChengesEditViewModel(TnpaChengesEditView window, Tnpa tnpa) : base(window)
         {
-            _tnpaChanges = tnpaChanges ?? throw new ArgumentNullException(nameof(tnpaChanges));
+            _tnpa = tnpa ?? throw new ArgumentNullException(nameof(tnpa));
 
             AddChangeCommand = new RelayCommand(AddChange);
             RemoveChangeCommand = new RelayCommand(RemoveChange);
@@ -71,7 +71,7 @@ namespace TNPASerch.ViewModel
 
         private void GetChange()
         {
-            Changes = new ObservableCollection<Change>(_tnpaChanges);
+            Changes = new ObservableCollection<Change>(_tnpa.Changes);
         }
     }
 }
