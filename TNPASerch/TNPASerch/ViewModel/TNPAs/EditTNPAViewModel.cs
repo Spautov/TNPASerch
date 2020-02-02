@@ -1,9 +1,5 @@
 ﻿using DAL;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TNPASerch.View;
 
 namespace TNPASerch.ViewModel
@@ -26,17 +22,38 @@ namespace TNPASerch.ViewModel
 
         protected override void Apply()
         {
-            throw new NotImplementedException();
-        }
-
-        protected override void EditChanges()
-        {
-            throw new NotImplementedException();
+            UpdateTnpa();
         }
 
         protected override void Save()
         {
-            throw new NotImplementedException();
+            if (UpdateTnpa())
+            {
+                _window.Close();
+            };
+        }
+
+        private bool UpdateTnpa()
+        {
+            if (!СheckFild())
+            {
+                return false;
+            }
+            _currentTnpa.Year = int.Parse(YearTnpa);
+            _currentTnpa.Cancelled = CancelledTnpa;
+            _currentTnpa.Registered = Registered;
+
+            try
+            {
+                _repository.Update(_currentTnpa);
+                YesMessage($"{_currentTnpa.Type.Name} {_currentTnpa.Number} - {_currentTnpa.Year} успешно обнавлен");
+            }
+            catch (Exception ex)
+            {
+                YesMessage(ex.Message, "Ошибка");
+                return false;
+            }
+            return true;
         }
     }
 }
