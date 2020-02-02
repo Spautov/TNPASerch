@@ -1,6 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using Repository;
-using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
