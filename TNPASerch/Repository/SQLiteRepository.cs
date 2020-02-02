@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Repository
@@ -95,7 +94,7 @@ namespace Repository
         {
             lock (_lockDb)
             {
-                return _dbContext.Tnpas.Find(id);
+                return _dbContext.Tnpas.Where(el=>el.Id == id).Include(p=>p.Changes).ToArray().First();
             }
         }
 
