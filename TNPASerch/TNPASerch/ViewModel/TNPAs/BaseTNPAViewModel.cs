@@ -2,11 +2,7 @@
 using GalaSoft.MvvmLight.Command;
 using Repository;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using TNPASerch.View;
@@ -173,7 +169,19 @@ namespace TNPASerch.ViewModel
         }
 
 
-        protected abstract void EditChanges();
+        protected void EditChanges()
+        {
+            var view = new TnpaChengesEditView
+            {
+                Owner = _window
+            };
+
+            var ViewModel = new TnpaChengesEditViewModel(view, _currentTnpa);
+            view.DataContext = ViewModel;
+            view.ShowDialog();
+            CountChanges = _currentTnpa.Changes.Count;
+        }
+
         protected abstract void Apply();
         protected abstract void Save();
         protected void Cancel()

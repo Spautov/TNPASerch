@@ -21,19 +21,6 @@ namespace TNPASerch.ViewModel
             Registered = DateTime.Now;
         }
          
-        protected override void EditChanges()
-        {
-            var view = new TnpaChengesEditView
-            {
-                Owner = _window
-            };
-
-            var ViewModel = new TnpaChengesEditViewModel(view, _currentTnpa);
-            view.DataContext = ViewModel;
-            view.ShowDialog();
-            CountChanges = _currentTnpa.Changes.Count;
-        }
-
         protected override void Save()
         {
             if (CreatTnpa())
