@@ -1,6 +1,10 @@
-﻿using GalaSoft.MvvmLight.Command;
+﻿using DAL;
+using GalaSoft.MvvmLight.Command;
 using Repository;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -70,9 +74,26 @@ namespace TNPASerch.ViewModel
 
         private void Search()
         {
-            // to do
-            MessageBox.Show(NumberTnpa);
-            NumberTnpa = "";
+            NumberTnpa = NumberTnpa.Trim(' ');
+
+            int findnum = 0;
+            while (findnum != -1)
+            {
+                findnum = NumberTnpa.IndexOf(' ');
+                if (findnum != -1)
+                {
+                    NumberTnpa = NumberTnpa.Remove(findnum,1);
+                }
+            }
+            
+            if (String.IsNullOrEmpty(NumberTnpa) || String.IsNullOrWhiteSpace(NumberTnpa) || SelectedTnpaType == null)
+            {
+                return;
+            }
+            NumberTnpa = NumberTnpa.Replace(',', '.');
+            var collect = _repository.SearchTnpaByNumber(NumberTnpa).Where(el => el.TnpaTypeId == SelectedTnpaType.Id);
+
+            Tnpas = TnpaToTnpaView(collect);
         }
 
         public string _numberTnpa;
@@ -106,6 +127,7 @@ namespace TNPASerch.ViewModel
             {
                 TnpaTypes.Add(new TnpaTypeView { Id = type.Id, Name = type.Name });
             }
+            SelectedTnpaType = TnpaTypes.First();
         }
 
         private TnpaTypeView _selectedTnpaType;
@@ -146,10 +168,15 @@ namespace TNPASerch.ViewModel
         {
             var colllectTnpa = await _repository.GetTnpaListAsunc();
 
-            Tnpas = new ObservableCollection<TnpaView>();
+            Tnpas = TnpaToTnpaView(colllectTnpa);
+        }
+
+        private ObservableCollection<TnpaView> TnpaToTnpaView(IEnumerable<Tnpa> colllectTnpa)
+        {
+            var tmp = new ObservableCollection<TnpaView>();
             foreach (var tnpa in colllectTnpa)
             {
-                Tnpas.Add(new TnpaView
+                tmp.Add(new TnpaView
                 {
                     Id = tnpa.Id,
                     Number = $"{tnpa.Number}-{tnpa.Year}",
@@ -162,7 +189,7 @@ namespace TNPASerch.ViewModel
                     Type = tnpa.Type.Name
                 });
             }
-
+            return tmp;
         }
 
         private void ShowAddTNPAWindow()

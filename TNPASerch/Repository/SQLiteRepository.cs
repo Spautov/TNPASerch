@@ -213,5 +213,16 @@ namespace Repository
             var collect = _dbContext.Tnpas.Where(x => x.Number.ToUpper().Equals(number.ToUpper()));
             return collect.ToList();
         }
+
+        public IEnumerable<Tnpa> SearchTnpaByNumber(string number)
+        {
+            var numberUp = number.ToUpper();
+            var collect = _dbContext.Tnpas
+                .Select(x => new { id = x.Id, Number = $"{x.Number}-{x.Year}".ToString().ToUpper()})
+                .ToList().Where(el => el.Number.Contains(numberUp))
+                .Select(a => a.id).ToList();
+            var collectTnpa = _dbContext.Tnpas.Where(r => collect.Contains(r.Id)).ToList();
+            return collectTnpa;
+        }
     }
 }

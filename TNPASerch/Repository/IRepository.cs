@@ -22,7 +22,8 @@ namespace Repository
         TnpaType FindTnpaTypeByName(string name);
         TnpaType FindTnpaTypeById(int id);
         Tnpa FindTnpaByName(string name);
-        IEnumerable<Tnpa> FindTnpaByNumber(string name);
+        IEnumerable<Tnpa> FindTnpaByNumber(string number);
+        IEnumerable<Tnpa> SearchTnpaByNumber(string number);
         Tnpa FindTnpaById(int id);
         void Save();
     }
