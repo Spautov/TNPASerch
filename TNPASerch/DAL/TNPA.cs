@@ -56,9 +56,15 @@ namespace DAL
         /// </summary>
         public ICollection<Change> Changes { get; set; }
 
+        /// <summary>
+        /// Коллекция файлов документа
+        /// </summary>
+        public ICollection<DataFileInfo> Files { get; set; }
+
         public Tnpa()
         {
             Changes = new List<Change>();
+            Files = new List<DataFileInfo>();
         }
     }
 }

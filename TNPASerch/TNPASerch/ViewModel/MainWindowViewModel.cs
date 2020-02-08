@@ -1,6 +1,6 @@
 ﻿using DAL;
 using GalaSoft.MvvmLight.Command;
-using Repository;
+using Repositories;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
