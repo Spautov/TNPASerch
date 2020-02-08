@@ -2,10 +2,11 @@
 {
     public interface IFileRepository
     {
-        bool AddFiles(string path);
-        void ShowFiles(string path);
-        bool RemoveFiles(string path);
+        string MainDirectory { get; }
+        string AddFiles(string path);
+        bool ShowFiles(string path);
+        bool RemoveFile(string path);
         int CalculateHashCodeFile(string path);
-        int CalculateHashCodeDirectory(string path);
+        int CalculateHashCodeDirectory();
     }
 }

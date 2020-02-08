@@ -154,6 +154,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FileRepository.cs" />
     <Compile Include="IFileRepository.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="SQLiteRepository.cs" />
