@@ -5,17 +5,12 @@ namespace DbWorker
 {
     public class TnpaDbContext: DbContext
     {
-        public TnpaDbContext()
-        {
-            Database.EnsureCreated();
-        }
-
         public DbSet<Tnpa> Tnpas { get; set; }
         public DbSet<TnpaType> TnpaTypes { get; set; }
+        public DbSet<FolderHashCod> FolderHashCods { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //optionsBuilder.UseSqlite(@"Filename=TNPA.db");
             optionsBuilder.UseSqlite(@"Filename=DataBase\TNPA.db");
         }
     }

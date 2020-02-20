@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Change.cs" />
     <Compile Include="DataFileInfo.cs" />
+    <Compile Include="FolderHashCod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tnpa.cs" />
     <Compile Include="TnpaType.cs" />
