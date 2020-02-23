@@ -31,7 +31,7 @@ namespace Repositories
         {
             lock (_lockDb)
             {
-                var collect = _dbContext.Tnpas.Where(x => x.Number.ToUpper().Equals(item.Number.ToUpper()) 
+                var collect = _dbContext.Tnpas.Where(x => x.Number.ToUpper().Equals(item.Number.ToUpper())
                 && x.TnpaTypeId == item.TnpaTypeId);
                 if (collect.Count() > 0)
                 {
@@ -74,7 +74,7 @@ namespace Repositories
             lock (_lockDb)
             {
                 TnpaType tnpaType = _dbContext.TnpaTypes.Find(id);
-                if (tnpaType != null) 
+                if (tnpaType != null)
                 {
                     var resoulCollect = _dbContext.Tnpas.Select(x => x).Where(el => el.TnpaTypeId == tnpaType.Id);
                     if (resoulCollect.Count() > 0)
@@ -94,7 +94,7 @@ namespace Repositories
         {
             lock (_lockDb)
             {
-                return _dbContext.Tnpas.Where(el=>el.Id == id).Include(p=>p.Changes).ToArray().First();
+                return _dbContext.Tnpas.Where(el => el.Id == id).Include(p => p.Changes).ToArray().First();
             }
         }
 
@@ -108,10 +108,11 @@ namespace Repositories
 
         async public ValueTask<IEnumerable<Tnpa>> GetTnpaListAsunc()
         {
-            var resoult = await Task.Run(() => {
+            var resoult = await Task.Run(() =>
+            {
                 lock (_lockDb)
-                { 
-                    return _dbContext.Tnpas; 
+                {
+                    return _dbContext.Tnpas;
                 }
             });
             return resoult;
@@ -127,7 +128,8 @@ namespace Repositories
 
         async public ValueTask<IEnumerable<TnpaType>> GetTnpaTypeListAsunc()
         {
-            var resoult = await Task.Run(() => {
+            var resoult = await Task.Run(() =>
+            {
                 lock (_lockDb)
                 {
                     return _dbContext.TnpaTypes;
@@ -151,6 +153,11 @@ namespace Repositories
 
         public void Update(Tnpa item)
         {
+            Update<Tnpa>(item);
+        }
+
+        private void Update<T>(T item)
+        {
             lock (_lockDb)
             {
                 _dbContext.Entry(item).State = EntityState.Modified;
@@ -160,11 +167,7 @@ namespace Repositories
 
         public void Update(TnpaType item)
         {
-            lock (_lockDb)
-            {
-                _dbContext.Entry(item).State = EntityState.Modified;
-                Save();
-            }
+            Update<TnpaType>(item);
         }
 
         private bool disposed = false;
@@ -218,11 +221,72 @@ namespace Repositories
         {
             var numberUp = number.ToUpper();
             var collect = _dbContext.Tnpas
-                .Select(x => new { id = x.Id, Number = $"{x.Number}-{x.Year}".ToString().ToUpper()})
+                .Select(x => new { id = x.Id, Number = $"{x.Number}-{x.Year}".ToString().ToUpper() })
                 .ToList().Where(el => el.Number.Contains(numberUp))
                 .Select(a => a.id).ToList();
             var collectTnpa = _dbContext.Tnpas.Where(r => collect.Contains(r.Id)).ToList();
             return collectTnpa;
+        }
+
+        public FolderHashCod GetFolderHashCod()
+        {
+            lock (_lockDb)
+            {
+                return _dbContext.FolderHashCods.FirstOrDefault();
+            }
+        }
+
+        public FolderHashCod CreateFolderHashCod(int hash)
+        {
+            FolderHashCod resoult = null;
+
+            lock (_lockDb)
+            {
+                if (_dbContext.FolderHashCods.Count() > 0)
+                {
+                    resoult = _dbContext.FolderHashCods.First();
+                    resoult.value = hash;
+                    if (_dbContext.FolderHashCods.Count() > 1)
+                    {
+                        var removelist = _dbContext.FolderHashCods.Where(el => el.Id != resoult.Id).ToList();
+                        if (removelist.Count > 0)
+                        {
+                            foreach (var item in removelist)
+                            {
+                                _dbContext.FolderHashCods.Remove(item);
+                                Save();
+                            }
+                        }
+                    }
+                }
+                if (_dbContext.FolderHashCods.Count() == 0)
+                {
+                    _dbContext.FolderHashCods.Add(new FolderHashCod() { value = hash });
+                    Save();
+                    resoult = _dbContext.FolderHashCods.First();
+                }
+            }
+            return resoult;
+        }
+
+        public void Update(FolderHashCod folderHashCod)
+        {
+            Update<FolderHashCod>(folderHashCod);
+        }
+
+        public bool DelitFolderHashCod()
+        {
+            var folderHashCod = GetFolderHashCod();
+            if (folderHashCod != null)
+            {
+                lock (_lockDb)
+                {
+                    _dbContext.FolderHashCods.Remove(folderHashCod);
+                    Save();
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

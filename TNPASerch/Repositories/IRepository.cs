@@ -25,6 +25,10 @@ namespace Repositories
         IEnumerable<Tnpa> FindTnpaByNumber(string number);
         IEnumerable<Tnpa> SearchTnpaByNumber(string number);
         Tnpa FindTnpaById(int id);
+        FolderHashCod GetFolderHashCod();
+        FolderHashCod CreateFolderHashCod(int hash);
+        void Update(FolderHashCod folderHashCod);
+        bool DelitFolderHashCod();
         void Save();
     }
 }
