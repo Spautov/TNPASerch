@@ -54,14 +54,7 @@ namespace TNPASerch.ViewModel
         {
             if (SelectedChange != null)
             {
-                ChangeView changeView = new ChangeView
-                {
-                    Owner = _window
-                };
-                ChangeEditViewModel changeEditViewModel = 
-                    new ChangeEditViewModel(changeView, _tnpa, SelectedChange.Number);
-                changeView.DataContext = changeEditViewModel;
-
+                ChangeView changeView = ViewsManager.ChangeEditView(_window, _tnpa, SelectedChange.Number);
                 changeView.ShowDialog();
                 GetChange();
             }
@@ -78,13 +71,7 @@ namespace TNPASerch.ViewModel
 
         private void AddChange()
         {
-            ChangeView changeView = new ChangeView
-            {
-                Owner = _window
-            };
-            ChangeViewModel changeViewModel = new ChangeViewModel(changeView, _tnpa);
-            changeView.DataContext = changeViewModel;
-
+            ChangeView changeView = ViewsManager.ChangeView(_window, _tnpa);
             changeView.ShowDialog();
             GetChange();
         }

@@ -230,6 +230,7 @@
     <Compile Include="View\TnpaTypeEditView.xaml.cs">
       <DependentUpon>TnpaTypeEditView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ViewsManager.cs" />
     <Page Include="View\AddTextView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
