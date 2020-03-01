@@ -45,12 +45,8 @@ namespace TNPASerch.ViewModel
                     return;
                 }
 
-                TNPAWindow addWindow = new TNPAWindow
-                {
-                    Owner = _window
-                };
-               
-                addWindow.DataContext = new EditTNPAViewModel(addWindow, tnpa);
+                TNPAWindow addWindow = ViewsManager.EditTNPAWindow(_window, tnpa);
+
                 addWindow.ShowDialog();
                 GetTnpaAsync();
             }
