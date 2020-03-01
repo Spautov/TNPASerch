@@ -5,8 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TNPASerch.View"
         mc:Ignorable="d"
-        Title="EditFilesView" Height="450" Width="800">
+        Title="Прикрепленные документы" Height="650" Width="550" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="12*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <ListView Grid.Row="0" 
+                  ItemsSource="{Binding Changes}"
+                  SelectedItem="{Binding SelectedChange}"></ListView>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Margin="8" Grid.Column="0" Command="{Binding AddChangeCommand}">Добавить</Button>
+            <Button Margin="8" Grid.Column="1" Command="{Binding RemoveChangeCommand}">Удалить</Button>
+            <Button Margin="8" Grid.Column="2" Command="{Binding EditChangeCommand}">Открыть документ</Button>
+            <Button Margin="8" Grid.Column="3" Command="{Binding CancelChangeCommand}">Закрыть</Button>
+        </Grid>
     </Grid>
 </Window>
