@@ -39,15 +39,17 @@ namespace TNPASerch.ViewModel
         {
             if (SelectedTnpa != null)
             {
-                TNPAWindow addWindow = new TNPAWindow
-                {
-                    Owner = _window
-                };
                 var tnpa = _repository.GetTnpa(SelectedTnpa.Id);
                 if (tnpa == null)
                 {
                     return;
                 }
+
+                TNPAWindow addWindow = new TNPAWindow
+                {
+                    Owner = _window
+                };
+               
                 addWindow.DataContext = new EditTNPAViewModel(addWindow, tnpa);
                 addWindow.ShowDialog();
                 GetTnpaAsync();
@@ -56,11 +58,7 @@ namespace TNPASerch.ViewModel
 
         private void ShowTNPATypeEditWindow()
         {
-            TnpaTypeEditView tnpaTypeEditView = new TnpaTypeEditView
-            {
-                Owner = _window
-            };
-            tnpaTypeEditView.DataContext = new TnpaTypeEditViewModel(tnpaTypeEditView);
+            TnpaTypeEditView tnpaTypeEditView = ViewsManager.TnpaTypeEditView(_window);
             tnpaTypeEditView.ShowDialog();
 
             GetTnpaTypsAsync();

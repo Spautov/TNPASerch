@@ -40,5 +40,15 @@ namespace TNPASerch.View
             view.DataContext = ViewModel;
             return view;
         }
+
+        public static TnpaTypeEditView TnpaTypeEditView(Window owner)
+        {
+            TnpaTypeEditView tnpaTypeEditView = new TnpaTypeEditView
+            {
+                Owner = owner
+            };
+            tnpaTypeEditView.DataContext = new TnpaTypeEditViewModel(tnpaTypeEditView);
+            return tnpaTypeEditView;
+        }
     }
 }
