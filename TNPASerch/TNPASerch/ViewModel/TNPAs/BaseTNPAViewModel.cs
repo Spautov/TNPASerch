@@ -171,13 +171,7 @@ namespace TNPASerch.ViewModel
 
         protected void EditChanges()
         {
-            var view = new TnpaChengesEditView
-            {
-                Owner = _window
-            };
-
-            var ViewModel = new TnpaChengesEditViewModel(view, _currentTnpa);
-            view.DataContext = ViewModel;
+            var view = ViewsManager.TnpaChengesEditView(_window, _currentTnpa);
             view.ShowDialog();
             CountChanges = _currentTnpa.Changes.Count;
         }

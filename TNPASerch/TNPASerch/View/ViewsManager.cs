@@ -28,5 +28,17 @@ namespace TNPASerch.View
             changeView.DataContext = changeViewModel;
             return changeView;
         }
+
+        public static TnpaChengesEditView TnpaChengesEditView(Window owner, Tnpa tnpa)
+        {
+            var view = new TnpaChengesEditView
+            {
+                Owner = owner
+            };
+
+            var ViewModel = new TnpaChengesEditViewModel(view, tnpa);
+            view.DataContext = ViewModel;
+            return view;
+        }
     }
 }
