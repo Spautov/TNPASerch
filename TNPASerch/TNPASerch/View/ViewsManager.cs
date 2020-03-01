@@ -72,5 +72,15 @@ namespace TNPASerch.View
             return addWindow;
         }
 
+        public static EditFilesView EditFilesView(Window owner)
+        {
+            EditFilesView editFilesView = new EditFilesView
+            { 
+                Owner = owner
+            };
+            editFilesView.DataContext = new EditFilesViewModel();
+            return editFilesView;
+        }
+
     }
 }
