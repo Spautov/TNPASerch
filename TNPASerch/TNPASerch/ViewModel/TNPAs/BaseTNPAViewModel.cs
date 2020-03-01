@@ -18,6 +18,7 @@ namespace TNPASerch.ViewModel
         public ICommand ApplyCommand { get; set; }
         public ICommand CancelCommand { get; set; }
         public ICommand EditChangesCommand { get; set; }
+        public ICommand ElectronicVersionCommand { get; set; }
 
         public BaseTNPAViewModel(TNPAWindow window) : base(window)
         {
@@ -26,6 +27,7 @@ namespace TNPASerch.ViewModel
             ApplyCommand = new RelayCommand(Apply);
             CancelCommand = new RelayCommand(Cancel);
             EditChangesCommand = new RelayCommand(EditChanges);
+            ElectronicVersionCommand = new RelayCommand(ElectronicVersion);
         }
 
         public string Title { get; set; }
@@ -168,6 +170,11 @@ namespace TNPASerch.ViewModel
             }
         }
 
+        private void ElectronicVersion()
+        {
+            var view = ViewsManager.EditFilesView(_window);
+            view.ShowDialog();
+        }
 
         protected void EditChanges()
         {

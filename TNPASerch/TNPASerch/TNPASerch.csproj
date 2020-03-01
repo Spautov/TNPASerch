@@ -206,6 +206,7 @@
     <Compile Include="Model\TnpaView.cs" />
     <Compile Include="ViewModel\BaseModelView\BaseViewModel.cs" />
     <Compile Include="ViewModel\AddTextViewModel.cs" />
+    <Compile Include="ViewModel\EditFilesViewModel.cs" />
     <Compile Include="ViewModel\TNPAs\BaseTNPAViewModel.cs" />
     <Compile Include="ViewModel\Changes\ChangeBaseViewModel.cs" />
     <Compile Include="ViewModel\Changes\ChangeEditViewModel.cs" />
@@ -221,6 +222,9 @@
     <Compile Include="View\ChangeView.xaml.cs">
       <DependentUpon>ChangeView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\EditFilesView.xaml.cs">
+      <DependentUpon>EditFilesView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MessageView.xaml.cs">
       <DependentUpon>MessageView.xaml</DependentUpon>
     </Compile>
@@ -232,6 +236,10 @@
     </Compile>
     <Compile Include="View\ViewsManager.cs" />
     <Page Include="View\AddTextView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EditFilesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

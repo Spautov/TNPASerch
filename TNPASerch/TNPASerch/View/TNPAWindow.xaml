@@ -126,36 +126,28 @@
                     Width="75" Margin="5"
                     Command="{Binding ApplyCommand}"/>
         </DockPanel>
-        <DockPanel Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3">
+        <DockPanel Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3" LastChildFill="False">
             <Label Content="Количество изменений:" 
                    DockPanel.Dock="Left"
-                   VerticalAlignment="Center" Margin="5 5 0 5"/>
+                   VerticalAlignment="Center" 
+                   Padding="0 0 15 0"
+                   Margin="5 5 0 5"/>
 
             <Label Content="{Binding CountChanges}" 
                    DockPanel.Dock="Left"
-                   VerticalAlignment="Center" Margin="0 5 5 5"
-                   />
+                   VerticalAlignment="Center" Margin="15 5 15 5"/>
             <Button Content="Редактировать" 
                     VerticalAlignment="Center" 
-                    Padding="5 0"
-                    Margin="5"
+                    DockPanel.Dock="Left"
+                    Padding="21 0"
+                    Margin="15 5 15 5"
                     Command="{Binding EditChangesCommand}"/>
             
-            <Button Content="Добавить" DockPanel.Dock="Right" 
+            <Button Content="Электронная версия" DockPanel.Dock="Right" 
                     VerticalAlignment="Center" 
-                    Width="75" Margin="5"
-                    Command="{Binding}"/>
-            
-            <Button Content="Извлечь" DockPanel.Dock="Right" 
-                    VerticalAlignment="Center" 
-                    Width="75" Margin="5"
-                    Command="{Binding}"/>
-            
-            <Label Content="Электронная версия"
-                   DockPanel.Dock="Right"
-                   HorizontalContentAlignment="Right"
-                   VerticalAlignment="Center" Margin="5 0"/>
-
+                    Padding="15 0"
+                    Margin="5"
+                    Command="{Binding ElectronicVersionCommand}"/>
         </DockPanel>
     </Grid>
 </Window>
