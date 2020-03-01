@@ -2,7 +2,7 @@
 {
     public interface IFileRepository
     {
-        string MainDirectory { get; }
+        string MainFileRepositoryDirectory { get; }
         string AddFiles(string path);
         bool OpenFile(string path);
         bool RemoveFile(string path);

@@ -6,7 +6,7 @@ namespace Repositories
 {
     public class FileRepository : IFileRepository
     {
-        public string MainDirectory { get; private set; }
+        public string MainFileRepositoryDirectory { get; private set; }
 
 
         public FileRepository(string directoryName)
@@ -15,10 +15,10 @@ namespace Repositories
             {
                 throw new ArgumentException(nameof(directoryName));
             }
-            MainDirectory = directoryName;
-            if (!Directory.Exists(MainDirectory))
+            MainFileRepositoryDirectory = directoryName;
+            if (!Directory.Exists(MainFileRepositoryDirectory))
             {
-                Directory.CreateDirectory(MainDirectory);
+                Directory.CreateDirectory(MainFileRepositoryDirectory);
             }
         }
 
@@ -31,7 +31,7 @@ namespace Repositories
                 FileInfo fileInfo = new FileInfo(path);
                 if (fileInfo.Exists)
                 {
-                    newPath = Path.Combine(MainDirectory, fileInfo.Name);
+                    newPath = Path.Combine(MainFileRepositoryDirectory, fileInfo.Name);
                     File.Copy(path, newPath, true);
                 }
                 return newPath;
@@ -45,13 +45,13 @@ namespace Repositories
         public int CalculateHashCodeDirectory()
         {
             int resoult = 0;
-            DirectoryInfo directoryInfo = new DirectoryInfo(MainDirectory);
+            DirectoryInfo directoryInfo = new DirectoryInfo(MainFileRepositoryDirectory);
             if (directoryInfo.Exists)
             {
                 var files = directoryInfo.GetFiles();
                 foreach (var file in files)
                 {
-                    var filePath = Path.Combine(MainDirectory, file.Name);
+                    var filePath = Path.Combine(MainFileRepositoryDirectory, file.Name);
                     resoult += CalculateHashCodeFile(filePath);
                 }
 
