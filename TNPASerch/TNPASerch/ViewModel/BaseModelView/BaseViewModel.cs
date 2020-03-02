@@ -17,7 +17,7 @@ namespace TNPASerch.ViewModel
         {
             MessageView messageView = new MessageView
             {
-                Owner = _window
+                Owner = App.Current.MainWindow
             };
             MessageViewModel messageViewModel = new MessageViewModel(messageView)
             {
@@ -35,7 +35,7 @@ namespace TNPASerch.ViewModel
         {
             MessageView messageView = new MessageView
             {
-                Owner = _window
+                Owner = App.Current.MainWindow
             };
             MessageViewModel messageViewModel = new MessageViewModel(messageView)
             {
@@ -53,7 +53,7 @@ namespace TNPASerch.ViewModel
         {
             MessageView messageView = new MessageView
             {
-                Owner = _window
+                Owner = App.Current.MainWindow
             };
             MessageViewModel messageViewModel = new MessageViewModel(messageView)
             {

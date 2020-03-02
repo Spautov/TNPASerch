@@ -44,7 +44,7 @@ namespace TNPASerch.ViewModel
                 {
                     return;
                 }
-                TNPAWindow addWindow = ViewsManager.EditTNPAView(_window, tnpa);
+                TNPAWindow addWindow = ViewsManager.EditTNPAView(tnpa);
                 addWindow.ShowDialog();
 
                 GetTnpaAsync();
@@ -53,7 +53,7 @@ namespace TNPASerch.ViewModel
 
         private void ShowTNPATypeEditWindow()
         {
-            TnpaTypeEditView tnpaTypeEditView = ViewsManager.TnpaTypeEditView(_window);
+            TnpaTypeEditView tnpaTypeEditView = ViewsManager.TnpaTypeEditView();
             tnpaTypeEditView.ShowDialog();
 
             GetTnpaTypsAsync();
@@ -187,7 +187,7 @@ namespace TNPASerch.ViewModel
 
         private void ShowAddTNPAWindow()
         {
-            TNPAWindow addWindow = ViewsManager.AddTNPAView(_window);
+            TNPAWindow addWindow = ViewsManager.AddTNPAView();
             addWindow.ShowDialog();
 
             GetTnpaAsync();

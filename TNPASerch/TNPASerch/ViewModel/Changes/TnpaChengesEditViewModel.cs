@@ -54,7 +54,7 @@ namespace TNPASerch.ViewModel
         {
             if (SelectedChange != null)
             {
-                ChangeView changeView = ViewsManager.ChangeEditView(_window, _tnpa, SelectedChange.Number);
+                ChangeView changeView = ViewsManager.ChangeEditView(_tnpa, SelectedChange.Number);
                 changeView.ShowDialog();
                 GetChange();
             }
@@ -71,7 +71,7 @@ namespace TNPASerch.ViewModel
 
         private void AddChange()
         {
-            ChangeView changeView = ViewsManager.ChangeView(_window, _tnpa);
+            ChangeView changeView = ViewsManager.ChangeView(_tnpa);
             changeView.ShowDialog();
             GetChange();
         }
