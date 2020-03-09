@@ -12,8 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using TNPASerch.View;
-using TNPASerch.ViewModel;
 
 namespace TNPASerch
 {
@@ -25,7 +23,6 @@ namespace TNPASerch
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = new MainWindowViewModel(this);
         }
     }
 }

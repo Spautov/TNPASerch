@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Command;
+using System.Windows;
 using System.Windows.Input;
 using TNPASerch.View;
 
@@ -9,7 +10,7 @@ namespace TNPASerch.ViewModel
         public ICommand OkCommand { get; set; }
         public ICommand CancelCommand { get; set; }
 
-        public AddTextViewModel(AddTextView window): base(window)
+        public AddTextViewModel()//(AddTextView window): base(window)
         {
             OkCommand = new RelayCommand(Ok);
             CancelCommand = new RelayCommand(Cancel);
@@ -17,14 +18,14 @@ namespace TNPASerch.ViewModel
 
         private void Cancel()
         {
-            _window.DialogResult = false;
-            _window.Close();
+            //_window.DialogResult = false;
+            Close();
         }
 
         private void Ok()
         {
-            _window.DialogResult = true;
-            _window.Close();
+            //_window.DialogResult = true;
+            Close();
         }
 
         private string _textValue;

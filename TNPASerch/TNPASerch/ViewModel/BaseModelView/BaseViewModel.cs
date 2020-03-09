@@ -6,12 +6,12 @@ namespace TNPASerch.ViewModel
 {
     public abstract class BaseViewModel : NotifyPropertyChangedModel
     {
-        protected readonly Window _window;
+        //protected readonly Window _window;
 
-        public BaseViewModel(Window window)
-        {
-            _window = window ?? throw new ArgumentNullException("window");
-        }
+        //public BaseViewModel(Window window)
+        //{
+        //    _window = window;
+        //}
 
         protected bool YesNoCancelMessage(string message = "", string title = "")
         {
@@ -71,7 +71,14 @@ namespace TNPASerch.ViewModel
 
         protected void Close()
         {
-            _window.Close();
+            foreach (Window wind in App.Current.Windows)
+            {
+                if (wind.IsActive)
+                {
+                    wind.Close();
+                    break;
+                }
+            }
         }
     }
 }

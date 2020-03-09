@@ -20,7 +20,7 @@ namespace TNPASerch.ViewModel
         public ICommand EditChangesCommand { get; set; }
         public ICommand ElectronicVersionCommand { get; set; }
 
-        public BaseTNPAViewModel(TNPAWindow window) : base(window)
+        public BaseTNPAViewModel(TNPAWindow window) //: base(window)
         {
             _repository = SQLiteRepository.GetRepository();
             SaveCommand = new RelayCommand(Save);
@@ -187,9 +187,7 @@ namespace TNPASerch.ViewModel
         protected abstract void Save();
         protected void Cancel()
         {
-            {
-                _window.Close();
-            }
+            Close();
         }
 
         public void Dispose()

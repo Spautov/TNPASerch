@@ -15,7 +15,7 @@ namespace TNPASerch.ViewModel
 
         protected readonly Tnpa _tnpa;
 
-        public ChangeBaseViewModel(ChangeView window, Tnpa tnpa) : base(window)
+        public ChangeBaseViewModel(ChangeView window, Tnpa tnpa) //: base(window)
         {
             _tnpa = tnpa ?? throw new ArgumentNullException(nameof(tnpa));
 

@@ -11,5 +11,10 @@ namespace TNPASerch.View
         {
             InitializeComponent();
         }
+
+        private void CommandOkBinding_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
+        {
+
+        }
     }
 }

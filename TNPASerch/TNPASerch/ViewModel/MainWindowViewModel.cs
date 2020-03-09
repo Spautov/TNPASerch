@@ -23,7 +23,7 @@ namespace TNPASerch.ViewModel
         public ICommand SettingsCommand { get; set; }
         public ICommand CloseCommand { get; set; }
 
-        public MainWindowViewModel(MainWindow window) : base(window)
+        public MainWindowViewModel() //: base(App.Current.MainWindow)
         {
             _repository = SQLiteRepository.GetRepository();
             GetTnpaTypsAsync();

@@ -29,7 +29,7 @@ namespace TNPASerch.ViewModel
         {
             if (UpdateTnpa())
             {
-                _window.Close();
+                Close();
             };
         }
 

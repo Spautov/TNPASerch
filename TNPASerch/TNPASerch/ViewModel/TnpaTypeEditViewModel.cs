@@ -28,7 +28,7 @@ namespace TNPASerch.ViewModel
             }
         }
 
-        public TnpaTypeEditViewModel(TnpaTypeEditView window) : base(window)
+        public TnpaTypeEditViewModel(TnpaTypeEditView window) //: base(window)
         {
             _repository = SQLiteRepository.GetRepository();
             AddTypeCommand = new RelayCommand(AddType);
@@ -44,9 +44,9 @@ namespace TNPASerch.ViewModel
             {
                 AddTextView addTextView = new AddTextView
                 {
-                    Owner = _window
+                    Owner = App.Current.MainWindow
                 };
-                AddTextViewModel addTextViewModel = new AddTextViewModel(addTextView)
+                AddTextViewModel addTextViewModel = new AddTextViewModel()
                 {
                     TextValue = SelectedTnpaType.Name
                 };
@@ -110,9 +110,9 @@ namespace TNPASerch.ViewModel
         {
             AddTextView addTextView = new AddTextView
             {
-                Owner = _window
+                Owner = App.Current.MainWindow
             };
-            AddTextViewModel addTextViewModel = new AddTextViewModel(addTextView);
+            AddTextViewModel addTextViewModel = new AddTextViewModel();
             addTextView.DataContext = addTextViewModel;
             addTextView.ShowDialog();
             if (addTextView.DialogResult == true)

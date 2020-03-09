@@ -38,7 +38,7 @@ namespace TNPASerch.ViewModel
             }
         }
 
-        public TnpaChengesEditViewModel(TnpaChengesEditView window, Tnpa tnpa) : base(window)
+        public TnpaChengesEditViewModel(TnpaChengesEditView window, Tnpa tnpa) //: base(window)
         {
             _tnpa = tnpa ?? throw new ArgumentNullException(nameof(tnpa));
 
