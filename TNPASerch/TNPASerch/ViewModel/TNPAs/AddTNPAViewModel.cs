@@ -6,7 +6,7 @@ namespace TNPASerch.ViewModel
 {
     public class AddTNPAViewModel : BaseTNPAViewModel
     {
-        public AddTNPAViewModel(TNPAWindow window): base(window)
+        public AddTNPAViewModel(): base()
         {
             GetTnpaTypsAsync();
             Title = "Добавить ТНПА";

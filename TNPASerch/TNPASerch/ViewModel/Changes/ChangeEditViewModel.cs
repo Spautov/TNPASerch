@@ -8,7 +8,7 @@ namespace TNPASerch.ViewModel
     {
         private readonly Change _currentChange;
 
-        public ChangeEditViewModel(ChangeView window, Tnpa tnpa, int number) : base(window, tnpa)
+        public ChangeEditViewModel(Tnpa tnpa, int number) : base(tnpa)
         {
             var coolect = _tnpa.Changes.Where(ch => ch.Number == number);
             if (coolect.Count() > 0)

@@ -6,7 +6,7 @@ namespace TNPASerch.ViewModel
 {
     public class EditTNPAViewModel : BaseTNPAViewModel
     {
-        public EditTNPAViewModel(TNPAWindow window, Tnpa tnpa) : base(window)
+        public EditTNPAViewModel(Tnpa tnpa) : base()
         {
             _currentTnpa = tnpa?? throw new ArgumentNullException(nameof(tnpa));
 

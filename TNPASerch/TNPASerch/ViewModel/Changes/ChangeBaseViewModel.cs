@@ -9,18 +9,16 @@ namespace TNPASerch.ViewModel
     public abstract class ChangeBaseViewModel : BaseViewModel
     {
         public ICommand OkCommand { get; set; }
-       // public ICommand CancelCommand { get; set; }
 
         public string Title { get; protected set; }
 
         protected readonly Tnpa _tnpa;
 
-        public ChangeBaseViewModel(ChangeView window, Tnpa tnpa) //: base(window)
+        public ChangeBaseViewModel(Tnpa tnpa)
         {
             _tnpa = tnpa ?? throw new ArgumentNullException(nameof(tnpa));
 
             OkCommand = new RelayCommand(Ok);
-            //CancelCommand = new RelayCommand(Close);
         }
 
         public DateTime _putIntoOperation;

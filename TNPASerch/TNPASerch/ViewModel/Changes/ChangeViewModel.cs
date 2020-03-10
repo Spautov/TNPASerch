@@ -7,7 +7,7 @@ namespace TNPASerch.ViewModel
 {
     public class ChangeViewModel : ChangeBaseViewModel
     {
-        public ChangeViewModel(ChangeView window, Tnpa tnpa) : base(window, tnpa)
+        public ChangeViewModel(Tnpa tnpa) : base(tnpa)
         {
             Registered = DateTime.Now;
             PutIntoOperation = DateTime.Now;

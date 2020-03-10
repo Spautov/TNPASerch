@@ -13,7 +13,7 @@ namespace TNPASerch.View
                 Owner = App.Current.MainWindow
             };
             ChangeEditViewModel changeEditViewModel =
-                new ChangeEditViewModel(changeView, tnpa, selectedChangeNumber);
+                new ChangeEditViewModel(tnpa, selectedChangeNumber);
             changeView.DataContext = changeEditViewModel;
             return changeView;
         } 
@@ -24,7 +24,7 @@ namespace TNPASerch.View
             {
                 Owner = App.Current.MainWindow
             };
-            ChangeViewModel changeViewModel = new ChangeViewModel(changeView, tnpa);
+            ChangeViewModel changeViewModel = new ChangeViewModel(tnpa);
             changeView.DataContext = changeViewModel;
             return changeView;
         }
@@ -57,7 +57,7 @@ namespace TNPASerch.View
             {
                 Owner = App.Current.MainWindow
             };
-            addWindow.DataContext = new EditTNPAViewModel(addWindow, tnpa);
+            addWindow.DataContext = new EditTNPAViewModel(tnpa);
 
             return addWindow;        
         }
@@ -69,7 +69,7 @@ namespace TNPASerch.View
                 Owner = App.Current.MainWindow
             };
             
-            addWindow.DataContext = new AddTNPAViewModel(addWindow);
+            addWindow.DataContext = new AddTNPAViewModel();
             return addWindow;
         }
 
