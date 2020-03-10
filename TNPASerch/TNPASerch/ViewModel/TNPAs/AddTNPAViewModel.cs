@@ -25,7 +25,7 @@ namespace TNPASerch.ViewModel
         {
             if (CreatTnpa())
             {
-                Close();
+               // Close();
             }
         }
 

@@ -83,5 +83,54 @@ namespace TNPASerch.View
             return editFilesView;
         }
 
+        public static MessageView YesMessage(string message = "", string title = "")
+        {
+            MessageView messageView = new MessageView
+            {
+                Owner = App.Current.MainWindow
+            };
+            MessageViewModel messageViewModel = new MessageViewModel()
+            {
+                Message = message,
+                Title = title,
+                OkButtonTitle = "Ok",
+                IsNOButtonVisible = Visibility.Collapsed,
+                IsCancelButtonVisible = Visibility.Hidden
+            };
+            messageView.DataContext = messageViewModel;
+            return messageView;
+        }
+
+        public static MessageView YesCancelMessage(string message = "", string title = "")
+        {
+            MessageView messageView = new MessageView
+            {
+                Owner = App.Current.MainWindow
+            };
+            MessageViewModel messageViewModel = new MessageViewModel()
+            {
+                Message = message,
+                Title = title,
+                IsNOButtonVisible = Visibility.Collapsed
+            };
+            messageView.DataContext = messageViewModel;
+            return messageView;
+        }
+
+        public static MessageView YesNoCancelMessage(string message = "", string title = "")
+        {
+            MessageView messageView = new MessageView
+            {
+                Owner = App.Current.MainWindow
+            };
+            MessageViewModel messageViewModel = new MessageViewModel()
+            {
+                Message = message,
+                Title = title,
+                IsNOButtonVisible = Visibility.Visible
+            };
+            messageView.DataContext = messageViewModel;
+            return messageView;
+        }
     }
 }

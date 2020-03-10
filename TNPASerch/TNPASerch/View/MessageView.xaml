@@ -7,7 +7,10 @@
         mc:Ignorable="d"
         Title="{Binding Title}" 
         Height="250" Width="500" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
-    
+    <Window.CommandBindings>
+        <CommandBinding Command="Open" Executed="CommandOkBinding_Executed"></CommandBinding>
+        <CommandBinding Command="Close" Executed="CommandCloseBinding_Executed"></CommandBinding>
+    </Window.CommandBindings>
     <DockPanel LastChildFill="True">
         <StackPanel DockPanel.Dock="Bottom" 
                     Margin="0 5" 
@@ -15,16 +18,16 @@
                     Orientation="Horizontal"
                     HorizontalAlignment="Right">
             <Button Margin="10 5" 
-                    Command="{Binding OkCommand}"
+                    Command="Open"
                     Width="143" HorizontalAlignment="Right"
                     Content="{Binding OkButtonTitle}"></Button>
             <Button Margin="10 5" 
-                    Command="{Binding CancelCommand}" 
+                    Command="Close" 
                     Visibility="{Binding IsNOButtonVisible}" 
                     Width="142" HorizontalAlignment="Right"
                     Content="{Binding NoButtonTitle}"></Button>
             <Button Margin="10 5" 
-                    Command="{Binding CancelCommand}" 
+                    Command="Close" 
                     Visibility="{Binding IsCancelButtonVisible}"
                     IsCancel="True" 
                     Width="143" HorizontalAlignment="Right"

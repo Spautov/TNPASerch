@@ -23,5 +23,11 @@ namespace TNPASerch.View
         {
             InitializeComponent();
         }
+
+        private void CommandCloseBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            this.DialogResult = false;
+            Close();
+        }
     }
 }

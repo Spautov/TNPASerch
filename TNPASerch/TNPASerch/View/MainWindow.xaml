@@ -9,6 +9,9 @@
     <Window.DataContext>
         <local:MainWindowViewModel />
     </Window.DataContext>
+    <Window.CommandBindings>
+        <CommandBinding Command="Close" Executed="CommandCloseBinding_Executed"></CommandBinding>
+    </Window.CommandBindings>
     <DockPanel LastChildFill="True">
         <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
             <Menu VerticalAlignment="Center" Padding="5">
@@ -39,7 +42,7 @@
             <Button Margin="5" Padding="5 0" Command="{Binding ShowEditTNPAWindowCommand}">
                 <Image Height="25" Source="/TNPASerch;component/Images/folder_settings_tools_22597.png"></Image>
             </Button>
-            <Button Margin="5" Padding="5 0" Command="{Binding CloseCommand}">
+            <Button Margin="5" Padding="5 0" Command="Close">
                 <Image Height="25" Source="/TNPASerch;component/Images/cancellationbutton_exitneartheaction_botondecancelacion_salida_6335.ico"></Image>
             </Button>
         </StackPanel>

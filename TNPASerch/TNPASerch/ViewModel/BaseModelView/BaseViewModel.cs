@@ -1,84 +1,29 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using TNPASerch.View;
 
 namespace TNPASerch.ViewModel
 {
     public abstract class BaseViewModel : NotifyPropertyChangedModel
     {
-        //protected readonly Window _window;
-
-        //public BaseViewModel(Window window)
-        //{
-        //    _window = window;
-        //}
-
         protected bool YesNoCancelMessage(string message = "", string title = "")
         {
-            MessageView messageView = new MessageView
-            {
-                Owner = App.Current.MainWindow
-            };
-            MessageViewModel messageViewModel = new MessageViewModel(messageView)
-            {
-                Message = message,
-                Title = title,
-                IsNOButtonVisible = Visibility.Visible
-            };
-            messageView.DataContext = messageViewModel;
+            MessageView messageView = ViewsManager.YesNoCancelMessage(message, title);
             messageView.ShowDialog();
-
-            return messageViewModel.ButtonResult;
+            return messageView.DialogResult.GetValueOrDefault();
         }
 
         protected bool YesCancelMessage(string message = "", string title = "")
         {
-            MessageView messageView = new MessageView
-            {
-                Owner = App.Current.MainWindow
-            };
-            MessageViewModel messageViewModel = new MessageViewModel(messageView)
-            {
-                Message = message,
-                Title = title,
-                IsNOButtonVisible = Visibility.Collapsed
-            };
-            messageView.DataContext = messageViewModel;
+            MessageView messageView = ViewsManager.YesCancelMessage(message, title);
             messageView.ShowDialog();
-
-            return messageViewModel.ButtonResult;
+            return messageView.DialogResult.GetValueOrDefault();
         }
 
         protected bool YesMessage(string message = "", string title = "")
         {
-            MessageView messageView = new MessageView
-            {
-                Owner = App.Current.MainWindow
-            };
-            MessageViewModel messageViewModel = new MessageViewModel(messageView)
-            {
-                Message = message,
-                Title = title,
-                OkButtonTitle = "Ok",
-                IsNOButtonVisible = Visibility.Collapsed,
-                IsCancelButtonVisible = Visibility.Hidden
-            };
-            messageView.DataContext = messageViewModel;
+            MessageView messageView = ViewsManager.YesMessage(message, title);
             messageView.ShowDialog();
-
-            return messageViewModel.ButtonResult;
-        }
-
-        protected void Close()
-        {
-            foreach (Window wind in App.Current.Windows)
-            {
-                if (wind.IsActive)
-                {
-                    wind.Close();
-                    break;
-                }
-            }
+            return messageView.DialogResult.GetValueOrDefault();
         }
     }
 }

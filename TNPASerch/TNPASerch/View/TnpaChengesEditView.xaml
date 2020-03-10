@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:TNPASerch.View"
         mc:Ignorable="d"
         Title="Редактор изменений" Height="650" Width="550" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
+    <Window.CommandBindings>
+        <CommandBinding Command="Close" Executed="CommandCloseBinding_Executed"></CommandBinding>
+    </Window.CommandBindings>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -27,7 +30,7 @@
             <Button Margin="8" Grid.Column="0" Command="{Binding AddChangeCommand}">Добавить</Button>
             <Button Margin="8" Grid.Column="1" Command="{Binding RemoveChangeCommand}">Удалить</Button>
             <Button Margin="8" Grid.Column="2" Command="{Binding EditChangeCommand}">Редактировать</Button>
-            <Button Margin="8" Grid.Column="3" Command="{Binding CancelChangeCommand}">Закрыть</Button>
+            <Button Margin="8" Grid.Column="3" Command="Close">Закрыть</Button>
         </Grid>
     </Grid>
 </Window>

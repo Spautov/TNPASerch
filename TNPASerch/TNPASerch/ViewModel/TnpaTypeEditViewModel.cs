@@ -13,7 +13,7 @@ namespace TNPASerch.ViewModel
         public ICommand AddTypeCommand { get; set; }
         public ICommand RemoveTypeCommand { get; set; }
         public ICommand EditTypeCommand { get; set; }
-        public ICommand CancelTypeCommand { get; set; }
+        //public ICommand CancelTypeCommand { get; set; }
 
         private readonly IRepository _repository;
 
@@ -34,7 +34,7 @@ namespace TNPASerch.ViewModel
             AddTypeCommand = new RelayCommand(AddType);
             RemoveTypeCommand = new RelayCommand(RemoveType);
             EditTypeCommand = new RelayCommand(EditType);
-            CancelTypeCommand = new RelayCommand(Close);
+            //CancelTypeCommand = new RelayCommand(Close);
             GetTnpaTypsAsync();
         }
 

@@ -12,7 +12,7 @@ namespace TNPASerch.ViewModel
         public ICommand AddChangeCommand { get; set; }
         public ICommand RemoveChangeCommand { get; set; }
         public ICommand EditChangeCommand { get; set; }
-        public ICommand CancelChangeCommand { get; set; }
+        //public ICommand CancelChangeCommand { get; set; }
 
         private readonly Tnpa _tnpa;
 
@@ -45,7 +45,7 @@ namespace TNPASerch.ViewModel
             AddChangeCommand = new RelayCommand(AddChange);
             RemoveChangeCommand = new RelayCommand(RemoveChange);
             EditChangeCommand = new RelayCommand(EditChange);
-            CancelChangeCommand = new RelayCommand(Close);
+            //CancelChangeCommand = new RelayCommand(Close);
 
             GetChange();
         }

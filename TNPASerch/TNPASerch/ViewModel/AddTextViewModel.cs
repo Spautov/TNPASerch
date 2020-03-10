@@ -7,27 +7,6 @@ namespace TNPASerch.ViewModel
 {
     public class AddTextViewModel : BaseViewModel
     {
-        public ICommand OkCommand { get; set; }
-        public ICommand CancelCommand { get; set; }
-
-        public AddTextViewModel()//(AddTextView window): base(window)
-        {
-            OkCommand = new RelayCommand(Ok);
-            CancelCommand = new RelayCommand(Cancel);
-        }
-
-        private void Cancel()
-        {
-            //_window.DialogResult = false;
-            Close();
-        }
-
-        private void Ok()
-        {
-            //_window.DialogResult = true;
-            Close();
-        }
-
         private string _textValue;
         public string TextValue
         {

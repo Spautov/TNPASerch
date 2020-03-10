@@ -24,5 +24,10 @@ namespace TNPASerch
         {
             InitializeComponent();
         }
+
+        private void CommandCloseBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

@@ -35,7 +35,7 @@ namespace TNPASerch.ViewModel
             _currentChange.Number = this.NumberChange;
             _currentChange.PutIntoOperation = this.PutIntoOperation;
             _currentChange.Registered = this.Registered;
-            Close();
+            //Close();
         }
 
         private bool Chek()

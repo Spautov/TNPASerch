@@ -35,7 +35,7 @@ namespace TNPASerch.ViewModel
                 Tnpa = _tnpa,
             };
             _tnpa.Changes.Add(change);
-            Close();
+            //Close();
         }
 
         private bool Chek()

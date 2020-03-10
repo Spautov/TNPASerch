@@ -16,7 +16,7 @@ namespace TNPASerch.ViewModel
 
         public ICommand SaveCommand { get; set; }
         public ICommand ApplyCommand { get; set; }
-        public ICommand CancelCommand { get; set; }
+       // public ICommand CancelCommand { get; set; }
         public ICommand EditChangesCommand { get; set; }
         public ICommand ElectronicVersionCommand { get; set; }
 
@@ -25,7 +25,7 @@ namespace TNPASerch.ViewModel
             _repository = SQLiteRepository.GetRepository();
             SaveCommand = new RelayCommand(Save);
             ApplyCommand = new RelayCommand(Apply);
-            CancelCommand = new RelayCommand(Cancel);
+            //CancelCommand = new RelayCommand(Cancel);
             EditChangesCommand = new RelayCommand(EditChanges);
             ElectronicVersionCommand = new RelayCommand(ElectronicVersion);
         }
@@ -185,10 +185,10 @@ namespace TNPASerch.ViewModel
 
         protected abstract void Apply();
         protected abstract void Save();
-        protected void Cancel()
-        {
-            Close();
-        }
+        //protected void Cancel()
+        //{
+        //    Close();
+        //}
 
         public void Dispose()
         {

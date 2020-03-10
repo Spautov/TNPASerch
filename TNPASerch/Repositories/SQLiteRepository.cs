@@ -156,7 +156,7 @@ namespace Repositories
             Update<Tnpa>(item);
         }
 
-        private void Update<T>(T item)
+        private void Update<T>(T item) where T : class
         {
             lock (_lockDb)
             {

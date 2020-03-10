@@ -9,7 +9,7 @@ namespace TNPASerch.ViewModel
     public abstract class ChangeBaseViewModel : BaseViewModel
     {
         public ICommand OkCommand { get; set; }
-        public ICommand CancelCommand { get; set; }
+       // public ICommand CancelCommand { get; set; }
 
         public string Title { get; protected set; }
 
@@ -20,7 +20,7 @@ namespace TNPASerch.ViewModel
             _tnpa = tnpa ?? throw new ArgumentNullException(nameof(tnpa));
 
             OkCommand = new RelayCommand(Ok);
-            CancelCommand = new RelayCommand(Close);
+            //CancelCommand = new RelayCommand(Close);
         }
 
         public DateTime _putIntoOperation;

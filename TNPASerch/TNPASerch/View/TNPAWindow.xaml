@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:TNPASerch.View"
         mc:Ignorable="d"
         Title="{Binding Title}" Height="550" Width="800" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
+    <Window.CommandBindings>
+        <CommandBinding Command="Close" Executed="CommandCloseBinding_Executed"></CommandBinding>
+    </Window.CommandBindings>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.5*"></ColumnDefinition>
@@ -120,7 +123,7 @@
             <Button Content="Отмена" DockPanel.Dock="Right" 
                     VerticalAlignment="Center" 
                     Width="75" Margin="5"
-                    Command="{Binding CancelCommand}"/>
+                    Command="Close"/>
             <Button Content="Применить" 
                     VerticalAlignment="Center" 
                     Width="75" Margin="5"
