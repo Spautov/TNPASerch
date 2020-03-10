@@ -1,11 +1,12 @@
 ﻿<Window x:Class="TNPASerch.View.AddTextView"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TNPASerch.View"
         mc:Ignorable="d"
-        Title="AddTextView" Height="150" Width="800" Topmost="True" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
+        Title="{Binding Title}" Height="150" Width="400" Topmost="True" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
     <Window.CommandBindings>
         <CommandBinding Command="Open" Executed="CommandOkBinding_Executed"></CommandBinding>
         <CommandBinding Command="Close" Executed="CommandCloseBinding_Executed"></CommandBinding>
@@ -14,15 +15,29 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="0.8*"/>
         </Grid.RowDefinitions>
-        <TextBox Grid.Column="0" Grid.ColumnSpan="4" Margin="8" Text="{Binding TextValue}"></TextBox>
-        <Button Grid.Column="2" Grid.Row="1" Margin="8" Command="Open" IsDefault="True">Ok</Button>
-        <Button Grid.Column="3" Grid.Row="1" Margin="8" Command="Close" IsCancel="True">Отмена</Button>
+        <TextBox Grid.Column="0" Grid.ColumnSpan="2"
+                 Height="32"
+                 materialDesign:TransitionAssist.DisableTransitions="True" 
+                 Text="{Binding TextValue}"
+                 Margin="5" />
+        <Button Grid.Column="0" 
+                Grid.Row="1"
+                Style="{DynamicResource MaterialDesignRaisedButton}" 
+                materialDesign:ShadowAssist.ShadowDepth="Depth4"
+                Command="Open" 
+                IsDefault="True"
+                Margin="8">Ok</Button >
+        <Button Grid.Column="1" 
+                Grid.Row="1"
+                Style="{DynamicResource MaterialDesignRaisedButton}" 
+                materialDesign:ShadowAssist.ShadowDepth="Depth4"
+                Command="Close" 
+                IsCancel="True"
+                Margin="8">Отмена</Button >
     </Grid>
 </Window>

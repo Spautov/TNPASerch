@@ -46,7 +46,8 @@ namespace TNPASerch.ViewModel
                 };
                 AddTextViewModel addTextViewModel = new AddTextViewModel()
                 {
-                    TextValue = SelectedTnpaType.Name
+                    TextValue = SelectedTnpaType.Name,
+                    Title = "Введите наименование типа"
                 };
                 addTextView.DataContext = addTextViewModel;
                 addTextView.ShowDialog();
@@ -110,7 +111,10 @@ namespace TNPASerch.ViewModel
             {
                 Owner = App.Current.MainWindow
             };
-            AddTextViewModel addTextViewModel = new AddTextViewModel();
+            AddTextViewModel addTextViewModel = new AddTextViewModel
+            {
+                Title = "Введите наименование типа"
+            };
             addTextView.DataContext = addTextViewModel;
             addTextView.ShowDialog();
             if (addTextView.DialogResult == true)
