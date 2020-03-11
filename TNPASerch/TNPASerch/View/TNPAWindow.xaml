@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TNPASerch.View"
         mc:Ignorable="d"
-        Title="{Binding Title}" Height="550" Width="800" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
+        Title="{Binding Title}" Height="550" Width="850" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
     <Window.CommandBindings>
         <CommandBinding Command="Close" Executed="CommandCloseBinding_Executed"></CommandBinding>
     </Window.CommandBindings>
@@ -31,6 +31,7 @@
         
         <ComboBox Grid.Row="1" Grid.Column="1"
                   materialDesign:HintAssist.Hint="Тип ТНПА"
+                  FontSize="16"
                   MinWidth="150" 
                   Margin="5" 
                   Height="42" 
@@ -38,13 +39,15 @@
                   SelectedItem="{Binding Path=SelectedTnpaType}"/>
         
         <TextBox Grid.Row="1" Grid.Column="2" 
-                  Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                 FontSize="16" 
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                  materialDesign:HintAssist.Hint="Номер ТНПА"
                  Height="42" 
                  TextWrapping="Wrap" 
                  VerticalAlignment="Center" Margin="5"
                  Text="{Binding NumberTnpa, Mode=TwoWay}"/>
         <TextBox Grid.Row="1" Grid.Column="3" 
+                 FontSize="16"
                  Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                  materialDesign:HintAssist.Hint="Год"
                  Height="42" 
@@ -65,8 +68,9 @@
                     Orientation="Horizontal">
             
             <Label VerticalAlignment="Center" 
+                   FontSize="16"
                    HorizontalAlignment="Left"
-                   Margin="0 0 10 0">Отменен</Label>
+                   Margin="0 0 5 0">Отменен</Label>
             
             <ToggleButton Style="{StaticResource MaterialDesignSwitchDarkToggleButton}"
                           ToolTip="MaterialDesignSwitchDarkToggleButton"
@@ -74,19 +78,22 @@
                           HorizontalAlignment="Center"
                           Grid.Row="5" Grid.Column="1"
                           IsChecked="{Binding IsValid, Mode=TwoWay}" 
-                          Margin="10 0"/>
+                          Margin="5 0"/>
             
             <Label VerticalAlignment="Center" 
+                   FontSize="16"
                    HorizontalAlignment="Right"
-                   Margin="10 0 0 0">Действует</Label>
+                   Margin="5 0 0 0">Действует</Label>
             
         </StackPanel>
 
         <Label Grid.Row="4" Grid.Column="1"
                Content="Номер регистрации в жернале:" 
+               FontSize="16"
                VerticalAlignment="Center"
                HorizontalAlignment="Left"/>
         <TextBox Grid.Row="4" Grid.Column="2"
+                 FontSize="16"
                  TextWrapping="Wrap" 
                  VerticalAlignment="Center"
                  HorizontalAlignment="Left"
@@ -96,18 +103,21 @@
                  Text="{Binding NumberRegisteredTnpa, Mode=TwoWay}"/>
        
         <DatePicker Grid.Row="4" Grid.Column="3" 
+                    FontSize="16"
                     materialDesign:HintAssist.Hint="Дата регистрации в жернале:"
                     Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
                     SelectedDate="{Binding Registered}"
                     Margin="5 0 0 0"/>
 
         <DatePicker Grid.Row="3" Grid.Column="2" 
+                    FontSize="16"
                     materialDesign:HintAssist.Hint="Введен в действе с:"
                     Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
                     SelectedDate="{Binding PutIntoOperationTnpa}"
                     Margin="5 0"/>
 
         <DatePicker Grid.Row="3" Grid.Column="3" 
+                    FontSize="16"
                     materialDesign:HintAssist.Hint="Отменен с:"
                     Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
                     SelectedDate="{Binding CancelledTnpa}"
@@ -115,65 +125,66 @@
                     Margin="5 0 0 0"/>
 
         <Button Style="{DynamicResource MaterialDesignRaisedButton}"
-                    materialDesign:ShadowAssist.ShadowDepth="Depth4"
-                    Grid.Row="6" Grid.Column="1"
-                    Content="Сохранить" 
-                    DockPanel.Dock="Left" 
-                    Height="32"
-                    Width="150"
-                    HorizontalAlignment="Left"
-                    Command="{Binding SaveCommand}">
+                materialDesign:ShadowAssist.ShadowDepth="Depth4"
+                Grid.Row="6" Grid.Column="1"
+                Content="Сохранить" 
+                DockPanel.Dock="Left" 
+                Height="32"
+                Width="150"
+                HorizontalAlignment="Left"
+                Command="{Binding SaveCommand}">
         </Button>
         <Button Style="{DynamicResource MaterialDesignRaisedButton}"
-                    materialDesign:ShadowAssist.ShadowDepth="Depth4"
-                    Grid.Row="6" Grid.Column="2"
-                    Content="Применить" 
-                    VerticalAlignment="Center" 
-                    Height="32"
-                    Width="150"
-                    Command="{Binding ApplyCommand}"/>
+                materialDesign:ShadowAssist.ShadowDepth="Depth4"
+                Grid.Row="6" Grid.Column="2"
+                Content="Применить" 
+                VerticalAlignment="Center" 
+                Height="32"
+                Width="150"
+                Command="{Binding ApplyCommand}"/>
         <Button Style="{DynamicResource MaterialDesignRaisedButton}"
-                    materialDesign:ShadowAssist.ShadowDepth="Depth4"
-                    Grid.Row="6" Grid.Column="3"
-                    Content="Отмена" 
-                    DockPanel.Dock="Right" 
-                    Height="32"
-                    Width="150"
-                    Command="Close"
-                    HorizontalAlignment="Right"/>
+                materialDesign:ShadowAssist.ShadowDepth="Depth4"
+                Grid.Row="6" Grid.Column="3"
+                Content="Отмена" 
+                DockPanel.Dock="Right" 
+                Height="32"
+                Width="150"
+                Command="Close"
+                HorizontalAlignment="Right"/>
 
         <DockPanel Grid.Row="5" Grid.Column="1" LastChildFill="False">
             <Label Content="Количество изменений:" 
+                   FontSize="16"
                    DockPanel.Dock="Left"
-                   VerticalAlignment="Center" 
-                   Width="150"/>
+                   VerticalAlignment="Center"/>
 
             <Label Content="{Binding CountChanges}" 
                    DockPanel.Dock="Left"
+                   FontSize="16"
                    Width="30"
                    Height="32"
                    VerticalAlignment="Center" 
-                   Margin="15 5 15 5"/>
+                   Margin="10 0 0 0"/>
         </DockPanel>
 
         <Button Style="{DynamicResource MaterialDesignRaisedButton}"
-                    materialDesign:ShadowAssist.ShadowDepth="Depth4"
-                    Grid.Row="5" Grid.Column="2"
-                    Content="Редактировать" 
-                    VerticalAlignment="Center" 
-                    DockPanel.Dock="Left"
-                    Height="32"
-                    Width="150"
-                    Command="{Binding EditChangesCommand}"/>
+                materialDesign:ShadowAssist.ShadowDepth="Depth4"
+                Grid.Row="5" Grid.Column="2"
+                Content="Редактировать" 
+                VerticalAlignment="Center" 
+                DockPanel.Dock="Left"
+                Height="32"
+                Width="150"
+                Command="{Binding EditChangesCommand}"/>
 
         <Button Style="{DynamicResource MaterialDesignRaisedButton}"
-                    materialDesign:ShadowAssist.ShadowDepth="Depth4"
-                    Grid.Row="5" Grid.Column="3"
-                    Content="Электронная версия" DockPanel.Dock="Right" 
-                    VerticalAlignment="Center" 
-                    HorizontalAlignment="Right"
-                    Height="32"
-                    Width="150"
-                    Command="{Binding ElectronicVersionCommand}"/>
+                materialDesign:ShadowAssist.ShadowDepth="Depth4"
+                Grid.Row="5" Grid.Column="3"
+                Content="Электронная версия" DockPanel.Dock="Right" 
+                VerticalAlignment="Center" 
+                HorizontalAlignment="Right"
+                Height="32"
+                Width="150"
+                Command="{Binding ElectronicVersionCommand}"/>
     </Grid>
 </Window>

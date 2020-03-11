@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TNPASerch.View"
         mc:Ignorable="d"
-        Title="{Binding Title}" Height="250" Width="350" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
+        Title="{Binding Title}" Height="300" Width="350" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
     <Window.CommandBindings>
         <CommandBinding Command="Close" Executed="CommandCloseBinding_Executed"></CommandBinding>
     </Window.CommandBindings>
@@ -27,37 +27,25 @@
                  Grid.ColumnSpan="2"
                  Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                  materialDesign:HintAssist.Hint="Номер изменения:"
-                 Height="42" 
+                 FontSize="16"                
                  TextWrapping="Wrap" 
                  VerticalAlignment="Center" 
                  Margin="10 5"
                  Text="{Binding NumberChange, Mode=TwoWay}"/>
-        <!--<Label Grid.Row="1" 
-               VerticalAlignment="Center"
-               Grid.Column="0" 
-               Content="Дата введения в действие:"></Label>-->
-        <!--<DatePicker Grid.Row="1" 
-                    Grid.Column="1"
-                    VerticalAlignment="Center" Margin="5"
-                    SelectedDate="{Binding PutIntoOperation}"/>-->
+       
         <DatePicker Grid.Row="1"
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
+                    FontSize="16"
                     materialDesign:HintAssist.Hint="Дата введения в действие:"
                     Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
                     SelectedDate="{Binding PutIntoOperation}"
                     Margin="10 5"/>
-        <!--<Label Grid.Row="2" 
-               VerticalAlignment="Center"
-               Grid.Column="0" 
-               Content="Дата регистрации в журнале:"></Label>-->
-        <!--<DatePicker Grid.Row="2" 
-                    Grid.Column="1"
-                    VerticalAlignment="Center" Margin="5"
-                    SelectedDate="{Binding Registered}"/>-->
+       
         <DatePicker Grid.Row="2" 
                     Grid.Column="0"
                     Grid.ColumnSpan="2" 
+                    FontSize="16"
                     materialDesign:HintAssist.Hint="Дата регистрации в журнале:"
                     Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
                     SelectedDate="{Binding Registered}"
@@ -75,6 +63,6 @@
                 materialDesign:ShadowAssist.ShadowDepth="Depth4"
                 Height="32"
                 Width="150"
-                Command="Close">Отмена</Button>
+                Command="Close">Закрыть</Button>
     </Grid>
 </Window>

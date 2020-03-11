@@ -24,7 +24,7 @@
                  Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                  materialDesign:HintAssist.Hint="{Binding Title}"
                  materialDesign:TransitionAssist.DisableTransitions="True" 
-                 FontSize="24"
+                 FontSize="16"
                  Text="{Binding TextValue}"
                  Margin="10 0" />
         <Button Grid.Column="0" 
