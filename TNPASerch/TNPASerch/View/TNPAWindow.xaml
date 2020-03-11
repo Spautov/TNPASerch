@@ -45,7 +45,7 @@
                  VerticalAlignment="Center" Margin="5"
                  Text="{Binding NumberTnpa, Mode=TwoWay}"/>
         <TextBox Grid.Row="1" Grid.Column="3" 
-                  Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                  materialDesign:HintAssist.Hint="Год"
                  Height="42" 
                  TextWrapping="Wrap" Text="{Binding YearTnpa, Mode=TwoWay}"
@@ -54,6 +54,7 @@
         <TextBox materialDesign:HintAssist.Hint="Наименование ТНПА" 
                  Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                  HorizontalAlignment="Stretch"  
+                 FontSize="16"
                  Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3"
                  TextWrapping="Wrap" 
                  Text="{Binding TnpaName, Mode=TwoWay}"
@@ -145,8 +146,7 @@
             <Label Content="Количество изменений:" 
                    DockPanel.Dock="Left"
                    VerticalAlignment="Center" 
-                   Width="150"
-                   Padding="0 0 15 0"/>
+                   Width="150"/>
 
             <Label Content="{Binding CountChanges}" 
                    DockPanel.Dock="Left"
