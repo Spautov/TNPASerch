@@ -27,7 +27,7 @@ namespace TNPASerch.ViewModel
             }
         }
 
-        public TnpaTypeEditViewModel(TnpaTypeEditView window)
+        public TnpaTypeEditViewModel()
         {
             _repository = SQLiteRepository.GetRepository();
             AddTypeCommand = new RelayCommand(AddType);

@@ -265,5 +265,23 @@ namespace TNPASerch.ViewModel
                 return false;
             }
         }
+
+        protected void Close()
+        {
+            Window windowActiv = null;
+            foreach (Window wind in App.Current.Windows)
+            {
+                if (wind.IsActive)
+                {
+                    windowActiv = wind;
+                    break;
+                }
+            }
+
+            if (windowActiv != null)
+            {
+                windowActiv.Close();
+            }
+        }
     }
 }

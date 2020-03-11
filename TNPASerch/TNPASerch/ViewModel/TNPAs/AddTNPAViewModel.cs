@@ -1,6 +1,6 @@
 ﻿using DAL;
 using System;
-using TNPASerch.View;
+using System.Windows;
 
 namespace TNPASerch.ViewModel
 {
@@ -25,7 +25,7 @@ namespace TNPASerch.ViewModel
         {
             if (CreatTnpa())
             {
-               // Close();
+               Close();
             }
         }
 

@@ -23,10 +23,5 @@ namespace TNPASerch.View
             this.DialogResult = false;
             Close();
         }
-
-        private void CommandBinding_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
-        {
-
-        }
     }
 }
