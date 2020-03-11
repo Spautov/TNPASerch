@@ -1,4 +1,5 @@
 ﻿<Window x:Class="TNPASerch.View.TnpaChengesEditView"
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -14,12 +15,35 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="12*"/>
+            <RowDefinition Height="8*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <ListView Grid.Row="0" 
                   ItemsSource="{Binding Changes}"
-                  SelectedItem="{Binding SelectedChange}"></ListView>
+                  SelectedItem="{Binding SelectedChange}"
+                  HorizontalContentAlignment="Stretch">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <materialDesign:Card  materialDesign:ShadowAssist.ShadowDepth="Depth4" 
+                                          Padding="12">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Изменение № " 
+                                       Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                                       Margin="5"/>
+                            <TextBlock Text="{Binding Number}" 
+                                       Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                                       Margin="5"/>
+                            <TextBlock Text="от" 
+                                       Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                                       Margin="5"/>
+                            <TextBlock Text="{Binding PutIntoOperation}" 
+                                       Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                                       Margin="5"/>
+                        </StackPanel>
+                    </materialDesign:Card>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -27,10 +51,34 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Margin="8" Grid.Column="0" Command="{Binding AddChangeCommand}">Добавить</Button>
-            <Button Margin="8" Grid.Column="1" Command="{Binding RemoveChangeCommand}">Удалить</Button>
-            <Button Margin="8" Grid.Column="2" Command="{Binding EditChangeCommand}">Редактировать</Button>
-            <Button Margin="8" Grid.Column="3" Command="Close">Закрыть</Button>
+            <Button Margin="8" 
+                    Grid.Column="0" 
+                    Command="{Binding AddChangeCommand}"
+                    Style="{DynamicResource MaterialDesignRaisedButton}"
+                    materialDesign:ShadowAssist.ShadowDepth="Depth4"
+                    Height="32"
+                    Width="110">Добавить</Button>
+            <Button Margin="8" 
+                    Grid.Column="1" 
+                    Command="{Binding RemoveChangeCommand}"
+                    Style="{DynamicResource MaterialDesignRaisedButton}"
+                    materialDesign:ShadowAssist.ShadowDepth="Depth4"
+                    Height="32"
+                    Width="110">Удалить</Button>
+            <Button Margin="8"
+                    Grid.Column="2"
+                    Command="{Binding EditChangeCommand}"
+                    Style="{DynamicResource MaterialDesignRaisedButton}"
+                    materialDesign:ShadowAssist.ShadowDepth="Depth4"
+                    Height="32"
+                    Width="110">Изменить</Button>
+            <Button Margin="8" 
+                    Grid.Column="3" 
+                    Command="Close"
+                    Style="{DynamicResource MaterialDesignRaisedButton}"
+                    materialDesign:ShadowAssist.ShadowDepth="Depth4"
+                    Height="32"
+                    Width="100">Закрыть</Button>
         </Grid>
     </Grid>
 </Window>

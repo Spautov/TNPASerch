@@ -1,11 +1,12 @@
 ﻿<Window x:Class="TNPASerch.View.ChangeView"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TNPASerch.View"
         mc:Ignorable="d"
-        Title="{Binding Title}" Height="250" Width="550" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
+        Title="{Binding Title}" Height="250" Width="350" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
     <Window.CommandBindings>
         <CommandBinding Command="Close" Executed="CommandCloseBinding_Executed"></CommandBinding>
     </Window.CommandBindings>
@@ -20,39 +21,60 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" 
-               VerticalAlignment="Center"
-               Grid.Column="0" 
-               Content="Номер изменения:"></Label>
+        
         <TextBox Grid.Row="0"
-                 Grid.Column="1"
-                 Height="23" 
+                 Grid.Column="0"
+                 Grid.ColumnSpan="2"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                 materialDesign:HintAssist.Hint="Номер изменения:"
+                 Height="42" 
                  TextWrapping="Wrap" 
-                 VerticalAlignment="Center" Margin="5"
+                 VerticalAlignment="Center" 
+                 Margin="10 5"
                  Text="{Binding NumberChange, Mode=TwoWay}"/>
-        <Label Grid.Row="1" 
+        <!--<Label Grid.Row="1" 
                VerticalAlignment="Center"
                Grid.Column="0" 
-               Content="Дата введения в действие:"></Label>
-        <DatePicker Grid.Row="1" 
+               Content="Дата введения в действие:"></Label>-->
+        <!--<DatePicker Grid.Row="1" 
                     Grid.Column="1"
                     VerticalAlignment="Center" Margin="5"
-                    SelectedDate="{Binding PutIntoOperation}"/>
-        <Label Grid.Row="2" 
+                    SelectedDate="{Binding PutIntoOperation}"/>-->
+        <DatePicker Grid.Row="1"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    materialDesign:HintAssist.Hint="Дата введения в действие:"
+                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+                    SelectedDate="{Binding PutIntoOperation}"
+                    Margin="10 5"/>
+        <!--<Label Grid.Row="2" 
                VerticalAlignment="Center"
                Grid.Column="0" 
-               Content="Дата регистрации в журнале:"></Label>
+               Content="Дата регистрации в журнале:"></Label>-->
+        <!--<DatePicker Grid.Row="2" 
+                    Grid.Column="1"
+                    VerticalAlignment="Center" Margin="5"
+                    SelectedDate="{Binding Registered}"/>-->
         <DatePicker Grid.Row="2" 
-                    Grid.Column="1"
-                    VerticalAlignment="Center" Margin="5"
-                    SelectedDate="{Binding Registered}"/>
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2" 
+                    materialDesign:HintAssist.Hint="Дата регистрации в журнале:"
+                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+                    SelectedDate="{Binding Registered}"
+                    Margin="10 5"/>
         <Button Grid.Row="3"
-                Grid.Column="0" 
-                Margin="8" 
+                Grid.Column="0"
+                Style="{DynamicResource MaterialDesignRaisedButton}" 
+                materialDesign:ShadowAssist.ShadowDepth="Depth4"
+                Height="32"
+                Width="150"
                 Command="{Binding OkCommand}">ОК</Button>
         <Button Grid.Row="3"
-                Grid.Column="3" 
-                Margin="8" 
+                Grid.Column="3"
+                Style="{DynamicResource MaterialDesignRaisedButton}" 
+                materialDesign:ShadowAssist.ShadowDepth="Depth4"
+                Height="32"
+                Width="150"
                 Command="Close">Отмена</Button>
     </Grid>
 </Window>
