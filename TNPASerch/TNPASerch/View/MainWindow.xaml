@@ -57,6 +57,7 @@
 
                     <TextBox Height="32"
                              materialDesign:TransitionAssist.DisableTransitions="True" 
+                             materialDesign:HintAssist.Hint="Номер ТНПА"
                              Text="{Binding NumberTnpa, Mode=TwoWay}"
                              MinWidth="150" 
                              Margin="5" />

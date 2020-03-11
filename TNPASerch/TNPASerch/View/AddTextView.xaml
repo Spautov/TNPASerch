@@ -31,13 +31,17 @@
                 materialDesign:ShadowAssist.ShadowDepth="Depth4"
                 Command="Open" 
                 IsDefault="True"
-                Margin="8">Ok</Button >
+                Margin="8"
+                Height="32"
+                Width="150">Ok</Button >
         <Button Grid.Column="1" 
                 Grid.Row="1"
                 Style="{DynamicResource MaterialDesignRaisedButton}" 
                 materialDesign:ShadowAssist.ShadowDepth="Depth4"
                 Command="Close" 
                 IsCancel="True"
-                Margin="8">Отмена</Button >
+                Margin="8"
+                Height="32"
+                Width="150">Отмена</Button >
     </Grid>
 </Window>

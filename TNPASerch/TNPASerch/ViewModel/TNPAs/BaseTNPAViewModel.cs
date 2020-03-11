@@ -47,29 +47,16 @@ namespace TNPASerch.ViewModel
             set
             {
                 _currentTnpa.IsReal = value;
-                if (_currentTnpa.IsReal)
-                {
-                    VvisibleCancelledTnpa = Visibility.Hidden;
-                }
-                else
-                {
-                    VvisibleCancelledTnpa = Visibility.Visible;
-                }
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(VvisibleCancelledTnpa));
             }
         }
 
-        private Visibility _visibleCancelledTnpa;
-        public Visibility VvisibleCancelledTnpa
+        public bool VvisibleCancelledTnpa
         {
             get
             {
-                return _visibleCancelledTnpa;
-            }
-            set
-            {
-                _visibleCancelledTnpa = value;
-                OnPropertyChanged();
+                return !_currentTnpa.IsReal;
             }
         }
 
