@@ -36,7 +36,7 @@ namespace TNPASerch.View
                 Owner = App.Current.MainWindow
             };
 
-            var ViewModel = new TnpaChengesEditViewModel(view, tnpa);
+            var ViewModel = new TnpaChengesEditViewModel(tnpa);
             view.DataContext = ViewModel;
             return view;
         }
