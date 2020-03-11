@@ -83,7 +83,6 @@ namespace TNPASerch.ViewModel
                     try
                     {
                         _repository.DeleteTnpaType(SelectedTnpaType.Id);
-                        YesMessage($"Тип {SelectedTnpaType.Name} успешно удален");
                         GetTnpaTypsAsync();
                     }
                     catch (Exception ex)
@@ -131,7 +130,6 @@ namespace TNPASerch.ViewModel
                     {
                         _repository.Create(tnpaType);
                         GetTnpaTypsAsync();
-                        YesMessage($"Тип {textresoult} успешно добавлен");
                     }
                     catch (Exception ex)
                     {

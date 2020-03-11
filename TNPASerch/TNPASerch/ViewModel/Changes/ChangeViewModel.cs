@@ -1,6 +1,7 @@
 ﻿using DAL;
 using System;
 using System.Linq;
+using System.Windows;
 using TNPASerch.View;
 
 namespace TNPASerch.ViewModel
@@ -35,7 +36,7 @@ namespace TNPASerch.ViewModel
                 Tnpa = _tnpa,
             };
             _tnpa.Changes.Add(change);
-            //Close();
+            Close();
         }
 
         private bool Chek()
@@ -47,5 +48,24 @@ namespace TNPASerch.ViewModel
             }
             return true;
         }
+
+        private void Close()
+        {
+            Window windowActiv = null;
+            foreach (Window wind in App.Current.Windows)
+            {
+                if (wind.IsActive)
+                {
+                    windowActiv = wind;
+                    break;
+                }
+            }
+
+            if (windowActiv != null)
+            {
+                windowActiv.Close();
+            }
+        }
+
     }
 }
