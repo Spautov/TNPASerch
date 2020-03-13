@@ -94,7 +94,7 @@ namespace Repositories
         {
             lock (_lockDb)
             {
-                return _dbContext.Tnpas.Where(el => el.Id == id).Include(p => p.Changes).ToArray().First();
+                return _dbContext.Tnpas.Where(el => el.Id == id).Include(p => p.Changes).Include(el=> el.Files).ToArray().First();
             }
         }
 
