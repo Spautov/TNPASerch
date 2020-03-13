@@ -23,22 +23,21 @@ namespace Repositories
         }
 
 
-        public string AddFiles(string path)
+        public string AddFile(string path)
         {
-            string newPath = null;
             try
             {
                 FileInfo fileInfo = new FileInfo(path);
                 if (fileInfo.Exists)
                 {
-                    newPath = Path.Combine(MainFileRepositoryDirectory, fileInfo.Name);
+                    string newPath = Path.Combine(MainFileRepositoryDirectory, fileInfo.Name);
                     File.Copy(path, newPath, true);
                 }
-                return newPath;
+                return fileInfo.Name;
             }
             catch (Exception)
             {
-                return newPath;
+                return null;
             }
         }
 
@@ -75,10 +74,11 @@ namespace Repositories
         {
             try
             {
-                FileInfo fileInfo = new FileInfo(path);
+                string pathWithDirectoty = Path.Combine(MainFileRepositoryDirectory, path);
+                FileInfo fileInfo = new FileInfo(pathWithDirectoty);
                 if (fileInfo.Exists)
                 {
-                    File.Delete(path);
+                    File.Delete(pathWithDirectoty);
                     return true;
                 }
                 return false;
@@ -93,7 +93,8 @@ namespace Repositories
         {
             try
             {
-                FileInfo fileInfo = new FileInfo(path);
+                string pathWithDirectoty = Path.Combine(MainFileRepositoryDirectory, path);
+                FileInfo fileInfo = new FileInfo(pathWithDirectoty);
                 if (fileInfo.Exists)
                 {
                     Process.Start(fileInfo.FullName);
