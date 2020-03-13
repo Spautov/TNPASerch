@@ -10,11 +10,11 @@
         /// </summary>
         public int Id { get; set; }
         /// <summary>
-        /// Номер документа
+        /// Имя файла
         /// </summary>
         public string Path { get; set; }
         /// <summary>
-        /// Номер документа
+        /// Хэш документа
         /// </summary>
         public int HashCode { get; set; }
 
