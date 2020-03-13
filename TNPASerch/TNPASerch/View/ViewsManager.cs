@@ -73,13 +73,13 @@ namespace TNPASerch.View
             return addWindow;
         }
 
-        public static EditFilesView EditFilesView()
+        public static EditFilesView EditFilesView(Tnpa tnpa)
         {
             EditFilesView editFilesView = new EditFilesView
             { 
                 Owner = App.Current.MainWindow
             };
-            editFilesView.DataContext = new EditFilesViewModel();
+            editFilesView.DataContext = new EditFilesViewModel(tnpa);
             return editFilesView;
         }
 

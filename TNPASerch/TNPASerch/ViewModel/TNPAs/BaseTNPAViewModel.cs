@@ -157,13 +157,13 @@ namespace TNPASerch.ViewModel
 
         private void ElectronicVersion()
         {
-            var view = ViewsManager.EditFilesView();
+            var view = ViewsManager.EditFilesView(_currentTnpa);
             view.ShowDialog();
         }
 
         protected void EditChanges()
         {
-            var view = ViewsManager.TnpaChengesEditView(_currentTnpa);
+            var view = ViewsManager.TnpaChengesEditView(_currentTnpa); 
             view.ShowDialog();
             CountChanges = _currentTnpa.Changes.Count;
         }
