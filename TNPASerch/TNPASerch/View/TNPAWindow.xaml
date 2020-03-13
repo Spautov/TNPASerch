@@ -130,7 +130,7 @@
                 Content="Сохранить" 
                 DockPanel.Dock="Left" 
                 Height="32"
-                Width="150"
+                Width="170"
                 HorizontalAlignment="Left"
                 Command="{Binding SaveCommand}">
         </Button>
@@ -140,7 +140,7 @@
                 Content="Применить" 
                 VerticalAlignment="Center" 
                 Height="32"
-                Width="150"
+                Width="170"
                 Command="{Binding ApplyCommand}"/>
         <Button Style="{DynamicResource MaterialDesignRaisedButton}"
                 materialDesign:ShadowAssist.ShadowDepth="Depth4"
@@ -148,7 +148,7 @@
                 Content="Отмена" 
                 DockPanel.Dock="Right" 
                 Height="32"
-                Width="150"
+                Width="170"
                 Command="Close"
                 HorizontalAlignment="Right"/>
 
@@ -174,7 +174,7 @@
                 VerticalAlignment="Center" 
                 DockPanel.Dock="Left"
                 Height="32"
-                Width="150"
+                Width="170"
                 Command="{Binding EditChangesCommand}"/>
 
         <Button Style="{DynamicResource MaterialDesignRaisedButton}"
@@ -184,7 +184,7 @@
                 VerticalAlignment="Center" 
                 HorizontalAlignment="Right"
                 Height="32"
-                Width="150"
+                Width="170"
                 Command="{Binding ElectronicVersionCommand}"/>
     </Grid>
 </Window>
