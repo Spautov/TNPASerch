@@ -21,9 +21,8 @@ namespace TNPASerch.ViewModel
         public ICommand ShowTNPATypeEditWindowCommand { get; set; }
         public ICommand SearchCommand { get; set; }
         public ICommand SettingsCommand { get; set; }
-        //public ICommand CloseCommand { get; set; }
 
-        public MainWindowViewModel() //: base(App.Current.MainWindow)
+        public MainWindowViewModel()
         {
             _repository = SQLiteRepository.GetRepository();
             GetTnpaTypsAsync();
@@ -32,7 +31,6 @@ namespace TNPASerch.ViewModel
             ShowEditTNPAWindowCommand = new RelayCommand(ShowEditTNPAWindow);
             ShowTNPATypeEditWindowCommand = new RelayCommand(ShowTNPATypeEditWindow);
             SearchCommand = new RelayCommand(SearchAsync);
-           // CloseCommand = new RelayCommand(Close);
         }
 
         private void ShowEditTNPAWindow()
@@ -67,26 +65,30 @@ namespace TNPASerch.ViewModel
 
         private void Search()
         {
-            NumberTnpa = NumberTnpa.Trim(' ');
-
-            int findnum = 0;
-            while (findnum != -1)
+            if (NumberTnpa != null)
             {
-                findnum = NumberTnpa.IndexOf(' ');
-                if (findnum != -1)
+                NumberTnpa = NumberTnpa.Trim(' ');
+
+                int findnum = 0;
+                while (findnum != -1)
                 {
-                    NumberTnpa = NumberTnpa.Remove(findnum,1);
+                    findnum = NumberTnpa.IndexOf(' ');
+                    if (findnum != -1)
+                    {
+                        NumberTnpa = NumberTnpa.Remove(findnum, 1);
+                    }
                 }
-            }
-            
-            if (String.IsNullOrEmpty(NumberTnpa) || String.IsNullOrWhiteSpace(NumberTnpa) || SelectedTnpaType == null)
-            {
-                return;
-            }
-            NumberTnpa = NumberTnpa.Replace(',', '.');
-            var collect = _repository.SearchTnpaByNumber(NumberTnpa).Where(el => el.TnpaTypeId == SelectedTnpaType.Id);
 
-            Tnpas = TnpaToTnpaView(collect);
+                if (String.IsNullOrEmpty(NumberTnpa) || String.IsNullOrWhiteSpace(NumberTnpa) || SelectedTnpaType == null)
+                {
+                    return;
+                }
+                NumberTnpa = NumberTnpa.Replace(',', '.');
+                var collect = _repository.SearchTnpaByNumber(NumberTnpa).Where(el => el.TnpaTypeId == SelectedTnpaType.Id);
+
+                Tnpas = TnpaToTnpaView(collect);
+                NumberTnpa = "";
+            }
         }
 
         public string _numberTnpa;
