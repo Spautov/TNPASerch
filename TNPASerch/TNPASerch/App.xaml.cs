@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Ninject;
 using Ninject.Modules;
+using Repositories;
 using System.Windows;
 
 namespace TNPASerch
@@ -11,24 +12,25 @@ namespace TNPASerch
     /// </summary>
     public partial class App : Application
     {
-        private IKernel container;
+        public static IKernel Container { get; private set; }
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
             ConfigureContainer();
             ComposeObjects();
             Current.MainWindow.Show();
-
         }
 
         private void ConfigureContainer()
         {
-            this.container = new StandardKernel();
+            Container = new StandardKernel();
         }
 
         private void ComposeObjects()
         {
-            Current.MainWindow = this.container.Get<MainWindow>();
+            Current.MainWindow = Container.Get<MainWindow>();
+            Container.Bind<IFileRepository>().To<FileRepository>().InSingletonScope()
+               .WithConstructorArgument("directoryName", "Data");
         }
 
     }

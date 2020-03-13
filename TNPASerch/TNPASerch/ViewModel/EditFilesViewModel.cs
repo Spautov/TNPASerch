@@ -1,6 +1,7 @@
 ﻿using DAL;
 using GalaSoft.MvvmLight.Command;
 using Microsoft.Win32;
+using Ninject;
 using Repositories;
 using System;
 using System.Collections.ObjectModel;
@@ -48,7 +49,7 @@ namespace TNPASerch.ViewModel
             RemoveDataFileInfoCommand = new RelayCommand(RemoveDataFileInfo);
             ShowDataFileInfoCommand = new RelayCommand(ShowDataFileInfo);
 
-            _fileRepository = new FileRepository("Data");
+            _fileRepository = App.Container.Get<IFileRepository>();
             GetDataFileInfos();
         }
 
