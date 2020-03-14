@@ -12,21 +12,14 @@ namespace Repositories
     {
         private readonly TnpaDbContext _dbContext;
 
-        private static SQLiteRepository _SQLiteRepository;
         private readonly object _lockDb;
 
-        public static SQLiteRepository GetRepository()
-        {
-            if (_SQLiteRepository == null)
-                _SQLiteRepository = new SQLiteRepository();
-            return _SQLiteRepository;
-        }
-
-        private SQLiteRepository()
+        public SQLiteRepository()
         {
             _lockDb = new object();
             _dbContext = new TnpaDbContext();
         }
+
         public void Create(Tnpa item)
         {
             lock (_lockDb)

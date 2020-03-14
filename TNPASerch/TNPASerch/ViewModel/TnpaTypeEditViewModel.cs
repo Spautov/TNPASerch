@@ -1,5 +1,6 @@
 ﻿using DAL;
 using GalaSoft.MvvmLight.Command;
+using Ninject;
 using Repositories;
 using System;
 using System.Collections.ObjectModel;
@@ -29,7 +30,7 @@ namespace TNPASerch.ViewModel
 
         public TnpaTypeEditViewModel()
         {
-            _repository = SQLiteRepository.GetRepository();
+            _repository = App.Container.Get<IRepository>();
             AddTypeCommand = new RelayCommand(AddType);
             RemoveTypeCommand = new RelayCommand(RemoveType);
             EditTypeCommand = new RelayCommand(EditType);

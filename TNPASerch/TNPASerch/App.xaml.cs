@@ -28,6 +28,7 @@ namespace TNPASerch
 
         private void ComposeObjects()
         {
+            Container.Bind<IRepository>().To<SQLiteRepository>().InSingletonScope();
             Current.MainWindow = Container.Get<MainWindow>();
             Container.Bind<IFileRepository>().To<FileRepository>().InSingletonScope()
                .WithConstructorArgument("directoryName", "Data");

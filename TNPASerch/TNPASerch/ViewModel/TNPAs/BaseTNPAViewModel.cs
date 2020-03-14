@@ -1,5 +1,6 @@
 ﻿using DAL;
 using GalaSoft.MvvmLight.Command;
+using Ninject;
 using Repositories;
 using System;
 using System.Collections.ObjectModel;
@@ -21,7 +22,7 @@ namespace TNPASerch.ViewModel
 
         public BaseTNPAViewModel() 
         {
-            _repository = SQLiteRepository.GetRepository();
+            _repository = App.Container.Get<IRepository>();
             SaveCommand = new RelayCommand(Save);
             ApplyCommand = new RelayCommand(Apply);
             EditChangesCommand = new RelayCommand(EditChanges);

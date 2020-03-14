@@ -1,5 +1,6 @@
 ﻿using DAL;
 using GalaSoft.MvvmLight.Command;
+using Ninject;
 using Repositories;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,7 @@ namespace TNPASerch.ViewModel
 
         public MainWindowViewModel()
         {
-            _repository = SQLiteRepository.GetRepository();
+            _repository = App.Container.Get<IRepository>();
             GetTnpaTypsAsync();
             GetTnpaAsync();
             ShowAddTNPAWindowCommand = new RelayCommand(ShowAddTNPAWindow);
