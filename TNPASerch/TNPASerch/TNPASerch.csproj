@@ -342,9 +342,6 @@
     <Resource Include="aqua_smooth_folder_documents_14309.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\search_book_open_search_locate_6178.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.1">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4.7.1 %28x86 and x64%29</ProductName>
@@ -358,12 +355,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\aqua_smooth_folder_documents_14309.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\folder_settings_tools_22597.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\cancellationbutton_exitneartheaction_botondecancelacion_salida_6335.ico" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
