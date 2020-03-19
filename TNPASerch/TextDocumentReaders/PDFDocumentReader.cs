@@ -1,5 +1,6 @@
 ﻿using iTextSharp.text.pdf;
 using iTextSharp.text.pdf.parser;
+using System;
 using System.Text;
 
 namespace TextDocumentReaders
@@ -8,21 +9,39 @@ namespace TextDocumentReaders
     {
         public string GetContent(object filename)
         {
-            PdfReader readerOut = new PdfReader((string)filename);
             string text = string.Empty;
-
-            for (int page = 1; page <= readerOut.NumberOfPages; page++)
+            PdfReader readerOut = null;
+            PdfReader readerIn = null;
+            try
             {
-                ITextExtractionStrategy its = new SimpleTextExtractionStrategy();
-                PdfReader readerIn = new PdfReader((string)filename);
-                string pdfString = PdfTextExtractor.GetTextFromPage(readerIn, page, its);
-
-                pdfString = Encoding.UTF8.GetString(ASCIIEncoding.Convert(Encoding.Default, 
-                    Encoding.UTF8, Encoding.Default.GetBytes(pdfString)));
-                text += pdfString;
-                readerIn.Close();
+                readerOut = new PdfReader((string)filename);
+                for (int page = 1; page <= readerOut.NumberOfPages; page++)
+                {
+                    ITextExtractionStrategy its = new SimpleTextExtractionStrategy();
+                    readerIn = new PdfReader((string)filename);
+                    string pdfString = PdfTextExtractor.GetTextFromPage(readerIn, page, its);
+                    pdfString = Encoding.UTF8.GetString(ASCIIEncoding.Convert(Encoding.Default,
+                        Encoding.UTF8, Encoding.Default.GetBytes(pdfString)));
+                    text += pdfString;
+                }
             }
-            readerOut.Close();
+            catch (Exception)
+            {
+                text = string.Empty;
+            }
+            finally
+            {
+                if (readerIn != null)
+                {
+                    readerIn.Close();
+                }
+                if (readerOut != null)
+                {
+                    readerOut.Close();
+                    readerOut.Dispose();
+                }
+            }
+
             return text;
         }
     }

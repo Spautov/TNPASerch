@@ -1,4 +1,5 @@
 ﻿using Microsoft.Office.Interop.Word;
+using System;
 
 namespace TextDocumentReaders
 {
@@ -6,16 +7,36 @@ namespace TextDocumentReaders
     {
         public string GetContent(object filename) 
         {
-            var wordApp = new Application();
-            var wordDoc = wordApp.Documents.Open(ref filename);
-
             string text = string.Empty;
-            for (int i = 0; i < wordDoc.Paragraphs.Count; i++)
+            Application wordApp = null;
+            Document wordDoc = null;
+            try
             {
-                text += wordDoc.Paragraphs[i + 1].Range.Text;
+                wordApp = new Application();
+                wordDoc = wordApp.Documents.Open(ref filename);
+
+                for (int i = 0; i < wordDoc.Paragraphs.Count; i++)
+                {
+                    text += wordDoc.Paragraphs[i + 1].Range.Text;
+                }
             }
-            wordDoc.Close();
-            wordApp.Quit();
+            catch (Exception)
+            {
+                text = string.Empty;
+            }
+            finally
+            {
+                if (wordDoc != null)
+                {
+                    wordDoc.Close();
+                }
+
+                if (wordApp != null)
+                {
+                    wordApp.Quit();
+                }
+            }
+            
             return text;
         }
     }
