@@ -343,6 +343,14 @@
       <Project>{8a8d66bd-ac5b-429a-9045-6ef432932890}</Project>
       <Name>Repositories</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Searcher\Searcher.csproj">
+      <Project>{8624ffd9-f48b-4d7d-a260-95430de18001}</Project>
+      <Name>Searcher</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TextDocumentReaders\TextDocumentReaders.csproj">
+      <Project>{f7a5b4ac-c629-4691-adea-dd74491d8b6d}</Project>
+      <Name>TextDocumentReaders</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="aqua_smooth_folder_documents_14309.ico" />
