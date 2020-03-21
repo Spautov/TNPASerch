@@ -3,7 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using Ninject;
 using Ninject.Modules;
 using Repositories;
+using Searcher;
 using System.Windows;
+using TextDocumentReaders;
 
 namespace TNPASerch
 {
@@ -12,6 +14,10 @@ namespace TNPASerch
     /// </summary>
     public partial class App : Application
     {
+        private readonly string PDFNamed = "PDF";
+        private readonly string WordNamed = "Word";
+        private readonly string TxtNamed = "Txt";
+        
         public static IKernel Container { get; private set; }
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -29,6 +35,14 @@ namespace TNPASerch
         private void ComposeObjects()
         {
             Container.Bind<IRepository>().To<SQLiteRepository>().InSingletonScope();
+            Container.Bind<ITextDocumentReader>().To<PDFDocumentReader>().Named(PDFNamed);
+            Container.Bind<ITextDocumentReader>().To<WordDocumentReader>().Named(WordNamed);
+            Container.Bind<ITextDocumentReader>().To<TxtDocumentReader>().Named("Txt");
+            Container.Bind<ISearcher>().To<LuceneSercher>()
+                .WithConstructorArgument("directoryName", "IndexData")
+                .WithConstructorArgument("pdfReader", Container.Get<ITextDocumentReader>(PDFNamed))
+                .WithConstructorArgument("wordReader", Container.Get<ITextDocumentReader>(WordNamed))
+                .WithConstructorArgument("txtReader", Container.Get<ITextDocumentReader>(TxtNamed));
             Current.MainWindow = Container.Get<MainWindow>();
             Container.Bind<IFileRepository>().To<FileRepository>().InSingletonScope()
                .WithConstructorArgument("directoryName", "Data");
