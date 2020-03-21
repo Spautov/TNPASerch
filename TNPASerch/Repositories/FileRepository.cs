@@ -23,15 +23,15 @@ namespace Repositories
         }
 
 
-        public string AddFile(string path)
+        public string AddFile(string faleName)
         {
             try
             {
-                FileInfo fileInfo = new FileInfo(path);
+                FileInfo fileInfo = new FileInfo(faleName);
                 if (fileInfo.Exists)
                 {
                     string newPath = Path.Combine(MainFileRepositoryDirectory, fileInfo.Name);
-                    File.Copy(path, newPath, true);
+                    File.Copy(faleName, newPath, true);
                 }
                 return fileInfo.Name;
             }
@@ -58,23 +58,23 @@ namespace Repositories
             return resoult;
         }
 
-        public int CalculateHashCodeFile(string path)
+        public int CalculateHashCodeFile(string faleName)
         {
-            FileInfo fileInfo = new FileInfo(path);
+            FileInfo fileInfo = new FileInfo(faleName);
             int resolt = 0;
             if (fileInfo.Exists)
             {
-                resolt += path.GetHashCode();
+                resolt += faleName.GetHashCode();
                 resolt += fileInfo.Length.GetHashCode();
             }
             return resolt;
         }
 
-        public bool RemoveFile(string path)
+        public bool RemoveFile(string faleName)
         {
             try
             {
-                string pathWithDirectoty = Path.Combine(MainFileRepositoryDirectory, path);
+                string pathWithDirectoty = Path.Combine(MainFileRepositoryDirectory, faleName);
                 FileInfo fileInfo = new FileInfo(pathWithDirectoty);
                 if (fileInfo.Exists)
                 {
@@ -89,11 +89,11 @@ namespace Repositories
             }
         }
 
-        public bool OpenFile(string path)
+        public bool OpenFile(string faleName)
         {
             try
             {
-                string pathWithDirectoty = Path.Combine(MainFileRepositoryDirectory, path);
+                string pathWithDirectoty = Path.Combine(MainFileRepositoryDirectory, faleName);
                 FileInfo fileInfo = new FileInfo(pathWithDirectoty);
                 if (fileInfo.Exists)
                 {
@@ -106,6 +106,12 @@ namespace Repositories
             {
                 return false;
             }
+        }
+
+        public string GetFullPath(string faleName)
+        {
+            //to do
+            throw new NotImplementedException();
         }
     }
 }

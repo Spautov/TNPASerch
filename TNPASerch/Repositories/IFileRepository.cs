@@ -3,10 +3,11 @@
     public interface IFileRepository
     {
         string MainFileRepositoryDirectory { get; }
-        string AddFile(string path);
-        bool OpenFile(string path);
-        bool RemoveFile(string path);
-        int CalculateHashCodeFile(string path);
+        string AddFile(string faleName);
+        bool OpenFile(string faleName);
+        bool RemoveFile(string faleName);
+        int CalculateHashCodeFile(string faleName);
         int CalculateHashCodeDirectory();
+        string GetFullPath(string faleName);
     }
 }
