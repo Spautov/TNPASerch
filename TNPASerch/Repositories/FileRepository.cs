@@ -110,8 +110,21 @@ namespace Repositories
 
         public string GetFullPath(string faleName)
         {
-            //to do
-            throw new NotImplementedException();
+            string resoult = string.Empty;
+            try
+            {
+                string pathWithDirectoty = Path.Combine(MainFileRepositoryDirectory, faleName);
+                FileInfo fileInfo = new FileInfo(pathWithDirectoty);
+                if (fileInfo.Exists)
+                {
+                    resoult = fileInfo.FullName;
+                }
+                return resoult;
+            }
+            catch (Exception)
+            {
+                return resoult;
+            }
         }
     }
 }
