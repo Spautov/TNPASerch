@@ -56,6 +56,10 @@
       <Project>{ae8b75b5-527d-45d8-8920-30fb097fa00e}</Project>
       <Name>DAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Repositories\Repositories.csproj">
+      <Project>{8a8d66bd-ac5b-429a-9045-6ef432932890}</Project>
+      <Name>Repositories</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TextDocumentReaders\TextDocumentReaders.csproj">
       <Project>{f7a5b4ac-c629-4691-adea-dd74491d8b6d}</Project>
       <Name>TextDocumentReaders</Name>

@@ -35,17 +35,20 @@ namespace TNPASerch
         private void ComposeObjects()
         {
             Container.Bind<IRepository>().To<SQLiteRepository>().InSingletonScope();
+            Container.Bind<IFileRepository>().To<FileRepository>().InSingletonScope()
+               .WithConstructorArgument("directoryName", "Data");
             Container.Bind<ITextDocumentReader>().To<PDFDocumentReader>().Named(PDFNamed);
             Container.Bind<ITextDocumentReader>().To<WordDocumentReader>().Named(WordNamed);
-            Container.Bind<ITextDocumentReader>().To<TxtDocumentReader>().Named("Txt");
+            Container.Bind<ITextDocumentReader>().To<TxtDocumentReader>().Named(TxtNamed);
             Container.Bind<ISearcher>().To<LuceneSercher>()
                 .WithConstructorArgument("directoryName", "IndexData")
                 .WithConstructorArgument("pdfReader", Container.Get<ITextDocumentReader>(PDFNamed))
                 .WithConstructorArgument("wordReader", Container.Get<ITextDocumentReader>(WordNamed))
                 .WithConstructorArgument("txtReader", Container.Get<ITextDocumentReader>(TxtNamed));
-            Current.MainWindow = Container.Get<MainWindow>();
+            
             Container.Bind<IFileRepository>().To<FileRepository>().InSingletonScope()
                .WithConstructorArgument("directoryName", "Data");
+            Current.MainWindow = Container.Get<MainWindow>();
         }
 
     }
