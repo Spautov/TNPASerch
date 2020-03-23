@@ -1,4 +1,6 @@
-﻿namespace Repositories
+﻿using System.IO;
+
+namespace Repositories
 {
     public interface IFileRepository
     {
@@ -8,6 +10,6 @@
         bool RemoveFile(string faleName);
         int CalculateHashCodeFile(string faleName);
         int CalculateHashCodeDirectory();
-        string GetFullPath(string faleName);
+        FileInfo GetFullPath(string faleName);
     }
 }
