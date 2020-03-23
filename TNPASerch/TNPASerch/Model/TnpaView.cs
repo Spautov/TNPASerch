@@ -1,5 +1,7 @@
-﻿using System;
+﻿using DAL;
+using System;
 using System.Collections.Generic;
+using System.Windows;
 using TNPASerch.ViewModel;
 
 namespace TNPASerch.Model
@@ -50,7 +52,7 @@ namespace TNPASerch.Model
         /// <summary>
         /// Дата введения в действие
         /// </summary>
-        public DateTime PutIntoOperation 
+        public string PutIntoOperation 
         {
             get { return _putIntoOperation; }
             set
@@ -59,12 +61,12 @@ namespace TNPASerch.Model
                 OnPropertyChanged();
             }
         }
-        private DateTime _putIntoOperation;
+        private string _putIntoOperation;
 
         /// <summary>
         /// Дата отмены
         /// </summary>
-        public DateTime Cancelled 
+        public string Cancelled 
         {
             get { return _cancelled; }
             set 
@@ -73,12 +75,12 @@ namespace TNPASerch.Model
                 OnPropertyChanged();
             }
         }
-        private DateTime _cancelled;
+        private string _cancelled;
 
         /// <summary>
         /// Дата регистрации в журнале
         /// </summary>
-        public DateTime Registered 
+        public string Registered 
         {
             get { return _registered; } 
             set
@@ -87,7 +89,7 @@ namespace TNPASerch.Model
                 OnPropertyChanged();
             }
         }
-        private DateTime _registered;
+        private string _registered;
 
         /// <summary>
         /// Номер регистрации в журнале
@@ -113,9 +115,29 @@ namespace TNPASerch.Model
             {
                 _isReal = value;
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(IsCanceled));
             }
         }
         private bool _isReal;
+
+        /// <summary>
+        /// Действующий ТНПА
+        /// </summary>
+        public Visibility IsCanceled
+        {
+            get
+            {
+                if (_isReal)
+                {
+                    return Visibility.Collapsed;
+                }
+                else
+                {
+                    return Visibility.Visible;
+                }
+            }
+        }
+
 
         /// <summary>
         /// Тип ТНПА
@@ -134,7 +156,7 @@ namespace TNPASerch.Model
         /// <summary>
         /// Коллекция изменений в документ
         /// </summary>
-        public ICollection<string> Changes 
+        public ICollection<Change> Changes 
         {
             get { return _changes; }
             set
@@ -143,11 +165,11 @@ namespace TNPASerch.Model
                 OnPropertyChanged();
             }
         }
-        private ICollection<string> _changes;
+        private ICollection<Change> _changes;
 
         public TnpaView()
         {
-            Changes = new List<string>();
+            Changes = new List<Change>();
         }
     }
 }

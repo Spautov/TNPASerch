@@ -110,7 +110,21 @@
                             <TextBlock Text="{Binding Type}" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="0" Margin="5"/>
                             <TextBlock Text="{Binding Number}" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="0" Margin="5"/>
                             <TextBlock Text="{Binding Name}" HorizontalAlignment="Left" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="0" Margin="5"/>
-                            <TextBlock Text="{Binding PutIntoOperation}" HorizontalAlignment="Left" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Margin="5"/>
+                            <StackPanel  Grid.Column="0" 
+                                         Grid.ColumnSpan="4" 
+                                         Grid.Row="1"
+                                         Orientation="Horizontal">
+                                <TextBlock Text="Дата регистрации в журнале" HorizontalAlignment="Left" Margin="5"/>
+                                <TextBlock Text="{Binding Registered}" HorizontalAlignment="Left" Margin="5"/>
+                                <TextBlock Text="№" HorizontalAlignment="Left" Margin="5"/>
+                                <TextBlock Text="{Binding NumberRegistered}" HorizontalAlignment="Left" Margin="5"/>
+                                <TextBlock Text="Введен в действие с " HorizontalAlignment="Left" Margin="5"/>
+                                <TextBlock Text="{Binding PutIntoOperation}" HorizontalAlignment="Left" Margin="5"/>
+                                <TextBlock Text="Отменен с " HorizontalAlignment="Left" Margin="5" Visibility="{Binding IsCanceled}"/>
+                                <TextBlock Text="{Binding Cancelled}" HorizontalAlignment="Left" Margin="5" Visibility="{Binding IsCanceled}"/>
+                                <TextBlock Text="Колечество изменений " HorizontalAlignment="Left" Margin="5"/>
+                                <TextBlock Text="{Binding Changes.Count}" HorizontalAlignment="Left" Margin="5"/>
+                            </StackPanel>
                         </Grid>
                     </materialDesign:Card>
                 </DataTemplate>

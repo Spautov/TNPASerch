@@ -177,12 +177,13 @@ namespace TNPASerch.ViewModel
                     Id = tnpa.Id,
                     Number = $"{tnpa.Number}-{tnpa.Year}",
                     Name = tnpa.Name,
-                    PutIntoOperation = tnpa.PutIntoOperation,
-                    Cancelled = tnpa.Cancelled,
-                    Registered = tnpa.Registered,
+                    PutIntoOperation = tnpa.PutIntoOperation.ToString("dd-MM-yyyy"),
+                    Cancelled = tnpa.Cancelled.ToString("dd-MM-yyyy"),
+                    Registered = tnpa.Registered.ToString("dd-MM-yyyy"),
                     NumberRegistered = tnpa.NumberRegistered,
                     IsReal = tnpa.IsReal,
-                    Type = tnpa.Type.Name
+                    Type = tnpa.Type.Name,
+                    Changes = tnpa.Changes
                 });
             }
             return tmp;
