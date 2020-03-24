@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TNPASerch.ViewModel"
         mc:Ignorable="d"
-        Title="Журнал учета ТНПА" Height="450" Width="900">
+        Title="Журнал учета ТНПА" Height="450" Width="1000">
     <Window.DataContext>
         <local:MainWindowViewModel />
     </Window.DataContext>
@@ -113,6 +113,8 @@
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="80"></ColumnDefinition>
+                                
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition></RowDefinition>
@@ -128,6 +130,13 @@
                                 <TextBlock Text="{Binding Name}" HorizontalAlignment="Left" Margin="5"
                                            Style="{StaticResource MaterialDesignHeadline6TextBlock}"/>
                             </StackPanel>
+                            <Button Grid.Column="1"
+                                    Grid.RowSpan="2"
+                                    Margin="5"
+                                    Style="{DynamicResource MaterialDesignRaisedButton}"
+                                    materialDesign:ShadowAssist.ShadowDepth="Depth4">
+                                <materialDesign:PackIcon Kind="Bookshelf" Height="24" Width="24"/>
+                            </Button>
 
                             <StackPanel  Grid.Column="0" 
                                          Grid.Row="1"
