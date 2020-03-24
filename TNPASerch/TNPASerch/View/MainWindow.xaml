@@ -13,6 +13,19 @@
     <Window.CommandBindings>
         <CommandBinding Command="Close" Executed="CommandCloseBinding_Executed"></CommandBinding>
     </Window.CommandBindings>
+    <Window.Resources>
+        <Style TargetType="materialDesign:Card">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsReal}" Value="False">
+                    <Setter Property="Background" Value="#4FFF857F"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsReal}" Value="True">
+                    <Setter Property="Background" Value="#4F8CFFE9"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
     <DockPanel LastChildFill="True">
         <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
             <Menu IsMainMenu="True" >
@@ -95,23 +108,28 @@
                   HorizontalContentAlignment="Stretch">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth4" Padding="12">
+                    <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth4" 
+                                         Padding="12">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
-                                <ColumnDefinition Width="2*"></ColumnDefinition>
-                                <ColumnDefinition Width="6*"></ColumnDefinition>
-                                <ColumnDefinition Width="6*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
                             </Grid.RowDefinitions>
-                            <TextBlock Text="{Binding Type}" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="0" Margin="5"/>
-                            <TextBlock Text="{Binding Number}" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="0" Margin="5"/>
-                            <TextBlock Text="{Binding Name}" HorizontalAlignment="Left" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="0" Margin="5"/>
+                            <StackPanel Grid.Column="0" 
+                                        Grid.Row="0"
+                                        Orientation="Horizontal">
+                                <TextBlock Text="{Binding Type}" HorizontalAlignment="Left" Margin="5"
+                                           Style="{StaticResource MaterialDesignHeadline6TextBlock}"/>
+                                <TextBlock Text="{Binding Number}" HorizontalAlignment="Left" Margin="5"
+                                           Style="{StaticResource MaterialDesignHeadline6TextBlock}"/>
+                                <TextBlock Text="{Binding Name}" HorizontalAlignment="Left" Margin="5"
+                                           Style="{StaticResource MaterialDesignHeadline6TextBlock}"/>
+                            </StackPanel>
+
                             <StackPanel  Grid.Column="0" 
-                                         Grid.ColumnSpan="4" 
                                          Grid.Row="1"
                                          Orientation="Horizontal">
                                 <TextBlock Text="Дата регистрации в журнале" HorizontalAlignment="Left" Margin="5"/>
@@ -122,7 +140,7 @@
                                 <TextBlock Text="{Binding PutIntoOperation}" HorizontalAlignment="Left" Margin="5"/>
                                 <TextBlock Text="Отменен с " HorizontalAlignment="Left" Margin="5" Visibility="{Binding IsCanceled}"/>
                                 <TextBlock Text="{Binding Cancelled}" HorizontalAlignment="Left" Margin="5" Visibility="{Binding IsCanceled}"/>
-                                <TextBlock Text="Колечество изменений " HorizontalAlignment="Left" Margin="5"/>
+                                <TextBlock Text="Количество изменений " HorizontalAlignment="Left" Margin="5"/>
                                 <TextBlock Text="{Binding Changes.Count}" HorizontalAlignment="Left" Margin="5"/>
                             </StackPanel>
                         </Grid>
