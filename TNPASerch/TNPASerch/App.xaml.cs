@@ -45,11 +45,8 @@ namespace TNPASerch
                 .WithConstructorArgument("pdfReader", Container.Get<ITextDocumentReader>(PDFNamed))
                 .WithConstructorArgument("wordReader", Container.Get<ITextDocumentReader>(WordNamed))
                 .WithConstructorArgument("txtReader", Container.Get<ITextDocumentReader>(TxtNamed));
-            
-            Container.Bind<IFileRepository>().To<FileRepository>().InSingletonScope()
-               .WithConstructorArgument("directoryName", "Data");
+
             Current.MainWindow = Container.Get<MainWindow>();
         }
-
     }
 }
