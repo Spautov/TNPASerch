@@ -198,3 +198,4 @@ GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
 *.bat
+!RestoreNugetPackages.bat
