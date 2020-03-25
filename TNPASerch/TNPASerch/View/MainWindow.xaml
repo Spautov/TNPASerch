@@ -90,7 +90,8 @@
                     <Button Style="{DynamicResource MaterialDesignRaisedButton}" 
                             Margin="5 0"
                             materialDesign:ShadowAssist.ShadowDepth="Depth4"
-                            Command="{Binding ShowEditTNPAWindowCommand}">
+                            Command="{Binding ShowEditTNPAWindowCommand}"
+                            IsEnabled="{Binding IsShowEditTNPAWindowCommandEnabled}">
                         <materialDesign:PackIcon Kind="FileEditOutline" Height="24" Width="24" />
                     </Button>
                     <Button Style="{DynamicResource MaterialDesignRaisedButton}" 

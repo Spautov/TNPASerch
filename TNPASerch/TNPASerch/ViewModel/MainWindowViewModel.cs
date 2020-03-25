@@ -36,19 +36,22 @@ namespace TNPASerch.ViewModel
 
         private void ShowEditTNPAWindow()
         {
-            if (SelectedTnpa != null)
+            var tnpa = _repository.GetTnpa(SelectedTnpa.Id);
+            if (tnpa == null)
             {
-                var tnpa = _repository.GetTnpa(SelectedTnpa.Id);
-                if (tnpa == null)
-                {
-                    return;
-                }
-                TNPAWindow addWindow = ViewsManager.EditTNPAView(tnpa);
-                addWindow.ShowDialog();
-
-                GetTnpaAsync();
+                return;
             }
+            TNPAWindow addWindow = ViewsManager.EditTNPAView(tnpa);
+            addWindow.ShowDialog();
+
+            GetTnpaAsync();
         }
+
+        public bool IsShowEditTNPAWindowCommandEnabled
+        {
+            get { return SelectedTnpa != null; }
+        }
+
 
         private void ShowTNPATypeEditWindow()
         {
@@ -100,6 +103,7 @@ namespace TNPASerch.ViewModel
             {
                 _numberTnpa = value;
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(IsSearchCommandEnabled));
             }
         }
 
@@ -152,10 +156,11 @@ namespace TNPASerch.ViewModel
         public TnpaView SelectedTnpa
         {
             get { return _selectedTnpa; }
-            set 
-            { 
+            set
+            {
                 _selectedTnpa = value;
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(IsShowEditTNPAWindowCommandEnabled));
             }
         }
 
