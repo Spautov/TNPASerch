@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight.Command;
 using Ninject;
 using Repositories;
+using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
@@ -185,11 +186,32 @@ namespace TNPASerch.Model
         }
         private ICollection<Change> _changes;
 
+        /// <summary>
+        /// Коллекция файлов документа
+        /// </summary>
+        public ICollection<DataFileInfo> Files
+        {
+            get { return _files; }
+            set
+            {
+                _files = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private ICollection<DataFileInfo> _files;
+
         public TnpaView()
         {
             _repository = App.Container.Get<IRepository>();
-            ElectronicVersionCommand = new RelayCommand(ElectronicVersion);
+            ElectronicVersionCommand = new RelayCommand(ElectronicVersion, IsExecute);
             Changes = new List<Change>();
+            Files = new List<DataFileInfo>();
+        }
+
+        private bool IsExecute()
+        {
+            return Files.Count > 0;
         }
     }
 }

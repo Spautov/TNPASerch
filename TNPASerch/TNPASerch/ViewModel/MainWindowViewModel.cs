@@ -183,7 +183,8 @@ namespace TNPASerch.ViewModel
                     NumberRegistered = tnpa.NumberRegistered,
                     IsReal = tnpa.IsReal,
                     Type = tnpa.Type.Name,
-                    Changes = tnpa.Changes
+                    Changes = tnpa.Changes,
+                    Files = tnpa.Files
                 });
             }
             return tmp;

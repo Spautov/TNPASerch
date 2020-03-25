@@ -47,14 +47,14 @@
                     Style="{DynamicResource MaterialDesignRaisedButton}"
                     materialDesign:ShadowAssist.ShadowDepth="Depth4"
                     Height="32"
-                    Width="110">Просмотр</Button>
+                    Width="160">Просмотр</Button>
             <Button Margin="8" 
                     Grid.Column="2" 
                     Command="Close"
                     Style="{DynamicResource MaterialDesignRaisedButton}"
                     materialDesign:ShadowAssist.ShadowDepth="Depth4"
                     Height="32"
-                    Width="110">Закрыть</Button>
+                    Width="160">Закрыть</Button>
         </Grid>
     </Grid>
 </Window>
