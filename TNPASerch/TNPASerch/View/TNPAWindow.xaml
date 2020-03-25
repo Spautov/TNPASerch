@@ -145,7 +145,7 @@
         <Button Style="{DynamicResource MaterialDesignRaisedButton}"
                 materialDesign:ShadowAssist.ShadowDepth="Depth4"
                 Grid.Row="6" Grid.Column="3"
-                Content="Отмена" 
+                Content="Закрыть" 
                 DockPanel.Dock="Right" 
                 Height="32"
                 Width="170"
