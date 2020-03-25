@@ -60,7 +60,7 @@ namespace TNPASerch.ViewModel
                 var resolt = _fileRepository.OpenFile(SelectedDataFileInfo.Path);
                 if (!resolt)
                 {
-                    YesMessage("Не открыть файл", "Ошибка");
+                    YesMessage("Не возмоно открыть файл", "Ошибка");
                 }
             }
         }
