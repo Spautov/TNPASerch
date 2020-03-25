@@ -1,20 +1,39 @@
 ﻿using DAL;
-using System;
+using GalaSoft.MvvmLight.Command;
+using Ninject;
+using Repositories;
 using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Input;
+using TNPASerch.View;
 using TNPASerch.ViewModel;
 
 namespace TNPASerch.Model
 {
     public class TnpaView : NotifyPropertyChangedModel
     {
+        private IRepository _repository;
+
+        public ICommand ElectronicVersionCommand { get; set; }
+
+        private void ElectronicVersion()
+        {
+            var tnpa = _repository.GetTnpa(Id);
+            if (tnpa == null)
+            {
+                return;
+            }
+            var view = ViewsManager.EditFilesView(tnpa);
+            view.ShowDialog();
+        }
+
         /// <summary>
         /// Id документа
         /// </summary>
-        public int Id 
+        public int Id
         {
             get { return _id; }
-            set 
+            set
             {
                 _id = value;
                 OnPropertyChanged();
@@ -27,7 +46,7 @@ namespace TNPASerch.Model
         public string Number
         {
             get { return _number; }
-            set 
+            set
             {
                 _number = value;
                 OnPropertyChanged();
@@ -38,10 +57,10 @@ namespace TNPASerch.Model
         /// <summary>
         /// Наименование документа
         /// </summary>
-        public string Name 
+        public string Name
         {
             get { return _name; }
-            set 
+            set
             {
                 _name = value;
                 OnPropertyChanged();
@@ -52,7 +71,7 @@ namespace TNPASerch.Model
         /// <summary>
         /// Дата введения в действие
         /// </summary>
-        public string PutIntoOperation 
+        public string PutIntoOperation
         {
             get { return _putIntoOperation; }
             set
@@ -66,10 +85,10 @@ namespace TNPASerch.Model
         /// <summary>
         /// Дата отмены
         /// </summary>
-        public string Cancelled 
+        public string Cancelled
         {
             get { return _cancelled; }
-            set 
+            set
             {
                 _cancelled = value;
                 OnPropertyChanged();
@@ -80,9 +99,9 @@ namespace TNPASerch.Model
         /// <summary>
         /// Дата регистрации в журнале
         /// </summary>
-        public string Registered 
+        public string Registered
         {
-            get { return _registered; } 
+            get { return _registered; }
             set
             {
                 _registered = value;
@@ -94,7 +113,7 @@ namespace TNPASerch.Model
         /// <summary>
         /// Номер регистрации в журнале
         /// </summary>
-        public int NumberRegistered 
+        public int NumberRegistered
         {
             get { return _numberRegistered; }
             set
@@ -108,7 +127,7 @@ namespace TNPASerch.Model
         /// <summary>
         /// Действующий ТНПА
         /// </summary>
-        public bool IsReal 
+        public bool IsReal
         {
             get { return _isReal; }
             set
@@ -138,11 +157,10 @@ namespace TNPASerch.Model
             }
         }
 
-
         /// <summary>
         /// Тип ТНПА
         /// </summary>
-        public string Type 
+        public string Type
         {
             get { return _type; }
             set
@@ -156,7 +174,7 @@ namespace TNPASerch.Model
         /// <summary>
         /// Коллекция изменений в документ
         /// </summary>
-        public ICollection<Change> Changes 
+        public ICollection<Change> Changes
         {
             get { return _changes; }
             set
@@ -169,6 +187,8 @@ namespace TNPASerch.Model
 
         public TnpaView()
         {
+            _repository = App.Container.Get<IRepository>();
+            ElectronicVersionCommand = new RelayCommand(ElectronicVersion);
             Changes = new List<Change>();
         }
     }
