@@ -105,7 +105,7 @@ namespace Repositories
             {
                 lock (_lockDb)
                 {
-                    return _dbContext.Tnpas;
+                    return _dbContext.Tnpas.Include(p => p.Changes).Include(el => el.Files);
                 }
             });
             return resoult;
@@ -217,7 +217,7 @@ namespace Repositories
                 .Select(x => new { id = x.Id, Number = $"{x.Number}-{x.Year}".ToString().ToUpper() })
                 .ToList().Where(el => el.Number.Contains(numberUp))
                 .Select(a => a.id).ToList();
-            var collectTnpa = _dbContext.Tnpas.Where(r => collect.Contains(r.Id)).ToList();
+            var collectTnpa = _dbContext.Tnpas.Where(r => collect.Contains(r.Id)).Include(p => p.Changes).Include(el => el.Files).ToList();
             return collectTnpa;
         }
 
