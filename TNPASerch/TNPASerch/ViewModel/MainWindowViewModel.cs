@@ -52,6 +52,10 @@ namespace TNPASerch.ViewModel
             get { return SelectedTnpa != null; }
         }
 
+        public bool IsSearchCommandEnabled
+        {
+            get { return !string.IsNullOrEmpty(NumberTnpa) && !string.IsNullOrWhiteSpace(NumberTnpa); }
+        }
 
         private void ShowTNPATypeEditWindow()
         {
@@ -69,30 +73,27 @@ namespace TNPASerch.ViewModel
 
         private void Search()
         {
-            if (NumberTnpa != null)
+            NumberTnpa = NumberTnpa.Trim(' ');
+
+            int findnum = 0;
+            while (findnum != -1)
             {
-                NumberTnpa = NumberTnpa.Trim(' ');
-
-                int findnum = 0;
-                while (findnum != -1)
+                findnum = NumberTnpa.IndexOf(' ');
+                if (findnum != -1)
                 {
-                    findnum = NumberTnpa.IndexOf(' ');
-                    if (findnum != -1)
-                    {
-                        NumberTnpa = NumberTnpa.Remove(findnum, 1);
-                    }
+                    NumberTnpa = NumberTnpa.Remove(findnum, 1);
                 }
-
-                if (String.IsNullOrEmpty(NumberTnpa) || String.IsNullOrWhiteSpace(NumberTnpa) || SelectedTnpaType == null)
-                {
-                    return;
-                }
-                NumberTnpa = NumberTnpa.Replace(',', '.');
-                var collect = _repository.SearchTnpaByNumber(NumberTnpa).Where(el => el.TnpaTypeId == SelectedTnpaType.Id);
-
-                Tnpas = TnpaToTnpaView(collect);
-                NumberTnpa = "";
             }
+
+            if (String.IsNullOrEmpty(NumberTnpa) || String.IsNullOrWhiteSpace(NumberTnpa) || SelectedTnpaType == null)
+            {
+                return;
+            }
+            NumberTnpa = NumberTnpa.Replace(',', '.');
+            var collect = _repository.SearchTnpaByNumber(NumberTnpa).Where(el => el.TnpaTypeId == SelectedTnpaType.Id);
+
+            Tnpas = TnpaToTnpaView(collect);
+            NumberTnpa = "";
         }
 
         public string _numberTnpa;
