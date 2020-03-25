@@ -23,7 +23,7 @@ namespace TNPASerch.Model
             {
                 return;
             }
-            var view = ViewsManager.EditFilesView(tnpa);
+            var view = ViewsManager.WatchFilesView(tnpa);
             view.ShowDialog();
         }
 

@@ -83,6 +83,18 @@ namespace TNPASerch.View
             return editFilesView;
         }
 
+        public static WatchFilesView WatchFilesView(Tnpa tnpa)
+        {
+            WatchFilesView watchFilesView = new WatchFilesView
+            {
+                Owner = App.Current.MainWindow
+            };
+            watchFilesView.DataContext = new WatchFilesViewModel(tnpa);
+            return watchFilesView;
+        }
+
+
+
         public static MessageView YesMessage(string message = "", string title = "")
         {
             MessageView messageView = new MessageView

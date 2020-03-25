@@ -238,6 +238,7 @@
     <Compile Include="ViewModel\Changes\TnpaChengesEditViewModel.cs" />
     <Compile Include="ViewModel\TNPAs\EditTNPAViewModel.cs" />
     <Compile Include="ViewModel\TnpaTypeEditViewModel.cs" />
+    <Compile Include="ViewModel\WatchFilesViewModel.cs" />
     <Compile Include="View\AddTextView.xaml.cs">
       <DependentUpon>AddTextView.xaml</DependentUpon>
     </Compile>
@@ -257,6 +258,9 @@
       <DependentUpon>TnpaTypeEditView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ViewsManager.cs" />
+    <Compile Include="View\WatchFilesView.xaml.cs">
+      <DependentUpon>WatchFilesView.xaml</DependentUpon>
+    </Compile>
     <Page Include="View\AddTextView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -299,6 +303,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\TnpaTypeEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\WatchFilesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
