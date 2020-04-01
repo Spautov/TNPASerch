@@ -17,7 +17,7 @@ namespace TNPASerch.ViewModel
             TnpaName = "";
             
             PutIntoOperationTnpa = DateTime.Now;
-            CancelledTnpa = new DateTime();
+            CancelledTnpa = DateTime.Now;
             Registered = DateTime.Now;
         }
          
@@ -43,7 +43,7 @@ namespace TNPASerch.ViewModel
                 IsValid = false;
 
                 PutIntoOperationTnpa = DateTime.Now;
-                CancelledTnpa = new DateTime();
+                CancelledTnpa = DateTime.Now;
                 Registered = DateTime.Now;
             }
         }
@@ -62,6 +62,7 @@ namespace TNPASerch.ViewModel
             {
                 _repository.Create(_currentTnpa);
                 YesMessage($"{_currentTnpa.Type.Name} {_currentTnpa.Number} - {_currentTnpa.Year} успешно добавлен");
+                _searcher.Add(_currentTnpa);
             }
             catch (Exception ex)
             {
