@@ -31,6 +31,11 @@ namespace Repositories
                 if (fileInfo.Exists)
                 {
                     string newPath = Path.Combine(MainFileRepositoryDirectory, fileInfo.Name);
+                    FileInfo newFileInfo = new FileInfo(newPath);
+                    if (newFileInfo.Exists)
+                    {
+                        return null;
+                    }
                     File.Copy(faleName, newPath, true);
                 }
                 return fileInfo.Name;
