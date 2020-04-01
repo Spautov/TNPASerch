@@ -47,6 +47,8 @@ namespace TNPASerch.ViewModel
             {
                 _repository.Update(_currentTnpa);
                 YesMessage($"{_currentTnpa.Type.Name} {_currentTnpa.Number} - {_currentTnpa.Year} успешно обнавлен");
+                _searcher.Remove(_currentTnpa);
+                _searcher.Add(_currentTnpa);
             }
             catch (Exception ex)
             {
