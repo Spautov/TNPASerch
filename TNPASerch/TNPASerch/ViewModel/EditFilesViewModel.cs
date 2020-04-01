@@ -91,7 +91,7 @@ namespace TNPASerch.ViewModel
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
-                Filter = "Text files (*.doc,*.docx,*.pdf,*.txt)| *.doc;*.docx;*.pdf;*.txt",
+                Filter = "Text files (*.doc,*.docx,*.pdf,*.txt,*.rtf)| *.doc;*.docx;*.pdf;*.txt;*.rtf",
                 InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
             };
             if (openFileDialog.ShowDialog() == true)
@@ -99,6 +99,10 @@ namespace TNPASerch.ViewModel
                 try
                 {
                     var files = _fileRepository.AddFile(openFileDialog.FileName);
+                    if (files == null)
+                    {
+                        throw new Exception();
+                    }
                     DataFileInfo dataFileInfo = new DataFileInfo
                     {
                         Path = files,
@@ -110,7 +114,7 @@ namespace TNPASerch.ViewModel
                 }
                 catch (Exception)
                 {
-                    YesMessage("Не удалось добавить файл", "Ошибка");
+                    YesMessage("Не удалось добавить файл. Возможно файл с таким именем уже существует", "Ошибка");
                 }
             }
         }
