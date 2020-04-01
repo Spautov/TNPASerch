@@ -29,6 +29,7 @@ namespace Searcher
         /// Словарь для хранения расширений файлов и соответстующих им ITextDocumentReader
         /// </summary>
         private readonly Dictionary<string, ITextDocumentReader> DocumentReaders;
+        private readonly int _limit = 50;
 
         /// <summary>
         /// Конструктор
@@ -162,34 +163,81 @@ namespace Searcher
             _writer.DeleteDocuments(GetQueryId(tnpa.Id.ToString()));
         }
 
-        public List<Tnpa> Serch()
+        /// <summary>
+        /// Получить список ТНПА по запросу
+        /// </summary>
+        /// <param name="request">запрос поиска</param>
+        /// <returns></returns>
+        public List<Tnpa> Serch(string request)
         {
-            //to do
-            //using (var directory = GetDirectory())
-            //using (var searcher = new IndexSearcher(directory))
-            //{
-            //    var query = GetQuery(keywords/*, name*/);
-            //    //var sort = GetSort();
-            //    //var filter = GetFilter();
+            var listIdByNumber = SerchNumber(request);
+            var listIdByName = SerchName(request);
+            var listIdByContent = SerchContent(request);
+            foreach (var tnpaId in listIdByName)
+            {
+                if (!listIdByNumber.Contains(tnpaId))
+                {
+                    listIdByNumber.Add(tnpaId);
+                }
+            }
 
-            //    var docs = searcher.Search(query, /*filter,*/ limit/*, sort*/);
-            //    count = docs.TotalHits;
+            foreach (var tnpaId in listIdByContent)
+            {
+                if (!listIdByNumber.Contains(tnpaId))
+                {
+                    listIdByNumber.Add(tnpaId);
+                }
+            }
+            var resoult = new List<Tnpa>();
 
-                var products = new List<Tnpa>();
-                //foreach (var scoreDoc in docs.ScoreDocs)
-                //{
-                //    var doc = searcher.Doc(scoreDoc.Doc);
-                //    var product = new Tnpa
-                //    {
-                //        Id = int.Parse(doc.Get("Id")),
-                //        Name = doc.Get("Name"),
-                //        Number = doc.Get("Number"),
-                //    };
-                //    products.Add(product);
-                //}
+            foreach (var tnpaId in listIdByNumber)
+            {
+                try
+                {
+                    var tnpa = _repository.GetTnpa(tnpaId);
+                    resoult.Add(tnpa);
+                }
+                catch (Exception)
+                {
+                    continue;
+                }
+            }
 
+            return resoult;
+        }
+
+        private List<int> SerchNumber(string request)
+        {
+            var req = request.Trim(' ').Replace(" ", "") + "*";
+            return SerchQuery(GetQueryNumber(req), _limit);
+        }
+
+        private List<int> SerchName(string request)
+        {
+            return SerchQuery(GetQueryName(request), _limit);
+        }
+
+        private List<int> SerchContent(string request)
+        {
+            return SerchQuery(GetQueryContent(request),10);
+        }
+
+        private List<int> SerchQuery(Query query, int limit)
+        {
+            using (var directory = GetDirectory())
+            using (var searcher = new IndexSearcher(directory))
+            {
+                var docs = searcher.Search(query, limit);
+                var count = docs.TotalHits;
+
+                var products = new List<int>();
+                foreach (var scoreDoc in docs.ScoreDocs)
+                {
+                    var doc = searcher.Doc(scoreDoc.Doc);
+                    products.Add(int.Parse(doc.Get("Id")));
+                }
                 return products;
-            //}
+            }
         }
 
 
@@ -289,7 +337,7 @@ namespace Searcher
                     var keywordsQuery = parser.Parse(requestNumber);
                     query.Add(keywordsQuery, Occur.SHOULD);
                 }
-                
+
                 return query;
             }
         }
@@ -310,7 +358,7 @@ namespace Searcher
             using (var analyzer = GetAnalyzer())
             {
                 var query = new BooleanQuery();
-                
+
                 var str = keywords.Trim(' ').Split(' ');
                 var phraseQuery = new PhraseQuery();
 
@@ -320,8 +368,9 @@ namespace Searcher
                 }
 
                 query.Add(phraseQuery, Occur.SHOULD);
-                return query; 
+                return query;
             }
         }
+
     }
 }

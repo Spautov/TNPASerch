@@ -5,7 +5,7 @@ namespace Searcher
 {
     public interface ISearcher
     {
-        List<Tnpa> Serch();
+        List<Tnpa> Serch(string request);
 
         void Add(Tnpa tnpa);
 
