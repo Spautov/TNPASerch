@@ -14,7 +14,7 @@ namespace TNPASerch.ViewModel
     public abstract class BaseTNPAViewModel : BaseViewModel, IDisposable
     {
         protected readonly IRepository _repository;
-        private readonly ISearcher _searcher;
+        protected readonly ISearcher _searcher;
         protected Tnpa _currentTnpa;
 
         public ICommand SaveCommand { get; set; }
