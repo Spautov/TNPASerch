@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight.Command;
 using Ninject;
 using Repositories;
+using Searcher;
 using System;
 using System.Collections.ObjectModel;
 using System.Windows;
@@ -13,6 +14,7 @@ namespace TNPASerch.ViewModel
     public abstract class BaseTNPAViewModel : BaseViewModel, IDisposable
     {
         protected readonly IRepository _repository;
+        private readonly ISearcher _searcher;
         protected Tnpa _currentTnpa;
 
         public ICommand SaveCommand { get; set; }
@@ -23,6 +25,7 @@ namespace TNPASerch.ViewModel
         public BaseTNPAViewModel() 
         {
             _repository = App.Container.Get<IRepository>();
+            _searcher = App.Container.Get<ISearcher>();
             SaveCommand = new RelayCommand(Save);
             ApplyCommand = new RelayCommand(Apply);
             EditChangesCommand = new RelayCommand(EditChanges);

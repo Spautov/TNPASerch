@@ -40,7 +40,7 @@ namespace TNPASerch
             Container.Bind<ITextDocumentReader>().To<PDFDocumentReader>().Named(PDFNamed);
             Container.Bind<ITextDocumentReader>().To<WordDocumentReader>().Named(WordNamed);
             Container.Bind<ITextDocumentReader>().To<TxtDocumentReader>().Named(TxtNamed);
-            Container.Bind<ISearcher>().To<LuceneSercher>()
+            Container.Bind<ISearcher>().To<LuceneSercher>().InSingletonScope()
                 .WithConstructorArgument("directoryName", "IndexData")
                 .WithConstructorArgument("pdfReader", Container.Get<ITextDocumentReader>(PDFNamed))
                 .WithConstructorArgument("wordReader", Container.Get<ITextDocumentReader>(WordNamed))
