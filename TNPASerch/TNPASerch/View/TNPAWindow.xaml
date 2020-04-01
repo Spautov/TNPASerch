@@ -73,7 +73,6 @@
                    Margin="0 0 5 0">Отменен</Label>
             
             <ToggleButton Style="{StaticResource MaterialDesignSwitchDarkToggleButton}"
-                          ToolTip="MaterialDesignSwitchDarkToggleButton"
                           VerticalAlignment="Center"
                           HorizontalAlignment="Center"
                           Grid.Row="5" Grid.Column="1"
@@ -101,22 +100,22 @@
                  Width="50"
                  HorizontalContentAlignment="Right"
                  Text="{Binding NumberRegisteredTnpa, Mode=TwoWay}"/>
-       
-        <DatePicker Grid.Row="4" Grid.Column="3" 
+
+        <DatePicker Grid.Row="4" Grid.Column="3" Language="ru-RU"
                     FontSize="16"
                     materialDesign:HintAssist.Hint="Дата регистрации в жернале:"
                     Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
                     SelectedDate="{Binding Registered}"
                     Margin="5 0 0 0"/>
 
-        <DatePicker Grid.Row="3" Grid.Column="2" 
+        <DatePicker Grid.Row="3" Grid.Column="2" Language="ru-RU"
                     FontSize="16"
                     materialDesign:HintAssist.Hint="Введен в действе с:"
                     Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
                     SelectedDate="{Binding PutIntoOperationTnpa}"
                     Margin="5 0"/>
 
-        <DatePicker Grid.Row="3" Grid.Column="3" 
+        <DatePicker Grid.Row="3" Grid.Column="3" Language="ru-RU"
                     FontSize="16"
                     materialDesign:HintAssist.Hint="Отменен с:"
                     Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
