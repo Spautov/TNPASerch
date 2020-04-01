@@ -21,6 +21,7 @@ namespace Searcher
     {
         private readonly string _directoryName;
         private readonly IFileRepository _fileRepository;
+        private readonly IRepository _repository;
         private readonly Lucene.Net.Store.Directory _directory;
         private readonly Analyzer _analyzer;
         private readonly IndexWriter _writer;
@@ -37,10 +38,12 @@ namespace Searcher
             ITextDocumentReader pdfReader,
             ITextDocumentReader wordReader,
             ITextDocumentReader txtReader,
-            IFileRepository fileRepository)
+            IFileRepository fileRepository,
+            IRepository repository)
         {
             _directoryName = directoryName ?? throw new ArgumentNullException(nameof(directoryName));
             _fileRepository = fileRepository ?? throw new ArgumentNullException(nameof(fileRepository));
+            _repository = repository ?? throw new ArgumentNullException(nameof(repository));
 
             if (pdfReader == null)
             {
@@ -162,7 +165,31 @@ namespace Searcher
         public List<Tnpa> Serch()
         {
             //to do
-            throw new NotImplementedException();
+            //using (var directory = GetDirectory())
+            //using (var searcher = new IndexSearcher(directory))
+            //{
+            //    var query = GetQuery(keywords/*, name*/);
+            //    //var sort = GetSort();
+            //    //var filter = GetFilter();
+
+            //    var docs = searcher.Search(query, /*filter,*/ limit/*, sort*/);
+            //    count = docs.TotalHits;
+
+                var products = new List<Tnpa>();
+                //foreach (var scoreDoc in docs.ScoreDocs)
+                //{
+                //    var doc = searcher.Doc(scoreDoc.Doc);
+                //    var product = new Tnpa
+                //    {
+                //        Id = int.Parse(doc.Get("Id")),
+                //        Name = doc.Get("Name"),
+                //        Number = doc.Get("Number"),
+                //    };
+                //    products.Add(product);
+                //}
+
+                return products;
+            //}
         }
 
 
@@ -193,9 +220,9 @@ namespace Searcher
         private Document MapProduct(Tnpa tnpa)
         {
             var document = new Document();
-            document.Add(new Field("Id", tnpa.Id.ToString(), Field.Store.YES, Field.Index.ANALYZED));
-            document.Add(new Field("Name", tnpa.Name, Field.Store.YES, Field.Index.ANALYZED));
-            document.Add(new Field("Number", tnpa.Number, Field.Store.YES, Field.Index.ANALYZED));
+            document.Add(new Field("Id", tnpa.Id.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
+            document.Add(new Field("Name", tnpa.Name, Field.Store.NO, Field.Index.ANALYZED));
+            document.Add(new Field("Number", $"{tnpa.Number}-{tnpa.Year}", Field.Store.NO, Field.Index.NOT_ANALYZED));
             string allCont = "";
             if (tnpa.Files.Count > 0)
             {
@@ -208,7 +235,7 @@ namespace Searcher
                     }
                 }
             }
-            document.Add(new Field("Content", allCont, Field.Store.YES, Field.Index.ANALYZED));
+            document.Add(new Field("Content", allCont, Field.Store.NO, Field.Index.ANALYZED));
             return document;
         }
 
@@ -247,6 +274,53 @@ namespace Searcher
                 }
 
                 return query;
+            }
+        }
+
+        private Query GetQueryNumber(string requestNumber)
+        {
+            using (var analyzer = GetAnalyzer())
+            {
+                var parser = new QueryParser(Lucene.Net.Util.Version.LUCENE_30, "Number", analyzer);
+
+                var query = new BooleanQuery();
+                if (requestNumber != null)
+                {
+                    var keywordsQuery = parser.Parse(requestNumber);
+                    query.Add(keywordsQuery, Occur.SHOULD);
+                }
+                
+                return query;
+            }
+        }
+
+        private Query GetQueryName(string requestName)
+        {
+            return GetPhraseQuery("Name", requestName);
+        }
+
+        private Query GetQueryContent(string requestContent)
+        {
+            return GetPhraseQuery("Content", requestContent);
+        }
+
+
+        private Query GetPhraseQuery(string field, string keywords)
+        {
+            using (var analyzer = GetAnalyzer())
+            {
+                var query = new BooleanQuery();
+                
+                var str = keywords.Trim(' ').Split(' ');
+                var phraseQuery = new PhraseQuery();
+
+                foreach (var item in str)
+                {
+                    phraseQuery.Add(new Term(field, item));
+                }
+
+                query.Add(phraseQuery, Occur.SHOULD);
+                return query; 
             }
         }
     }
