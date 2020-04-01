@@ -169,7 +169,7 @@
         <Button Style="{DynamicResource MaterialDesignRaisedButton}"
                 materialDesign:ShadowAssist.ShadowDepth="Depth4"
                 Grid.Row="5" Grid.Column="2"
-                Content="Редактировать" 
+                Content="Изменения" 
                 VerticalAlignment="Center" 
                 DockPanel.Dock="Left"
                 Height="32"
