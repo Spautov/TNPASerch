@@ -62,17 +62,12 @@
             <ToolBarTray>
                 <ToolBar Style="{DynamicResource MaterialDesignToolBar}"
                          ClipToBounds="False">
-                    <ComboBox MinWidth="150" 
-                              Margin="5" 
-                              Height="32"
-                              ItemsSource="{Binding  TnpaTypes, Mode=TwoWay}"
-                              SelectedItem="{Binding Path=SelectedTnpaType}"/>
 
                     <TextBox Height="32"
                              materialDesign:TransitionAssist.DisableTransitions="True" 
                              materialDesign:HintAssist.Hint="Номер искомого ТНПА"
                              Text="{Binding NumberTnpa, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                             MinWidth="150" 
+                             MinWidth="475" 
                              Margin="5" />
 
                     <Button Style="{DynamicResource MaterialDesignRaisedButton}"

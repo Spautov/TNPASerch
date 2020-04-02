@@ -29,7 +29,6 @@ namespace TNPASerch.ViewModel
         {
             _repository = App.Container.Get<IRepository>();
             _searcher = App.Container.Get<ISearcher>();
-            GetTnpaTypsAsync();
             GetTnpaAsync();
             ShowAddTNPAWindowCommand = new RelayCommand(ShowAddTNPAWindow);
             ShowEditTNPAWindowCommand = new RelayCommand(ShowEditTNPAWindow);
@@ -65,7 +64,6 @@ namespace TNPASerch.ViewModel
             TnpaTypeEditView tnpaTypeEditView = ViewsManager.TnpaTypeEditView();
             tnpaTypeEditView.ShowDialog();
 
-            GetTnpaTypsAsync();
             GetTnpaAsync();
         }
 
@@ -93,29 +91,6 @@ namespace TNPASerch.ViewModel
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(IsSearchCommandEnabled));
             }
-        }
-
-        private ObservableCollection<TnpaTypeView> _tnpaTypes;
-        public ObservableCollection<TnpaTypeView> TnpaTypes
-        {
-            get { return _tnpaTypes; }
-            set
-            {
-                _tnpaTypes = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private async void GetTnpaTypsAsync()
-        {
-            var colllectTnpaType = await _repository.GetTnpaTypeListAsunc();
-
-            TnpaTypes = new ObservableCollection<TnpaTypeView>();
-            foreach (var type in colllectTnpaType)
-            {
-                TnpaTypes.Add(new TnpaTypeView { Id = type.Id, Name = type.Name });
-            }
-            SelectedTnpaType = TnpaTypes.First();
         }
 
         private TnpaTypeView _selectedTnpaType;
