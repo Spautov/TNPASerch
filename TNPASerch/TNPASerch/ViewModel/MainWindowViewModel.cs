@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight.Command;
 using Ninject;
 using Repositories;
+using Searcher;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,6 +18,7 @@ namespace TNPASerch.ViewModel
     public class MainWindowViewModel : BaseViewModel
     {
         private readonly IRepository _repository;
+        protected readonly ISearcher _searcher;
         public ICommand ShowAddTNPAWindowCommand { get; set; }
         public ICommand ShowEditTNPAWindowCommand { get; set; }
         public ICommand ShowTNPATypeEditWindowCommand { get; set; }
@@ -26,6 +28,7 @@ namespace TNPASerch.ViewModel
         public MainWindowViewModel()
         {
             _repository = App.Container.Get<IRepository>();
+            _searcher = App.Container.Get<ISearcher>();
             GetTnpaTypsAsync();
             GetTnpaAsync();
             ShowAddTNPAWindowCommand = new RelayCommand(ShowAddTNPAWindow);
@@ -74,24 +77,8 @@ namespace TNPASerch.ViewModel
         private void Search()
         {
             NumberTnpa = NumberTnpa.Trim(' ');
-
-            int findnum = 0;
-            while (findnum != -1)
-            {
-                findnum = NumberTnpa.IndexOf(' ');
-                if (findnum != -1)
-                {
-                    NumberTnpa = NumberTnpa.Remove(findnum, 1);
-                }
-            }
-
-            if (String.IsNullOrEmpty(NumberTnpa) || String.IsNullOrWhiteSpace(NumberTnpa) || SelectedTnpaType == null)
-            {
-                return;
-            }
-            NumberTnpa = NumberTnpa.Replace(',', '.');
-            var collect = _repository.SearchTnpaByNumber(NumberTnpa).Where(el => el.TnpaTypeId == SelectedTnpaType.Id);
-
+            NumberTnpa = NumberTnpa.ToLower();
+            var collect = _searcher.Serch(NumberTnpa);
             Tnpas = TnpaToTnpaView(collect);
             NumberTnpa = "";
         }

@@ -25,6 +25,7 @@ namespace Searcher
         private readonly Lucene.Net.Store.Directory _directory;
         private readonly Analyzer _analyzer;
         private readonly IndexWriter _writer;
+        private char[] _illegalСharacters = new char[] { '*', '?' };
         /// <summary>
         /// Словарь для хранения расширений файлов и соответстующих им ITextDocumentReader
         /// </summary>
@@ -170,24 +171,67 @@ namespace Searcher
         /// <returns></returns>
         public List<Tnpa> Serch(string request)
         {
-            var listIdByNumber = SerchNumber(request);
-            var listIdByName = SerchName(request);
-            var listIdByContent = SerchContent(request);
-            foreach (var tnpaId in listIdByName)
+            var req = request.Replace("*", "").Replace("?", "");
+            if (string.IsNullOrEmpty(req)|| string.IsNullOrWhiteSpace(req))
             {
-                if (!listIdByNumber.Contains(tnpaId))
+                return new List<Tnpa>();
+            }
+            var listIdByType = SerchType(req);
+            var listIdByNumber = SerchNumber(req);
+            var listIdByName = SerchName(req);
+            var listIdByContent = SerchContent(req);
+
+            if (listIdByType.Count > 0)
+            {
+                var tmpList = new List<int>();
+                if (listIdByNumber.Count > 0)
                 {
-                    listIdByNumber.Add(tnpaId);
+                    foreach (var tnpaId in listIdByNumber)
+                    {
+                        if (listIdByType.Contains(tnpaId))
+                        {
+                            tmpList.Add(tnpaId);
+                        }
+                    }
+                    listIdByNumber = tmpList;
+                }
+                else
+                {
+                    listIdByNumber = listIdByType;
                 }
             }
 
-            foreach (var tnpaId in listIdByContent)
+            if (listIdByNumber.Count > 0)
             {
-                if (!listIdByNumber.Contains(tnpaId))
+                foreach (var tnpaId in listIdByName)
                 {
-                    listIdByNumber.Add(tnpaId);
+                    if (!listIdByNumber.Contains(tnpaId))
+                    {
+                        listIdByNumber.Add(tnpaId);
+                    }
                 }
             }
+            else
+            {
+                listIdByNumber = listIdByName;
+            }
+
+
+            if (listIdByNumber.Count > 0)
+            {
+                foreach (var tnpaId in listIdByContent)
+                {
+                    if (!listIdByNumber.Contains(tnpaId))
+                    {
+                        listIdByNumber.Add(tnpaId);
+                    }
+                }
+            }
+            else
+            {
+                listIdByNumber = listIdByContent;
+            }
+           
             var resoult = new List<Tnpa>();
 
             foreach (var tnpaId in listIdByNumber)
@@ -208,8 +252,12 @@ namespace Searcher
 
         private List<int> SerchNumber(string request)
         {
-            var req = request.Trim(' ').Replace(" ", "") + "*";
-            return SerchQuery(GetQueryNumber(req), _limit);
+            return SerchQuery(GetQueryNumber(request), _limit);
+        }
+
+        private List<int> SerchType(string request)
+        {
+            return SerchQuery(GetQueryType(request), _limit);
         }
 
         private List<int> SerchName(string request)
@@ -219,23 +267,30 @@ namespace Searcher
 
         private List<int> SerchContent(string request)
         {
-            return SerchQuery(GetQueryContent(request),10);
+            return SerchQuery(GetQueryContent(request), 10);
         }
 
         private List<int> SerchQuery(Query query, int limit)
         {
-            using (var directory = GetDirectory())
-            using (var searcher = new IndexSearcher(directory))
+            var products = new List<int>();
+            try
             {
-                var docs = searcher.Search(query, limit);
-                var count = docs.TotalHits;
-
-                var products = new List<int>();
-                foreach (var scoreDoc in docs.ScoreDocs)
+                using (var directory = GetDirectory())
+                using (var searcher = new IndexSearcher(directory))
                 {
-                    var doc = searcher.Doc(scoreDoc.Doc);
-                    products.Add(int.Parse(doc.Get("Id")));
+                    var docs = searcher.Search(query, limit);
+                    var count = docs.TotalHits;
+
+                    foreach (var scoreDoc in docs.ScoreDocs)
+                    {
+                        var doc = searcher.Doc(scoreDoc.Doc);
+                        products.Add(int.Parse(doc.Get("Id")));
+                    }
+                    return products;
                 }
+            }
+            catch (Exception)
+            {
                 return products;
             }
         }
@@ -270,6 +325,7 @@ namespace Searcher
             var document = new Document();
             document.Add(new Field("Id", tnpa.Id.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
             document.Add(new Field("Name", tnpa.Name, Field.Store.NO, Field.Index.ANALYZED));
+            document.Add(new Field("Type", tnpa.Type.Name, Field.Store.NO, Field.Index.ANALYZED));
             document.Add(new Field("Number", $"{tnpa.Number}-{tnpa.Year}", Field.Store.NO, Field.Index.NOT_ANALYZED));
             string allCont = "";
             if (tnpa.Files.Count > 0)
@@ -334,12 +390,51 @@ namespace Searcher
                 var query = new BooleanQuery();
                 if (requestNumber != null)
                 {
-                    var keywordsQuery = parser.Parse(requestNumber);
+                    requestNumber = requestNumber.TrimStart(_illegalСharacters);
+                    var keywordsQuery = parser.Parse(requestNumber + "*");
+                    query.Add(keywordsQuery, Occur.SHOULD);
+                }
+                return query;
+            }
+        }
+
+        private Query GetQueryType(string request)
+        {
+            using (var analyzer = GetAnalyzer())
+            {
+                var parser = new QueryParser(Lucene.Net.Util.Version.LUCENE_30, "Type", analyzer);
+
+                var query = new BooleanQuery();
+                if (request != null)
+                {
+                    var str = request.Trim(' ').Split(' ');
+                    if (str.Count() > 0)
+                    {
+                        var keywordsQuery = parser.Parse(str[0] + "*");
+                        query.Add(keywordsQuery, Occur.SHOULD);
+                    }
+                }
+
+                return query;
+            }
+        }
+
+        private Query GetQuery(string field, string requestNumber)
+        {
+            using (var analyzer = GetAnalyzer())
+            {
+                var parser = new QueryParser(Lucene.Net.Util.Version.LUCENE_30, field, analyzer);
+
+                var query = new BooleanQuery();
+                if (requestNumber != null)
+                {
+                    var keywordsQuery = parser.Parse(requestNumber + "*");
                     query.Add(keywordsQuery, Occur.SHOULD);
                 }
 
                 return query;
             }
+            // return GetPhraseRegQuery("Number", requestNumber);
         }
 
         private Query GetQueryName(string requestName)
@@ -362,12 +457,44 @@ namespace Searcher
                 var str = keywords.Trim(' ').Split(' ');
                 var phraseQuery = new PhraseQuery();
 
-                foreach (var item in str)
+                for (int i = 0; i < str.Length; i++)
                 {
-                    phraseQuery.Add(new Term(field, item));
+                    if (string.IsNullOrWhiteSpace(str[i]))
+                    {
+                        continue;
+                    }
+                    str[i] = str[i].Trim(' ');
+                    str[i] = str[i].TrimStart(_illegalСharacters);
+                    phraseQuery.Add(new Term(field, str[i]));
                 }
 
                 query.Add(phraseQuery, Occur.SHOULD);
+                return query;
+            }
+        }
+
+        private Query GetPhraseRegQuery(string field, string keywords)
+        {
+            using (var analyzer = GetAnalyzer())
+            {
+                var query = new BooleanQuery();
+
+                var str = keywords.Trim(' ').Split(' ');
+                var phraseQuery = new PhraseQuery();
+
+                for (int i = 0; i < str.Count(); i++)
+                {
+                    if (i == str.Count() - 1 && i > 0)
+                    {
+                        phraseQuery.Add(new Term(field, str[i] + "*"));
+                    }
+                    else
+                    {
+                        phraseQuery.Add(new Term(field, str[i]));
+                    }
+                }
+
+                query.Add(phraseQuery, Occur.MUST);
                 return query;
             }
         }
