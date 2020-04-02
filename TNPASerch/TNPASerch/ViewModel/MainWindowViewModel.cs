@@ -131,8 +131,8 @@ namespace TNPASerch.ViewModel
         private async void GetTnpaAsync()
         {
             var colllectTnpa = await _repository.GetTnpaListAsunc();
-
-            Tnpas = TnpaToTnpaView(colllectTnpa);
+            
+            Tnpas = TnpaToTnpaView(colllectTnpa.Reverse().Take(5));
         }
 
         private ObservableCollection<TnpaView> TnpaToTnpaView(IEnumerable<Tnpa> colllectTnpa)
