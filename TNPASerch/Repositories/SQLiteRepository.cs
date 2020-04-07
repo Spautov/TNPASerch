@@ -87,7 +87,7 @@ namespace Repositories
         {
             lock (_lockDb)
             {
-                return _dbContext.Tnpas.Where(el => el.Id == id).Include(p => p.Changes).Include(el=> el.Files).ToArray().First();
+                return _dbContext.Tnpas.Where(el => el.Id == id).Include(p => p.Changes).Include(el=> el.Files).Include(t => t.Type).ToArray().First();
             }
         }
 
@@ -95,7 +95,7 @@ namespace Repositories
         {
             lock (_lockDb)
             {
-                return _dbContext.Tnpas;
+                return _dbContext.Tnpas.Include(p => p.Changes).Include(el => el.Files).Include(t => t.Type);
             }
         }
 
@@ -105,7 +105,7 @@ namespace Repositories
             {
                 lock (_lockDb)
                 {
-                    return _dbContext.Tnpas.Include(p => p.Changes).Include(el => el.Files);
+                    return _dbContext.Tnpas.Include(p => p.Changes).Include(el => el.Files).Include(t => t.Type);
                 }
             });
             return resoult;
