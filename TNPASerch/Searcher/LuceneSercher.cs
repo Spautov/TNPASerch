@@ -64,11 +64,11 @@ namespace Searcher
 
             DocumentReaders = new Dictionary<string, ITextDocumentReader>
             {
-                {"PDF", pdfReader },
-                {"DOC", wordReader },
-                {"DOCX", wordReader },
-                {"RTF", wordReader },
-                {"TXT", txtReader }
+                {".PDF", pdfReader },
+                {".DOC", wordReader },
+                {".DOCX", wordReader },
+                {".RTF", wordReader },
+                {".TXT", txtReader }
             };
 
             _directory = GetDirectory();
@@ -83,7 +83,7 @@ namespace Searcher
         /// <returns></returns>
         private ITextDocumentReader GetDocumentReader(string extension)
         {
-            if (!string.IsNullOrEmpty(extension) || !string.IsNullOrWhiteSpace(extension))
+            if (string.IsNullOrEmpty(extension) || string.IsNullOrWhiteSpace(extension))
             {
                 return null;
             }
@@ -181,24 +181,25 @@ namespace Searcher
             var listIdByName = SerchName(req);
             var listIdByContent = SerchContent(req);
 
+            var listResoult = new List<int>();
+
             if (listIdByType.Count > 0)
             {
-                var tmpList = new List<int>();
                 if (listIdByNumber.Count > 0)
                 {
                     foreach (var tnpaId in listIdByNumber)
                     {
                         if (listIdByType.Contains(tnpaId))
                         {
-                            tmpList.Add(tnpaId);
+                            listResoult.Add(tnpaId);
                         }
                     }
-                    listIdByNumber = tmpList;
+                    listIdByNumber = listResoult;
                 }
-                else
-                {
-                    listIdByNumber = listIdByType;
-                }
+                //else
+                //{
+                //    listIdByNumber = listIdByType;
+                //}
             }
 
             if (listIdByNumber.Count > 0)
@@ -233,6 +234,11 @@ namespace Searcher
             }
            
             var resoult = new List<Tnpa>();
+
+            //if (listIdByType.Count > 0 || listIdByNumber.Count == listIdByType.Count)
+            //{
+            //    return resoult;
+            //}
 
             foreach (var tnpaId in listIdByNumber)
             {
