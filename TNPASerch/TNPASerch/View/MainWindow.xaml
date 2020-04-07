@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TNPASerch.ViewModel"
         mc:Ignorable="d"
-        Title="Журнал учета ТНПА" Height="800" Width="1000">
+        Title="Журнал учета ТНПА" Height="650" Width="1050">
     <Window.DataContext>
         <local:MainWindowViewModel />
     </Window.DataContext>
