@@ -5,11 +5,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TNPASerch.View"
+        xmlns:localConvert="clr-namespace:TNPASerch.ValueConverters"
         mc:Ignorable="d"
         Title="Редактор изменений" Height="650" Width="550" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
     <Window.CommandBindings>
         <CommandBinding Command="Close" Executed="CommandCloseBinding_Executed"></CommandBinding>
     </Window.CommandBindings>
+    <Window.Resources>
+        <localConvert:DateTimeToDateConverter x:Key="dateConverter" />
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -36,7 +40,7 @@
                             <TextBlock Text="от" 
                                        Style="{StaticResource MaterialDesignHeadline5TextBlock}"
                                        Margin="5"/>
-                            <TextBlock Text="{Binding PutIntoOperation}" 
+                            <TextBlock Text="{Binding PutIntoOperation, Converter={StaticResource dateConverter}}" 
                                        Style="{StaticResource MaterialDesignHeadline5TextBlock}"
                                        Margin="5"/>
                         </StackPanel>

@@ -226,6 +226,7 @@
     </ApplicationDefinition>
     <Compile Include="Model\TnpaTypeView.cs" />
     <Compile Include="Model\TnpaView.cs" />
+    <Compile Include="ValueConverters\DateTimeToDateConverter.cs" />
     <Compile Include="ViewModel\BaseModelView\BaseViewModel.cs" />
     <Compile Include="ViewModel\AddTextViewModel.cs" />
     <Compile Include="ViewModel\EditFilesViewModel.cs" />
