@@ -22,7 +22,7 @@ namespace TNPASerch.ViewModel
         public ICommand ShowEditTNPAWindowCommand { get; set; }
         public ICommand ShowTNPATypeEditWindowCommand { get; set; }
         public ICommand SearchCommand { get; set; }
-        public ICommand SettingsCommand { get; set; }
+        public ICommand CleanQueueCommand { get; set; }
 
         public MainWindowViewModel()
         {
@@ -33,6 +33,12 @@ namespace TNPASerch.ViewModel
             ShowEditTNPAWindowCommand = new RelayCommand(ShowEditTNPAWindow);
             ShowTNPATypeEditWindowCommand = new RelayCommand(ShowTNPATypeEditWindow);
             SearchCommand = new RelayCommand(SearchAsync);
+            CleanQueueCommand = new RelayCommand(CleanQueue);
+        }
+
+        private void CleanQueue()
+        {
+            GetTnpaAsync();
         }
 
         private void ShowEditTNPAWindow()

@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TNPASerch.ViewModel"
         mc:Ignorable="d"
-        Title="Журнал учета ТНПА" Height="650" Width="1000">
+        Title="Журнал учета ТНПА" Height="800" Width="1000">
     <Window.DataContext>
         <local:MainWindowViewModel />
     </Window.DataContext>
@@ -57,6 +57,12 @@
                             <materialDesign:PackIcon Kind="FileEditOutline" />
                         </MenuItem.Icon>
                     </MenuItem>
+                    <MenuItem Header="Отобразить начальный экран"
+                              Command="{Binding CleanQueueCommand}">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="MonitorClean" />
+                        </MenuItem.Icon>
+                    </MenuItem>
                 </MenuItem>
             </Menu>
             <ToolBarTray>
@@ -67,7 +73,7 @@
                              materialDesign:TransitionAssist.DisableTransitions="True" 
                              materialDesign:HintAssist.Hint="Номер искомого ТНПА"
                              Text="{Binding NumberTnpa, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                             MinWidth="475" 
+                             MinWidth="450" 
                              Margin="5" />
 
                     <Button Style="{DynamicResource MaterialDesignRaisedButton}"
@@ -76,6 +82,12 @@
                             Command="{Binding SearchCommand}"
                             IsEnabled="{Binding IsSearchCommandEnabled}">
                         <materialDesign:PackIcon Kind="FileFindOutline" Height="24" Width="24" />
+                    </Button>
+                    <Button Style="{DynamicResource MaterialDesignRaisedButton}"
+                            Margin="5 0"
+                            materialDesign:ShadowAssist.ShadowDepth="Depth4"
+                            Command="{Binding CleanQueueCommand}">
+                        <materialDesign:PackIcon Kind="MonitorClean" Height="24" Width="24" />
                     </Button>
                     <Button Style="{DynamicResource MaterialDesignRaisedButton}" 
                             Margin="5 0"
