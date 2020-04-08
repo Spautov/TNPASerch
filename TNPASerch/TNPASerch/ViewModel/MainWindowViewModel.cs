@@ -157,7 +157,8 @@ namespace TNPASerch.ViewModel
                     IsReal = tnpa.IsReal,
                     Type = tnpa.Type.Name,
                     Changes = tnpa.Changes,
-                    Files = tnpa.Files
+                    Files = tnpa.Files,
+                    Content = tnpa.Content
                 });
             }
             return tmp;

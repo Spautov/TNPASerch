@@ -54,7 +54,7 @@
                     <MenuItem Header="Редактор типов ТНПА"
                               Command="{Binding ShowTNPATypeEditWindowCommand}">
                         <MenuItem.Icon>
-                            <materialDesign:PackIcon Kind="FileEditOutline" />
+                            <materialDesign:PackIcon Kind="ClipboardListOutline" />
                         </MenuItem.Icon>
                     </MenuItem>
                     <MenuItem Header="Отобразить начальный экран"
@@ -80,32 +80,37 @@
                             Margin="5 0"
                             materialDesign:ShadowAssist.ShadowDepth="Depth4"
                             Command="{Binding SearchCommand}"
-                            IsEnabled="{Binding IsSearchCommandEnabled}">
+                            IsEnabled="{Binding IsSearchCommandEnabled}"
+                            ToolTip="Поиск">
                         <materialDesign:PackIcon Kind="FileFindOutline" Height="24" Width="24" />
                     </Button>
                     <Button Style="{DynamicResource MaterialDesignRaisedButton}"
                             Margin="5 0"
                             materialDesign:ShadowAssist.ShadowDepth="Depth4"
-                            Command="{Binding CleanQueueCommand}">
+                            Command="{Binding CleanQueueCommand}"
+                            ToolTip="Отобразить начальный экран">
                         <materialDesign:PackIcon Kind="MonitorClean" Height="24" Width="24" />
                     </Button>
                     <Button Style="{DynamicResource MaterialDesignRaisedButton}" 
                             Margin="5 0"
                             materialDesign:ShadowAssist.ShadowDepth="Depth4"
-                            Command="{Binding ShowAddTNPAWindowCommand}">
+                            Command="{Binding ShowAddTNPAWindowCommand}"
+                            ToolTip="Создать ТНПА">
                         <materialDesign:PackIcon Kind="FileDocumentBoxPlusOutline" Height="24" Width="24" />
                     </Button>
                     <Button Style="{DynamicResource MaterialDesignRaisedButton}" 
                             Margin="5 0"
                             materialDesign:ShadowAssist.ShadowDepth="Depth4"
                             Command="{Binding ShowEditTNPAWindowCommand}"
-                            IsEnabled="{Binding IsShowEditTNPAWindowCommandEnabled}">
+                            IsEnabled="{Binding IsShowEditTNPAWindowCommandEnabled}"
+                            ToolTip="Редактировать ТНПА">
                         <materialDesign:PackIcon Kind="FileEditOutline" Height="24" Width="24" />
                     </Button>
                     <Button Style="{DynamicResource MaterialDesignRaisedButton}" 
                             Margin="5 0"
                             materialDesign:ShadowAssist.ShadowDepth="Depth4"
-                            Command="Close">
+                            Command="Close"
+                            ToolTip="Выход">
                         <materialDesign:PackIcon Kind="ExitToApp" Height="24" Width="24" />
                     </Button>
                 </ToolBar>
@@ -119,50 +124,58 @@
                 <DataTemplate>
                     <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth4" 
                                          Padding="12">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"></ColumnDefinition>
-                                <ColumnDefinition Width="80"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <StackPanel Grid.Column="0" 
+                        <StackPanel>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="80"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <StackPanel Grid.Column="0" 
                                         Grid.Row="0"
                                         Orientation="Horizontal">
-                                <TextBlock Text="{Binding Type}" HorizontalAlignment="Left" Margin="5"
+                                    <TextBlock Text="{Binding Type}" HorizontalAlignment="Left" Margin="5"
                                            Style="{StaticResource MaterialDesignHeadline6TextBlock}"/>
-                                <TextBlock Text="{Binding Number}" HorizontalAlignment="Left" Margin="5"
+                                    <TextBlock Text="{Binding Number}" HorizontalAlignment="Left" Margin="5"
                                            Style="{StaticResource MaterialDesignHeadline6TextBlock}"/>
-                                <TextBlock Text="{Binding Name}" HorizontalAlignment="Left" Margin="5"
+                                    <TextBlock Text="{Binding Name}" HorizontalAlignment="Left" Margin="5"
                                            Style="{StaticResource MaterialDesignHeadline6TextBlock}"/>
-                            </StackPanel>
-                            <Button Grid.Column="1"
+                                </StackPanel>
+                                <Button Grid.Column="1"
                                     Grid.RowSpan="2"
                                     Margin="5"
                                     Style="{DynamicResource MaterialDesignRaisedButton}"
                                     materialDesign:ShadowAssist.ShadowDepth="Depth4"
                                     Command="{Binding ElectronicVersionCommand}">
-                                <materialDesign:PackIcon Kind="Bookshelf" Height="24" Width="24"/>
-                            </Button>
+                                    <materialDesign:PackIcon Kind="Bookshelf" Height="24" Width="24"/>
+                                </Button>
 
-                            <StackPanel  Grid.Column="0" 
+                                <StackPanel  Grid.Column="0" 
                                          Grid.Row="1"
                                          Orientation="Horizontal">
-                                <TextBlock Text="Дата регистрации в журнале" HorizontalAlignment="Left" Margin="5"/>
-                                <TextBlock Text="{Binding Registered}" HorizontalAlignment="Left" Margin="5"/>
-                                <TextBlock Text="№" HorizontalAlignment="Left" Margin="5"/>
-                                <TextBlock Text="{Binding NumberRegistered}" HorizontalAlignment="Left" Margin="5"/>
-                                <TextBlock Text="Введен в действие с " HorizontalAlignment="Left" Margin="5"/>
-                                <TextBlock Text="{Binding PutIntoOperation}" HorizontalAlignment="Left" Margin="5"/>
-                                <TextBlock Text="Отменен с " HorizontalAlignment="Left" Margin="5" Visibility="{Binding IsCanceled}"/>
-                                <TextBlock Text="{Binding Cancelled}" HorizontalAlignment="Left" Margin="5" Visibility="{Binding IsCanceled}"/>
-                                <TextBlock Text="Количество изменений " HorizontalAlignment="Left" Margin="5"/>
-                                <TextBlock Text="{Binding Changes.Count}" HorizontalAlignment="Left" Margin="5"/>
-                            </StackPanel>
-                        </Grid>
+                                    <TextBlock Text="Дата регистрации в журнале" HorizontalAlignment="Left" Margin="5"/>
+                                    <TextBlock Text="{Binding Registered}" HorizontalAlignment="Left" Margin="5"/>
+                                    <TextBlock Text="№" HorizontalAlignment="Left" Margin="5"/>
+                                    <TextBlock Text="{Binding NumberRegistered}" HorizontalAlignment="Left" Margin="5"/>
+                                    <TextBlock Text="Введен в действие с " HorizontalAlignment="Left" Margin="5"/>
+                                    <TextBlock Text="{Binding PutIntoOperation}" HorizontalAlignment="Left" Margin="5"/>
+                                    <TextBlock Text="Отменен с " HorizontalAlignment="Left" Margin="5" Visibility="{Binding IsCanceled}"/>
+                                    <TextBlock Text="{Binding Cancelled}" HorizontalAlignment="Left" Margin="5" Visibility="{Binding IsCanceled}"/>
+                                    <TextBlock Text="Количество изменений " HorizontalAlignment="Left" Margin="5"/>
+                                    <TextBlock Text="{Binding Changes.Count}" HorizontalAlignment="Left" Margin="5"/>
+                                </StackPanel>
+                            </Grid>
+                            <TextBlock x:Name="contentTxt" Text="{Binding Content}" Margin="5 0"></TextBlock>
+                        </StackPanel>
                     </materialDesign:Card>
+                    <DataTemplate.Triggers>
+                        <DataTrigger Binding="{Binding Content}" Value="">
+                            <Setter TargetName="contentTxt" Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                    </DataTemplate.Triggers>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

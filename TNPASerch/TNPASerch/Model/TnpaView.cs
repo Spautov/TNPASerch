@@ -207,11 +207,27 @@ namespace TNPASerch.Model
             ElectronicVersionCommand = new RelayCommand(ElectronicVersion, IsExecute);
             Changes = new List<Change>();
             Files = new List<DataFileInfo>();
+            Content = string.Empty;
         }
 
         private bool IsExecute()
         {
             return Files.Count > 0;
+        }
+
+        private string _content;
+
+        public string Content
+        {
+            get 
+            { 
+                return _content; 
+            }
+            set 
+            {
+                _content = value;
+                OnPropertyChanged();
+            }
         }
     }
 }

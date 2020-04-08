@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DAL
 {
@@ -61,10 +62,14 @@ namespace DAL
         /// </summary>
         public ICollection<DataFileInfo> Files { get; set; }
 
+        [NotMapped]
+        public string Content { get; set; }
+
         public Tnpa()
         {
             Changes = new List<Change>();
             Files = new List<DataFileInfo>();
+            Content = string.Empty;
         }
     }
 }

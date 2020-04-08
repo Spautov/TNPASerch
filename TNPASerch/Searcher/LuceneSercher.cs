@@ -181,25 +181,20 @@ namespace Searcher
             var listIdByName = SerchName(req);
             var listIdByContent = SerchContent(req);
 
-            var listResoult = new List<int>();
-
             if (listIdByType.Count > 0)
             {
+                var tmpList = new List<int>();
                 if (listIdByNumber.Count > 0)
                 {
                     foreach (var tnpaId in listIdByNumber)
                     {
                         if (listIdByType.Contains(tnpaId))
                         {
-                            listResoult.Add(tnpaId);
+                            tmpList.Add(tnpaId);
                         }
                     }
-                    listIdByNumber = listResoult;
+                    listIdByNumber = tmpList;
                 }
-                //else
-                //{
-                //    listIdByNumber = listIdByType;
-                //}
             }
 
             if (listIdByNumber.Count > 0)
@@ -220,31 +215,39 @@ namespace Searcher
 
             if (listIdByNumber.Count > 0)
             {
+                var tmpList = new List<int>();
                 foreach (var tnpaId in listIdByContent)
                 {
                     if (!listIdByNumber.Contains(tnpaId))
                     {
-                        listIdByNumber.Add(tnpaId);
+                        tmpList.Add(tnpaId);
                     }
                 }
-            }
-            else
-            {
-                listIdByNumber = listIdByContent;
+                listIdByContent = tmpList;
             }
            
             var resoult = new List<Tnpa>();
-
-            //if (listIdByType.Count > 0 || listIdByNumber.Count == listIdByType.Count)
-            //{
-            //    return resoult;
-            //}
 
             foreach (var tnpaId in listIdByNumber)
             {
                 try
                 {
                     var tnpa = _repository.GetTnpa(tnpaId);
+                    tnpa.Content = string.Empty;
+                    resoult.Add(tnpa);
+                }
+                catch (Exception)
+                {
+                    continue;
+                }
+            }
+
+            foreach (var tnpaId in listIdByContent)
+            {
+                try
+                {
+                    var tnpa = _repository.GetTnpa(tnpaId);
+                    tnpa.Content = $"Прикрепленные файлы содержат текст ...{req}...";
                     resoult.Add(tnpa);
                 }
                 catch (Exception)
