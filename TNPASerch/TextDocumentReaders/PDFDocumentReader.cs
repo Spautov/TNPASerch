@@ -10,16 +10,14 @@ namespace TextDocumentReaders
         public string GetContent(object filename)
         {
             string text = string.Empty;
-            PdfReader readerOut = null;
-            PdfReader readerIn = null;
+            PdfReader reader = null;
             try
             {
-                readerOut = new PdfReader((string)filename);
-                for (int page = 1; page <= readerOut.NumberOfPages; page++)
+                reader = new PdfReader((string)filename);
+                for (int page = 1; page <= reader.NumberOfPages; page++)
                 {
                     ITextExtractionStrategy its = new SimpleTextExtractionStrategy();
-                    readerIn = new PdfReader((string)filename);
-                    string pdfString = PdfTextExtractor.GetTextFromPage(readerIn, page, its);
+                    string pdfString = PdfTextExtractor.GetTextFromPage(reader, page, its);
                     pdfString = Encoding.UTF8.GetString(ASCIIEncoding.Convert(Encoding.Default,
                         Encoding.UTF8, Encoding.Default.GetBytes(pdfString)));
                     text += pdfString;
@@ -31,17 +29,12 @@ namespace TextDocumentReaders
             }
             finally
             {
-                if (readerIn != null)
+                if (reader != null)
                 {
-                    readerIn.Close();
-                }
-                if (readerOut != null)
-                {
-                    readerOut.Close();
-                    readerOut.Dispose();
+                    reader.Close();
+                    reader.Dispose();
                 }
             }
-
             return text;
         }
     }
