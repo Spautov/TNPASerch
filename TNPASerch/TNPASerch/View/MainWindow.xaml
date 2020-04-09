@@ -73,7 +73,7 @@
                              materialDesign:TransitionAssist.DisableTransitions="True" 
                              materialDesign:HintAssist.Hint="Номер искомого ТНПА"
                              Text="{Binding NumberTnpa, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                             MinWidth="450" 
+                             MinWidth="400" 
                              Margin="5" />
 
                     <Button Style="{DynamicResource MaterialDesignRaisedButton}"
@@ -102,9 +102,17 @@
                             Margin="5 0"
                             materialDesign:ShadowAssist.ShadowDepth="Depth4"
                             Command="{Binding ShowEditTNPAWindowCommand}"
-                            IsEnabled="{Binding IsShowEditTNPAWindowCommandEnabled}"
+                            IsEnabled="{Binding IsSelectedTnpa}"
                             ToolTip="Редактировать ТНПА">
                         <materialDesign:PackIcon Kind="FileEditOutline" Height="24" Width="24" />
+                    </Button>
+                    <Button Style="{DynamicResource MaterialDesignRaisedButton}" 
+                            Margin="5 0"
+                            materialDesign:ShadowAssist.ShadowDepth="Depth4"
+                            Command="{Binding DeleteTNPACommand}"
+                            IsEnabled="{Binding IsSelectedTnpa}"
+                            ToolTip="Удалить ТНПА">
+                        <materialDesign:PackIcon Kind="FileDocumentBoxRemoveOutline" Height="24" Width="24" />
                     </Button>
                     <Button Style="{DynamicResource MaterialDesignRaisedButton}" 
                             Margin="5 0"

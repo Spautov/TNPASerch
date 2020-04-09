@@ -18,22 +18,61 @@ namespace TNPASerch.ViewModel
     {
         private readonly IRepository _repository;
         protected readonly ISearcher _searcher;
+        private readonly IFileRepository _fileRepository;
+
         public ICommand ShowAddTNPAWindowCommand { get; set; }
         public ICommand ShowEditTNPAWindowCommand { get; set; }
         public ICommand ShowTNPATypeEditWindowCommand { get; set; }
         public ICommand SearchCommand { get; set; }
         public ICommand CleanQueueCommand { get; set; }
+        public ICommand DeleteTNPACommand { get; set; }
+
 
         public MainWindowViewModel()
         {
             _repository = App.Container.Get<IRepository>();
             _searcher = App.Container.Get<ISearcher>();
+            _fileRepository = App.Container.Get<IFileRepository>();
             GetTnpaAsync();
             ShowAddTNPAWindowCommand = new RelayCommand(ShowAddTNPAWindow);
             ShowEditTNPAWindowCommand = new RelayCommand(ShowEditTNPAWindow);
             ShowTNPATypeEditWindowCommand = new RelayCommand(ShowTNPATypeEditWindow);
             SearchCommand = new RelayCommand(SearchAsync);
             CleanQueueCommand = new RelayCommand(CleanQueue);
+            DeleteTNPACommand = new RelayCommand(DeleteTNPA);
+        }
+
+        private void DeleteTNPA()
+        {
+            var nameTNPA = $"{SelectedTnpa.Type} {SelectedTnpa.Number}";
+            var answer = YesNoCancelMessage($"Вы точно желаете удалит {nameTNPA}?", "Удаление");
+            if (answer)
+            {
+                var tnpa = _repository.GetTnpa(SelectedTnpa.Id);
+                try
+                {
+                    _searcher.Remove(tnpa);
+                }
+                catch (Exception) { }
+               
+                if (tnpa.Files.Count > 0)
+                {
+                    foreach (var file in tnpa.Files)
+                    {
+                        try
+                        {
+                            _fileRepository.RemoveFile(file.Path);
+                        }
+                        catch (Exception)
+                        {
+                            continue;
+                        }
+                    }
+                }
+                _repository.DeleteTnpa(SelectedTnpa.Id);
+                YesMessage($"{nameTNPA} успешно удален");
+                GetTnpaAsync();
+            }
         }
 
         private void CleanQueue()
@@ -54,7 +93,7 @@ namespace TNPASerch.ViewModel
             GetTnpaAsync();
         }
 
-        public bool IsShowEditTNPAWindowCommandEnabled
+        public bool IsSelectedTnpa
         {
             get { return SelectedTnpa != null; }
         }
@@ -128,7 +167,7 @@ namespace TNPASerch.ViewModel
             {
                 _selectedTnpa = value;
                 OnPropertyChanged();
-                OnPropertyChanged(nameof(IsShowEditTNPAWindowCommandEnabled));
+                OnPropertyChanged(nameof(IsSelectedTnpa));
             }
         }
 
