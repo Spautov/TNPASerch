@@ -8,7 +8,6 @@ namespace Repositories
     {
         public string MainFileRepositoryDirectory { get; private set; }
 
-
         public FileRepository(string directoryName)
         {
             if (string.IsNullOrEmpty(directoryName) || string.IsNullOrWhiteSpace(directoryName))
@@ -21,7 +20,6 @@ namespace Repositories
                 Directory.CreateDirectory(MainFileRepositoryDirectory);
             }
         }
-
 
         public string AddFile(string faleName)
         {
@@ -58,7 +56,6 @@ namespace Repositories
                     var filePath = Path.Combine(MainFileRepositoryDirectory, file.Name);
                     resoult += CalculateHashCodeFile(filePath);
                 }
-
             }
             return resoult;
         }
