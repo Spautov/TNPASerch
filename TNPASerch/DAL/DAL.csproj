@@ -51,5 +51,8 @@
     <Compile Include="Tnpa.cs" />
     <Compile Include="TnpaType.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="DALClassDiagram.cd" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

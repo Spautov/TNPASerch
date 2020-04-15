@@ -165,6 +165,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="DbWorkerClassDiagram.cd" />
     <None Include="DataBase\TNPA.db">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

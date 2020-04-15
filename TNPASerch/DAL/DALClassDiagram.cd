@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DAL.Change">
+    <Position X="0.5" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAEEEAAAgAAAAAAAABAAAAAAEAAAAA=</HashCode>
+      <FileName>Change.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.DataFileInfo">
+    <Position X="2.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAIAAAAAAIAAAAAAgAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>DataFileInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.FolderHashCod">
+    <Position X="4.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAA=</HashCode>
+      <FileName>FolderHashCod.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.Tnpa">
+    <Position X="6" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAACAQAABiBAAAgAEEAAEAQAAAAAAABAAQAAAAAAAIA=</HashCode>
+      <FileName>Tnpa.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.TnpaType">
+    <Position X="4.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAEAAAAAAQAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>TnpaType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

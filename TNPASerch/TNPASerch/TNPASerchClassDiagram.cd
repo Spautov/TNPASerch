@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="TNPASerch.App">
+    <Position X="1.5" Y="0.5" Width="2" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>IQAAAAQAAAAAQAAAAAAAAAAAAACAAAAAAEAAAAAABAA=</HashCode>
+      <FileName>App.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TNPASerch.Model.TnpaTypeView">
+    <Position X="10.75" Y="2.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAACIAAAAAAAAAAEAABAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\TnpaTypeView.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TNPASerch.Model.TnpaView">
+    <Position X="9" Y="2.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>IAACIQAAAiBAAAwBEEBAEAQAAACIAABQAYIEAAFEEYA=</HashCode>
+      <FileName>Model\TnpaView.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TNPASerch.ValueConverters.DateTimeToDateConverter" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="9.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ValueConverters\DateTimeToDateConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="TNPASerch.View.ViewsManager">
+    <Position X="3.25" Y="9.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAEoAAAAAAAAAAICAAAAAAAgAAAABQAAAAAQ=</HashCode>
+      <FileName>View\ViewsManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TNPASerch.ViewModel.AddTextViewModel">
+    <Position X="17.25" Y="5.75" Width="1.75" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAEAAAAAAAAAAAAAAAAAAAAEAAAAACAA=</HashCode>
+      <FileName>ViewModel\AddTextViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TNPASerch.ViewModel.BaseViewModel">
+    <Position X="6.5" Y="2.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAAAAICAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\BaseModelView\BaseViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TNPASerch.ViewModel.MessageViewModel">
+    <Position X="4" Y="2.5" Width="2" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AIEAAAAAAAAAAEAAAEAAAAQAAAAQAAAAEAAAIAAAAAA=</HashCode>
+      <FileName>ViewModel\BaseModelView\MessageViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TNPASerch.ViewModel.NotifyPropertyChangedModel">
+    <Position X="7.25" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\BaseModelView\NotifyPropertyChangedModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="TNPASerch.ViewModel.ChangeBaseViewModel">
+    <Position X="7.5" Y="5.75" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAgABAAAAAAAAEAAEAAABAAAAACAAABIAAABAAEAAAA=</HashCode>
+      <FileName>ViewModel\Changes\ChangeBaseViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TNPASerch.ViewModel.ChangeEditViewModel">
+    <Position X="6.25" Y="9.5" Width="2" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAAAAAAAAAAAAAQAAAAAABAAAAAAA=</HashCode>
+      <FileName>ViewModel\Changes\ChangeEditViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TNPASerch.ViewModel.ChangeViewModel">
+    <Position X="8.5" Y="9.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAABAACAAAA=</HashCode>
+      <FileName>ViewModel\Changes\ChangeViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TNPASerch.ViewModel.TnpaChengesEditViewModel">
+    <Position X="10" Y="5.75" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>KAEUBAAAAAAAABgAAIAAAAAAAAQAgAAAAEAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\Changes\TnpaChengesEditViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TNPASerch.ViewModel.EditFilesViewModel">
+    <Position X="2.75" Y="5.75" Width="2" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AgQABAQAAQAAAAAQABAAAAAAQAABAEAAAAAAAAIAAAI=</HashCode>
+      <FileName>ViewModel\EditFilesViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TNPASerch.ViewModel.MainWindowViewModel">
+    <Position X="5" Y="5.75" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>ACAYDAiIA4FAhAAQhAAQAAAgCAgAAACACAAAAQAgEAA=</HashCode>
+      <FileName>ViewModel\MainWindowViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TNPASerch.ViewModel.AddTNPAViewModel">
+    <Position X="11" Y="9.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAABAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\TNPAs\AddTNPAViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TNPASerch.ViewModel.BaseTNPAViewModel">
+    <Position X="12.5" Y="5.75" Width="2" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>CIAAQoiaALHBAUEAEAggAAEAAACIBIABAAAEAACGAAA=</HashCode>
+      <FileName>ViewModel\TNPAs\BaseTNPAViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="TNPASerch.ViewModel.EditTNPAViewModel">
+    <Position X="13.25" Y="9.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>ViewModel\TNPAs\EditTNPAViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TNPASerch.ViewModel.TnpaTypeEditViewModel">
+    <Position X="14.75" Y="5.75" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAQACAAADAAAAAAACAAAEAAAAIEAgAAAAAAAAAEQA=</HashCode>
+      <FileName>ViewModel\TnpaTypeEditViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TNPASerch.ViewModel.WatchFilesViewModel">
+    <Position X="0.5" Y="5.75" Width="2" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAQABAQAAQAAAAAAABAAAAAAQAAAAEAAAAAAAAIAAAI=</HashCode>
+      <FileName>ViewModel\WatchFilesViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
