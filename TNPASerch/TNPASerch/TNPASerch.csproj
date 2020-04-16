@@ -224,8 +224,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\TnpaTypeView.cs" />
-    <Compile Include="Model\TnpaView.cs" />
+    <Compile Include="Model\TnpaTypeViewModel.cs" />
+    <Compile Include="Model\TnpaViewModel.cs" />
     <Compile Include="ValueConverters\DateTimeToDateConverter.cs" />
     <Compile Include="ViewModel\BaseModelView\BaseViewModel.cs" />
     <Compile Include="ViewModel\AddTextViewModel.cs" />

@@ -5,7 +5,7 @@ namespace TNPASerch.Model
     /// <summary>
     /// Класс для отображения тип ТНПА
     /// </summary>
-    public class TnpaTypeView : NotifyPropertyChangedModel
+    public class TnpaTypeViewModel : NotifyPropertyChangedModel
     {
         private int _id;
         /// <summary>

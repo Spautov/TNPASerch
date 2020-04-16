@@ -137,8 +137,8 @@ namespace TNPASerch.ViewModel
             }
         }
 
-        private TnpaTypeView _selectedTnpaType;
-        public TnpaTypeView SelectedTnpaType
+        private TnpaTypeViewModel _selectedTnpaType;
+        public TnpaTypeViewModel SelectedTnpaType
         {
             get { return _selectedTnpaType; }
             set
@@ -148,8 +148,8 @@ namespace TNPASerch.ViewModel
             }
         }
 
-        private ObservableCollection<TnpaView> _tnpas;
-        public ObservableCollection<TnpaView> Tnpas
+        private ObservableCollection<TnpaViewModel> _tnpas;
+        public ObservableCollection<TnpaViewModel> Tnpas
         {
             get { return _tnpas; }
             set
@@ -159,8 +159,8 @@ namespace TNPASerch.ViewModel
             }
         }
 
-        private TnpaView _selectedTnpa;
-        public TnpaView SelectedTnpa
+        private TnpaViewModel _selectedTnpa;
+        public TnpaViewModel SelectedTnpa
         {
             get { return _selectedTnpa; }
             set
@@ -179,12 +179,12 @@ namespace TNPASerch.ViewModel
             Tnpas = TnpaToTnpaView(colllectTnpa.Reverse().Take(5));
         }
 
-        private ObservableCollection<TnpaView> TnpaToTnpaView(IEnumerable<Tnpa> colllectTnpa)
+        private ObservableCollection<TnpaViewModel> TnpaToTnpaView(IEnumerable<Tnpa> colllectTnpa)
         {
-            var tmp = new ObservableCollection<TnpaView>();
+            var tmp = new ObservableCollection<TnpaViewModel>();
             foreach (var tnpa in colllectTnpa)
             {
-                tmp.Add(new TnpaView
+                tmp.Add(new TnpaViewModel
                 {
                     Id = tnpa.Id,
                     Number = $"{tnpa.Number}-{tnpa.Year}",

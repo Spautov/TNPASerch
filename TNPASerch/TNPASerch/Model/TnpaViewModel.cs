@@ -2,7 +2,6 @@
 using GalaSoft.MvvmLight.Command;
 using Ninject;
 using Repositories;
-using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
@@ -11,7 +10,7 @@ using TNPASerch.ViewModel;
 
 namespace TNPASerch.Model
 {
-    public class TnpaView : NotifyPropertyChangedModel
+    public class TnpaViewModel : NotifyPropertyChangedModel
     {
         private IRepository _repository;
 
@@ -201,7 +200,7 @@ namespace TNPASerch.Model
 
         private ICollection<DataFileInfo> _files;
 
-        public TnpaView()
+        public TnpaViewModel()
         {
             _repository = App.Container.Get<IRepository>();
             ElectronicVersionCommand = new RelayCommand(ElectronicVersion, IsExecute);

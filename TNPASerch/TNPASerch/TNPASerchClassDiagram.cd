@@ -10,17 +10,17 @@
       <FileName>App.xaml.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="TNPASerch.Model.TnpaTypeView">
-    <Position X="10.75" Y="2.5" Width="1.5" />
+  <Class Name="TNPASerch.Model.TnpaTypeViewModel">
+    <Position X="10.75" Y="2.5" Width="1.75" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
       <HashCode>AAACIAAAAAAAAAAEAABAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Model\TnpaTypeView.cs</FileName>
+      <FileName>Model\TnpaTypeViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="TNPASerch.Model.TnpaView">
+  <Class Name="TNPASerch.Model.TnpaViewModel">
     <Position X="9" Y="2.5" Width="1.5" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
@@ -28,7 +28,7 @@
     </Compartments>
     <TypeIdentifier>
       <HashCode>IAACIQAAAiBAAAwBEEBAEAQAAACIAABQAYIEAAFEEYA=</HashCode>
-      <FileName>Model\TnpaView.cs</FileName>
+      <FileName>Model\TnpaViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TNPASerch.ValueConverters.DateTimeToDateConverter" BaseTypeListCollapsed="true">

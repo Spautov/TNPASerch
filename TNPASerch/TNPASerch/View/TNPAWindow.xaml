@@ -87,7 +87,7 @@
         </StackPanel>
 
         <Label Grid.Row="4" Grid.Column="1"
-               Content="Номер регистрации в жернале:" 
+               Content="Номер регистрации в журнале:" 
                FontSize="16"
                VerticalAlignment="Center"
                HorizontalAlignment="Left"/>
