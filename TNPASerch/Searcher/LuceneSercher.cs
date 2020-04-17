@@ -11,8 +11,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TextDocumentReaders;
 
 namespace Searcher
@@ -25,7 +23,7 @@ namespace Searcher
         private readonly Lucene.Net.Store.Directory _directory;
         private readonly Analyzer _analyzer;
         private readonly IndexWriter _writer;
-        private char[] _illegalСharacters = new char[] { '*', '?' };
+        private readonly char[] _illegalСharacters = new char[] { '*', '?' };
         /// <summary>
         /// Словарь для хранения расширений файлов и соответстующих им ITextDocumentReader
         /// </summary>
@@ -304,7 +302,6 @@ namespace Searcher
             }
         }
 
-
         /// <summary>
         /// Метод возвращает хранилище индекса
         /// </summary>
@@ -443,7 +440,6 @@ namespace Searcher
 
                 return query;
             }
-            // return GetPhraseRegQuery("Number", requestNumber);
         }
 
         private Query GetQueryName(string requestName)
@@ -507,6 +503,5 @@ namespace Searcher
                 return query;
             }
         }
-
     }
 }

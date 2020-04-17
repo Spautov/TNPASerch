@@ -2,7 +2,6 @@
 using System;
 using System.Linq;
 using System.Windows;
-using TNPASerch.View;
 
 namespace TNPASerch.ViewModel
 {
@@ -66,6 +65,5 @@ namespace TNPASerch.ViewModel
                 windowActiv.Close();
             }
         }
-
     }
 }

@@ -1,6 +1,5 @@
 ﻿using DAL;
 using System;
-using TNPASerch.View;
 
 namespace TNPASerch.ViewModel
 {
