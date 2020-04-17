@@ -40,9 +40,16 @@
                 </MenuItem>
                 <MenuItem Header="Инструменты">
                     <MenuItem Header="Поиск"
-                              Command="{Binding SearchCommand}">
+                              Command="{Binding SearchCommand}"
+                              IsEnabled="{Binding IsSearchCommandEnabled}">
                         <MenuItem.Icon>
                             <materialDesign:PackIcon Kind="FileFindOutline" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Отобразить начальный экран"
+                              Command="{Binding CleanQueueCommand}">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="MonitorClean" />
                         </MenuItem.Icon>
                     </MenuItem>
                     <MenuItem Header="Создать ТНПА"
@@ -51,16 +58,25 @@
                             <materialDesign:PackIcon Kind="FileDocumentBoxPlusOutline" />
                         </MenuItem.Icon>
                     </MenuItem>
+                    <MenuItem Header="Редактировать ТНПА"
+                              Command="{Binding ShowEditTNPAWindowCommand}"
+                              IsEnabled="{Binding IsSelectedTnpa}">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="FileEditOutline" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Удалить ТНПА"
+                              Command="{Binding DeleteTNPACommand}"
+                              IsEnabled="{Binding IsSelectedTnpa}">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="FileDocumentBoxRemoveOutline" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator />
                     <MenuItem Header="Редактор типов ТНПА"
                               Command="{Binding ShowTNPATypeEditWindowCommand}">
                         <MenuItem.Icon>
                             <materialDesign:PackIcon Kind="ClipboardListOutline" />
-                        </MenuItem.Icon>
-                    </MenuItem>
-                    <MenuItem Header="Отобразить начальный экран"
-                              Command="{Binding CleanQueueCommand}">
-                        <MenuItem.Icon>
-                            <materialDesign:PackIcon Kind="MonitorClean" />
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
