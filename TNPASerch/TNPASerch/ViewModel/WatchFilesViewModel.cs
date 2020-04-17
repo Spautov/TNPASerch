@@ -12,7 +12,7 @@ namespace TNPASerch.ViewModel
     {
         public ICommand ShowDataFileInfoCommand { get; set; }
 
-        private IFileRepository _fileRepository;
+        private readonly IFileRepository _fileRepository;
 
         private readonly Tnpa _tnpa;
 

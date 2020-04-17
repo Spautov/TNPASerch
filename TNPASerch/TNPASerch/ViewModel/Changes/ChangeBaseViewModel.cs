@@ -2,7 +2,6 @@
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.Windows.Input;
-using TNPASerch.View;
 
 namespace TNPASerch.ViewModel
 {
@@ -54,7 +53,5 @@ namespace TNPASerch.ViewModel
             }
         }
         protected abstract void Ok();
-
-        
     }
 }

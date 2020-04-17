@@ -1,6 +1,5 @@
 ﻿using DAL;
 using System.Linq;
-using TNPASerch.View;
 
 namespace TNPASerch.ViewModel
 {
@@ -35,7 +34,6 @@ namespace TNPASerch.ViewModel
             _currentChange.Number = this.NumberChange;
             _currentChange.PutIntoOperation = this.PutIntoOperation;
             _currentChange.Registered = this.Registered;
-            //Close();
         }
 
         private bool Chek()

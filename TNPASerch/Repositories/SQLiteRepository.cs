@@ -11,7 +11,6 @@ namespace Repositories
     public class SQLiteRepository : IRepository
     {
         private readonly TnpaDbContext _dbContext;
-
         private readonly object _lockDb;
 
         public SQLiteRepository()
@@ -87,7 +86,12 @@ namespace Repositories
         {
             lock (_lockDb)
             {
-                return _dbContext.Tnpas.Where(el => el.Id == id).Include(p => p.Changes).Include(el=> el.Files).Include(t => t.Type).ToArray().First();
+                return _dbContext.Tnpas.Where(el => el.Id == id)
+                    .Include(p => p.Changes)
+                    .Include(el=> el.Files)
+                    .Include(t => t.Type)
+                    .ToArray()
+                    .First();
             }
         }
 
@@ -95,7 +99,9 @@ namespace Repositories
         {
             lock (_lockDb)
             {
-                return _dbContext.Tnpas.Include(p => p.Changes).Include(el => el.Files).Include(t => t.Type);
+                return _dbContext.Tnpas.Include(p => p.Changes)
+                    .Include(el => el.Files)
+                    .Include(t => t.Type);
             }
         }
 
@@ -105,7 +111,9 @@ namespace Repositories
             {
                 lock (_lockDb)
                 {
-                    return _dbContext.Tnpas.Include(p => p.Changes).Include(el => el.Files).Include(t => t.Type);
+                    return _dbContext.Tnpas.Include(p => p.Changes)
+                    .Include(el => el.Files)
+                    .Include(t => t.Type);
                 }
             });
             return resoult;
@@ -217,7 +225,10 @@ namespace Repositories
                 .Select(x => new { id = x.Id, Number = $"{x.Number}-{x.Year}".ToString().ToUpper() })
                 .ToList().Where(el => el.Number.Contains(numberUp))
                 .Select(a => a.id).ToList();
-            var collectTnpa = _dbContext.Tnpas.Where(r => collect.Contains(r.Id)).Include(p => p.Changes).Include(el => el.Files).ToList();
+            var collectTnpa = _dbContext.Tnpas.Where(r => collect.Contains(r.Id))
+                .Include(p => p.Changes)
+                .Include(el => el.Files)
+                .ToList();
             return collectTnpa;
         }
 

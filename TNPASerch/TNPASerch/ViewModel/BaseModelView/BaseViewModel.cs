@@ -1,5 +1,4 @@
-﻿using System.Windows;
-using TNPASerch.View;
+﻿using TNPASerch.View;
 
 namespace TNPASerch.ViewModel
 {

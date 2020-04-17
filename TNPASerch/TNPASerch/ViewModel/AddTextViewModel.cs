@@ -1,9 +1,4 @@
-﻿using GalaSoft.MvvmLight.Command;
-using System.Windows;
-using System.Windows.Input;
-using TNPASerch.View;
-
-namespace TNPASerch.ViewModel
+﻿namespace TNPASerch.ViewModel
 {
     public class AddTextViewModel : BaseViewModel
     {
@@ -29,6 +24,5 @@ namespace TNPASerch.ViewModel
                 OnPropertyChanged();
             }
         }
-
     }
 }

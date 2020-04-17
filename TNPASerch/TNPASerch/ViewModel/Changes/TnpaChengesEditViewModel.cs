@@ -44,7 +44,6 @@ namespace TNPASerch.ViewModel
             AddChangeCommand = new RelayCommand(AddChange);
             RemoveChangeCommand = new RelayCommand(RemoveChange);
             EditChangeCommand = new RelayCommand(EditChange);
-
             GetChange();
         }
 
