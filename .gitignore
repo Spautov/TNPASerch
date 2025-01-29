@@ -199,3 +199,4 @@ _Pvt_Extensions/
 ModelManifest.xml
 *.bat
 !RestoreNugetPackages.bat
+/TNPASerch/.vs
