@@ -200,3 +200,9 @@ ModelManifest.xml
 *.bat
 !RestoreNugetPackages.bat
 /TNPASerch/.vs
+/TNPASerch/DbWorker/.vs
+/TNPASerch/Repositories/.vs
+/TNPASerch/Searcher/.vs
+/TNPASerch/TextDocumentReaders/.vs
+/TNPASerch/TNPASerch/.vs
+/TNPASerch/DAL/.vs

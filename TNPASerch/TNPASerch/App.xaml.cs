@@ -1,9 +1,12 @@
-﻿using DbWorker;
+﻿using DataLoader;
+using DataServices;
+using DbWorker;
 using Microsoft.EntityFrameworkCore;
 using Ninject;
 using Ninject.Modules;
 using Repositories;
 using Searcher;
+using System.Threading.Tasks;
 using System.Windows;
 using TextDocumentReaders;
 
@@ -14,17 +17,20 @@ namespace TNPASerch
     /// </summary>
     public partial class App : Application
     {
-        private readonly string PDFNamed = "PDF";
-        private readonly string WordNamed = "Word";
-        private readonly string TxtNamed = "Txt";
+        private const string PDFNamed = "PDF";
+        private const string WordNamed = "Word";
+        private const string TxtNamed = "Txt";
         
         public static IKernel Container { get; private set; }
+        public static WebDataLoader dataLoader { get; private set; }
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
             ConfigureContainer();
             ComposeObjects();
             Current.MainWindow.Show();
+            dataLoader = Container.Get<WebDataLoader>();
+            _ = LoadData();
         }
 
         private void ConfigureContainer()
@@ -45,8 +51,15 @@ namespace TNPASerch
                 .WithConstructorArgument("pdfReader", Container.Get<ITextDocumentReader>(PDFNamed))
                 .WithConstructorArgument("wordReader", Container.Get<ITextDocumentReader>(WordNamed))
                 .WithConstructorArgument("txtReader", Container.Get<ITextDocumentReader>(TxtNamed));
+            Container.Bind<WebDataLoader>().To<WebDataLoader>().InSingletonScope();
+            Container.Bind<DataService>().To<DataService>().InSingletonScope();
 
             Current.MainWindow = Container.Get<MainWindow>();
+        }
+
+        private async Task LoadData()
+        {
+            var res = await dataLoader.GetDataAsync();
         }
     }
 }
