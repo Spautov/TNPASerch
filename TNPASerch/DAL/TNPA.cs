@@ -63,9 +63,9 @@ namespace DAL
         public ICollection<DataFileInfo> Files { get; set; }
 
 
-        public int? IDGLOBAL { get; set; }
+        public int? GlobalId { get; set; }
 
-        public int? RN { get; set; }
+        public int? AdditionalId { get; set; }
 
         [NotMapped]
         public string Content { get; set; }

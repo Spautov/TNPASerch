@@ -51,7 +51,7 @@ namespace TNPASerch
                 .WithConstructorArgument("pdfReader", Container.Get<ITextDocumentReader>(PDFNamed))
                 .WithConstructorArgument("wordReader", Container.Get<ITextDocumentReader>(WordNamed))
                 .WithConstructorArgument("txtReader", Container.Get<ITextDocumentReader>(TxtNamed));
-            Container.Bind<WebDataLoader>().To<WebDataLoader>().InSingletonScope();
+            Container.Bind<WebDataLoader>().To<WebDataLoader>();
             Container.Bind<DataService>().To<DataService>().InSingletonScope();
 
             Current.MainWindow = Container.Get<MainWindow>();
@@ -59,7 +59,16 @@ namespace TNPASerch
 
         private async Task LoadData()
         {
-            var res = await dataLoader.GetDataAsync();
+            try
+            {
+                var res = await dataLoader.GetDataAsync();
+                var res1 = await dataLoader.GetDataByIdGlobalAsync(172293, 149873);
+            }
+            catch (System.Exception ex)
+            {
+                throw;
+            }
+            
         }
     }
 }

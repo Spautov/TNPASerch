@@ -45,7 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TechnicalDocument.cs" />
+    <Compile Include="DocumentBriefInfo.cs" />
+    <Compile Include="DocumentfInfo.cs" />
     <Compile Include="WebDataLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
