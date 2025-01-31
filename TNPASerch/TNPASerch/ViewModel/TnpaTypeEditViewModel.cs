@@ -4,16 +4,18 @@ using Ninject;
 using Repositories;
 using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using TNPASerch.View;
+using CommunityToolkit.Mvvm.Input;
 
 namespace TNPASerch.ViewModel
 {
     public class TnpaTypeEditViewModel : BaseViewModel
     {
-        public ICommand AddTypeCommand { get; set; }
+        public IAsyncRelayCommand AddTypeCommand { get; set; }
         public ICommand RemoveTypeCommand { get; set; }
-        public ICommand EditTypeCommand { get; set; }
+        public IAsyncRelayCommand EditTypeCommand { get; set; }
 
         private readonly IRepository _repository;
 
@@ -31,13 +33,13 @@ namespace TNPASerch.ViewModel
         public TnpaTypeEditViewModel()
         {
             _repository = App.Container.Get<IRepository>();
-            AddTypeCommand = new RelayCommand(AddType);
-            RemoveTypeCommand = new RelayCommand(RemoveType);
-            EditTypeCommand = new RelayCommand(EditType);
+            AddTypeCommand = new AsyncRelayCommand(AddTypeAsync);
+            RemoveTypeCommand = new CommunityToolkit.Mvvm.Input.RelayCommand(RemoveType);
+            EditTypeCommand = new AsyncRelayCommand(EditType);
             GetTnpaTypsAsync();
         }
 
-        private void EditType()
+        private async Task EditType()
         {
             if (SelectedTnpaType != null)
             {
@@ -65,7 +67,7 @@ namespace TNPASerch.ViewModel
                         else
                         {
                             SelectedTnpaType.Name = textresoult;
-                            _repository.Update(SelectedTnpaType);
+                            await _repository.UpdateAsync(SelectedTnpaType);
                             GetTnpaTypsAsync();
                         }
                     }
@@ -105,7 +107,7 @@ namespace TNPASerch.ViewModel
             }
         }
 
-        private void AddType()
+        private async Task AddTypeAsync()
         {
             AddTextView addTextView = new AddTextView
             {
@@ -129,7 +131,7 @@ namespace TNPASerch.ViewModel
 
                     try
                     {
-                        _repository.Create(tnpaType);
+                        await _repository.CreateAsync(tnpaType);
                         GetTnpaTypsAsync();
                     }
                     catch (Exception ex)

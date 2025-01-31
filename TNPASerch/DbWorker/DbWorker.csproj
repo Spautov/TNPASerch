@@ -173,9 +173,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="DataBase\TNPA.db">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <None Include="DataBase\TNPA.db" />
     <None Include="DbWorkerClassDiagram.cd" />
     <None Include="packages.config" />
   </ItemGroup>

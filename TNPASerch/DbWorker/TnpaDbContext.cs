@@ -14,10 +14,10 @@ namespace DbWorker
             optionsBuilder.UseSqlite(@"Filename=DataBase\TNPA.db");
         }
 
-        public TnpaDbContext()
-        {
-            Database.EnsureDeleted();
-            Database.EnsureCreated();
-        }
+        //public TnpaDbContext()
+        //{
+        //    Database.EnsureDeleted();
+        //    Database.EnsureCreated();
+        //}
     }
 }

@@ -1,13 +1,16 @@
-﻿using DAL;
+﻿using CommunityToolkit.Mvvm.Input;
+using DAL;
 using GalaSoft.MvvmLight.Command;
 using Ninject;
 using Repositories;
 using Searcher;
 using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using TNPASerch.View;
+using RelayCommand = CommunityToolkit.Mvvm.Input.RelayCommand;
 
 namespace TNPASerch.ViewModel
 {
@@ -17,17 +20,17 @@ namespace TNPASerch.ViewModel
         protected readonly ISearcher _searcher;
         protected Tnpa _currentTnpa;
 
-        public ICommand SaveCommand { get; set; }
-        public ICommand ApplyCommand { get; set; }
+        public IAsyncRelayCommand SaveCommand { get; set; }
+        public IAsyncRelayCommand ApplyCommand { get; set; }
         public ICommand EditChangesCommand { get; set; }
         public ICommand ElectronicVersionCommand { get; set; }
 
-        public BaseTNPAViewModel() 
+        public BaseTNPAViewModel()
         {
             _repository = App.Container.Get<IRepository>();
             _searcher = App.Container.Get<ISearcher>();
-            SaveCommand = new RelayCommand(Save);
-            ApplyCommand = new RelayCommand(Apply);
+            SaveCommand = new AsyncRelayCommand(SaveAsync);
+            ApplyCommand = new AsyncRelayCommand(ApplyAsync);
             EditChangesCommand = new RelayCommand(EditChanges);
             ElectronicVersionCommand = new RelayCommand(ElectronicVersion);
         }
@@ -172,8 +175,8 @@ namespace TNPASerch.ViewModel
             CountChanges = _currentTnpa.Changes.Count;
         }
 
-        protected abstract void Apply();
-        protected abstract void Save();
+        protected abstract Task ApplyAsync();
+        protected abstract Task SaveAsync();
         
         public void Dispose()
         {

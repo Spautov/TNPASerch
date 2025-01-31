@@ -19,33 +19,27 @@ namespace Repositories
             _dbContext = new TnpaDbContext();
         }
 
-        public void Create(Tnpa item)
+        public async Task CreateAsync(Tnpa item)
         {
-            lock (_lockDb)
+            var collect = _dbContext.Tnpas.Where(x => x.Number.ToUpper().Equals(item.Number.ToUpper())
+            && x.TnpaTypeId == item.TnpaTypeId);
+            if (collect.Count() > 0)
             {
-                var collect = _dbContext.Tnpas.Where(x => x.Number.ToUpper().Equals(item.Number.ToUpper())
-                && x.TnpaTypeId == item.TnpaTypeId);
-                if (collect.Count() > 0)
-                {
-                    throw new Exception($"ТНПА {item.Type.Name} {item.Number} уже существует");
-                }
-                _dbContext.Tnpas.Add(item);
-                Save();
+                throw new Exception($"ТНПА {item.Type.Name} {item.Number} уже существует");
             }
+            _dbContext.Tnpas.Add(item);
+            await SaveAsync();
         }
 
-        public void Create(TnpaType item)
+        public async Task CreateAsync(TnpaType item)
         {
-            lock (_lockDb)
+            var collect = _dbContext.TnpaTypes.Where(x => x.Name.ToUpper().Equals(item.Name.ToUpper()));
+            if (collect.Count() > 0)
             {
-                var collect = _dbContext.TnpaTypes.Where(x => x.Name.ToUpper().Equals(item.Name.ToUpper()));
-                if (collect.Count() > 0)
-                {
-                    throw new Exception($"Тип {item.Name} уже существует");
-                }
-                _dbContext.TnpaTypes.Add(item);
-                Save();
+                throw new Exception($"Тип {item.Name} уже существует");
             }
+            _dbContext.TnpaTypes.Add(item);
+            await SaveAsync();
         }
 
         public void DeleteTnpa(int id)
@@ -56,7 +50,7 @@ namespace Repositories
                 if (tnpa != null)
                 {
                     _dbContext.Tnpas.Remove(tnpa);
-                    Save();
+                    SaveAsync();
                 }
             }
         }
@@ -77,7 +71,7 @@ namespace Repositories
                         throw new Exception(message);
                     }
                     _dbContext.TnpaTypes.Remove(tnpaType);
-                    Save();
+                    SaveAsync();
                 }
             }
         }
@@ -105,18 +99,13 @@ namespace Repositories
             }
         }
 
-        async public ValueTask<IEnumerable<Tnpa>> GetTnpaListAsunc()
+        async public Task<IEnumerable<Tnpa>> GetTnpaListAsunc()
         {
-            var resoult = await Task.Run(() =>
-            {
-                lock (_lockDb)
-                {
-                    return _dbContext.Tnpas.Include(p => p.Changes)
-                    .Include(el => el.Files)
-                    .Include(t => t.Type);
-                }
-            });
-            return resoult;
+            return await _dbContext.Tnpas
+                .Include(p => p.Changes)
+                .Include(el => el.Files)
+                .Include(t => t.Type)
+                .ToListAsync();
         }
 
         public TnpaType GetTnpaType(int id)
@@ -147,28 +136,25 @@ namespace Repositories
             }
         }
 
-        public void Save()
+        public async Task SaveAsync()
         {
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
         }
 
-        public void Update(Tnpa item)
+        public async Task UpdateAsync(Tnpa item)
         {
-            Update<Tnpa>(item);
+            await UpdateAsync<Tnpa>(item);
         }
 
-        private void Update<T>(T item) where T : class
+        private async Task UpdateAsync<T>(T item) where T : class
         {
-            lock (_lockDb)
-            {
-                _dbContext.Entry(item).State = EntityState.Modified;
-                Save();
-            }
+            _dbContext.Entry(item).State = EntityState.Modified;
+            await SaveAsync();
         }
 
-        public void Update(TnpaType item)
+        public async Task UpdateAsync(TnpaType item)
         {
-            Update<TnpaType>(item);
+            await UpdateAsync<TnpaType>(item);
         }
 
         private bool disposed = false;
@@ -258,7 +244,7 @@ namespace Repositories
                             foreach (var item in removelist)
                             {
                                 _dbContext.FolderHashCods.Remove(item);
-                                Save();
+                                SaveAsync();
                             }
                         }
                     }
@@ -266,7 +252,7 @@ namespace Repositories
                 if (_dbContext.FolderHashCods.Count() == 0)
                 {
                     _dbContext.FolderHashCods.Add(new FolderHashCod() { value = hash });
-                    Save();
+                    SaveAsync();
                     resoult = _dbContext.FolderHashCods.First();
                 }
             }
@@ -275,7 +261,7 @@ namespace Repositories
 
         public void Update(FolderHashCod folderHashCod)
         {
-            Update<FolderHashCod>(folderHashCod);
+            UpdateAsync<FolderHashCod>(folderHashCod);
         }
 
         public bool DelitFolderHashCod()
@@ -286,7 +272,7 @@ namespace Repositories
                 lock (_lockDb)
                 {
                     _dbContext.FolderHashCods.Remove(folderHashCod);
-                    Save();
+                    SaveAsync();
                     return true;
                 }
             }

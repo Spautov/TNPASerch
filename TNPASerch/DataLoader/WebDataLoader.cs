@@ -26,11 +26,11 @@ namespace DataLoader
             }
         }
 
-        public async Task<List<DocumentBriefInfo>> GetDataAsync()
+        public async Task<List<DocumentBriefInfo>> GetDataAsync(string typeName , string number)
         {
             try
             {
-                var content = await GetData(@"https://tnpa.by/api/tnpadocs?page=1&per-page=100&sort=b.KL&SearchParam=%D0%A1%D0%A2%D0%91%201033&lang=ru&stateID=-1&onlyActive=null&depID=0");
+                var content = await GetData($"https://tnpa.by/api/tnpadocs?page=1&per-page=100&sort=b.KL&SearchParam={typeName}%20{number}&lang=ru&stateID=-1&onlyActive=null&depID=0");
                 var data = JsonConvert.DeserializeObject<List<DocumentBriefInfo>>(content);
                 return data;
             }

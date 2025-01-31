@@ -1,5 +1,6 @@
 ﻿using DAL;
 using System;
+using System.Threading.Tasks;
 
 namespace TNPASerch.ViewModel
 {
@@ -20,17 +21,17 @@ namespace TNPASerch.ViewModel
             Registered = DateTime.Now;
         }
          
-        protected override void Save()
+        protected override async Task SaveAsync()
         {
-            if (CreatTnpa())
+            if (await CreatTnpaAsync())
             {
                Close();
             }
         }
 
-        protected override void Apply()
+        protected override async Task ApplyAsync()
         {
-            if (CreatTnpa())
+            if (await CreatTnpaAsync())
             {
                 _currentTnpa = new Tnpa();
                 YearTnpa = "";
@@ -47,7 +48,7 @@ namespace TNPASerch.ViewModel
             }
         }
 
-        private bool CreatTnpa()
+        private async Task<bool> CreatTnpaAsync()
         {
             if (!СheckFild())
             {
@@ -59,7 +60,7 @@ namespace TNPASerch.ViewModel
 
             try
             {
-                _repository.Create(_currentTnpa);
+                await _repository.CreateAsync(_currentTnpa);
                 _searcher.Add(_currentTnpa);
                 YesMessage($"{_currentTnpa.Type.Name} {_currentTnpa.Number} - {_currentTnpa.Year} успешно добавлен");
             }

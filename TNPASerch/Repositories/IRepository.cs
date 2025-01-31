@@ -8,15 +8,15 @@ namespace Repositories
     public interface IRepository : IDisposable
     {
         IEnumerable<Tnpa> GetTnpaList();
-        ValueTask<IEnumerable<Tnpa>> GetTnpaListAsunc();
+        Task<IEnumerable<Tnpa>> GetTnpaListAsunc();
         IEnumerable<TnpaType> GetTnpaTypeList();
         ValueTask<IEnumerable<TnpaType>> GetTnpaTypeListAsunc();
         Tnpa GetTnpa(int id);
         TnpaType GetTnpaType(int id);
-        void Create(Tnpa item);
-        void Create(TnpaType item);
-        void Update(Tnpa item);
-        void Update(TnpaType item);
+        Task CreateAsync(Tnpa item);
+        Task CreateAsync(TnpaType item);
+        Task UpdateAsync(Tnpa item);
+        Task UpdateAsync(TnpaType item);
         void DeleteTnpa(int id);
         void DeleteTnpaType(int id);
         TnpaType FindTnpaTypeByName(string name);
@@ -29,6 +29,6 @@ namespace Repositories
         FolderHashCod CreateFolderHashCod(int hash);
         void Update(FolderHashCod folderHashCod);
         bool DelitFolderHashCod();
-        void Save();
+        Task SaveAsync();
     }
 }

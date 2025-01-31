@@ -46,6 +46,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{AE8B75B5-527D-45D8-8920-30FB097FA00E}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DataLoader\DataLoader.csproj">
       <Project>{FCFDEB1B-EE55-4316-B786-E086F8E367B4}</Project>
       <Name>DataLoader</Name>

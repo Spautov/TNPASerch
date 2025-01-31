@@ -23,13 +23,15 @@ namespace TNPASerch
         
         public static IKernel Container { get; private set; }
         public static WebDataLoader dataLoader { get; private set; }
+        public static DataService dataService { get; private set; }
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
             ConfigureContainer();
             ComposeObjects();
             Current.MainWindow.Show();
-            dataLoader = Container.Get<WebDataLoader>();
+           // dataLoader = Container.Get<WebDataLoader>();
+            dataService = Container.Get<DataService>();
             _ = LoadData();
         }
 
@@ -61,8 +63,9 @@ namespace TNPASerch
         {
             try
             {
-                var res = await dataLoader.GetDataAsync();
-                var res1 = await dataLoader.GetDataByIdGlobalAsync(172293, 149873);
+                await dataService.ChackTnpaListAsunc();
+                //var res = await dataLoader.GetDataAsync("СТБ", "1033");
+                //var res1 = await dataLoader.GetDataByIdGlobalAsync(172293, 149873);
             }
             catch (System.Exception ex)
             {
